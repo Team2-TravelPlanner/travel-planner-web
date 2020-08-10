@@ -1,4 +1,4 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Travel Planner is a smart planner for the city of New York.
 
 ## Available Scripts
 
