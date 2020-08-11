@@ -1,3 +1,8 @@
-.App {
+.app {
   text-align: center;
+  position: relative;
+  display: grid;
+  grid-template-rows: 70px 1fr 40px;
+  flex-direction: column;
+  min-height: 100vh;
 }

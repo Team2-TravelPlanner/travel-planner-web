@@ -3,7 +3,9 @@ import React from 'react';
 class Main extends React.Component {
   render() {
     return (
-      <div></div>
+      <div class="main">
+        Main
+      </div>
     )
   }
 }
