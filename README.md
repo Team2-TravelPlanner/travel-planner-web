@@ -7,10 +7,15 @@ Travel Planner is a smart planner for the city of New York.
 # Component Structure [WIP]
 ```
 <App>
-  <Header>             --> handles login, logout, open saved plans
+  <Login>              --> a modal for login or register form
+  <SavedTrips>         --> a modal for listing saved trips
+  <Header>             --> with links to open login, logout, view saved trips
   <Main>               --> switches between sub components
-    <CityExplorer>     --> search, browse, select POIs
-    <AutoPlanner>      --> form
-    <Plan>             --> generated plan or existing plan
+    <SelfPlanner>      --> map to search, browse, select POIs
+    <AutoPlanner>      --> interactive form of questions
+    <Trip>             --> map and schedule of generated trip or existing trip
   <Footer>
 ```
+
+# React Bootstrap
+We use [React-Bootstrap](https://react-bootstrap.github.io/) library for our UI components. Go see its documentation on specific component you are adding.
