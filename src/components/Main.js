@@ -56,8 +56,6 @@ class Main extends React.Component {
             <Form close={this.closeForm} generateItinerary={this.generateItinerary} />
           </Modal.Body>
         </Modal>
-
-
       </div>
     )
   }
