@@ -1,15 +1,27 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
+import { backgrounds } from "../Backgrounds";
+
 
 class Home extends React.Component {
 
   render() {
+    const random = Math.floor(Math.random() * backgrounds.length);
+    console.log(random);
+    console.log(backgrounds);
+    const background = backgrounds[random];
+    
+
+    var backgroundStyle = {
+      backgroundImage: `url(${background.path})`
+    };
+
     return (
       <div className="home">
 
         {/* for background image with opacity */}
-        <div className="background">
+        <div className="background" style={backgroundStyle}>
         </div>
 
         {/* Navigations */}
@@ -44,10 +56,10 @@ class Home extends React.Component {
         {/* background image credit */}
         <span className="background-credit">
           Photo by{" "}
-          <a href="https://unsplash.com/@andersjilden?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText"
+          <a href={background.link}
             target="_blank"
             rel="noopener noreferrer">
-            Anders Jildén
+            {background.author}
           </a>{" "}
           on{" "}
           <a href="https://unsplash.com/s/photos/new-york?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText"
