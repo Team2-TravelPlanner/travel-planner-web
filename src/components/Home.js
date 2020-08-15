@@ -8,8 +8,6 @@ class Home extends React.Component {
 
   render() {
     const random = Math.floor(Math.random() * backgrounds.length);
-    console.log(random);
-    console.log(backgrounds);
     const background = backgrounds[random];
     
 
