@@ -1,8 +1,10 @@
 @import "~bootstrap/dist/css/bootstrap.min.css";
 @import "./styles/App.css";
 @import "./styles/Header.css";
+@import "./styles/Home.css";
 @import "./styles/Main.css";
 @import "./styles/Footer.css";
+@import "./styles/NotFound.css";
 
 body {
   margin: 0;
