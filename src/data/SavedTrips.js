@@ -12,3 +12,5 @@ const savedTrips = [
     endDate: "1620370800000"
   }
 ]
+
+export default savedTrips;
