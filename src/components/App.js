@@ -5,11 +5,11 @@ import Footer from "./Footer";
 import Login from "./Login"
 
 class App extends React.Component {
-  state = {
+  state = { //states used to activated login or register form.
     isLoginForm: false,
     isRegisterForm: false
   }
-
+//two call back functions used to get props from it's child(Header and Login)
   LoginCB = (isLoginData) => {
     this.setState({isLoginForm: isLoginData})
   }

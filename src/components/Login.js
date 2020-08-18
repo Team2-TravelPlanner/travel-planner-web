@@ -12,6 +12,7 @@ class Login extends React.Component {
         confirm_password: 0,
         temp: true,
     };
+    //Schemas used to validate input of form.
     RegisterSchema = yup.object({
         email: yup.string().email('Invalid email address').required('Email is required'),
         password: yup.string().required('Password is required'),
@@ -23,6 +24,7 @@ class Login extends React.Component {
         email: yup.string().email('Invalid email address').required('Email is required'),
         password: yup.string().required('Password is required'),
     })
+    //When forms close, need to set the state of its parent(App) back to false. 
     handleLoginForm = () => {
         this.props.isLoginData(false);
     };
@@ -30,7 +32,7 @@ class Login extends React.Component {
     handleRegisterForm = () => {
         this.props.isRegisterData(false);
     };
-
+    //Handle Submit. TODO(Http request.)
     handleSubmitLogin = (event) => {
         const form = event.currentTarget;
         if (form.checkValidity() === false) {
@@ -54,12 +56,14 @@ class Login extends React.Component {
     render() {
         return (
             <div>
-                {<Modal show={this.props.isLoginForm} onHide={this.handleLoginForm}>
+                {/* Modal is the pop up window */}
+                {<Modal show={this.props.isLoginForm} onHide={this.handleLoginForm}> 
+
                     <Modal.Header closeButton>
                         <Modal.Title>Login</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-
+                        {/* Formik and yup are used to validate input of form */}
                         <Formik
                             validationSchema={this.LoginSchema}
                             onSubmit={console.log}
@@ -68,7 +72,7 @@ class Login extends React.Component {
                                 password: '',
                             }}
                         >
-
+                            {/* Form start here */}
                             {({ handleSubmit,
                                 handleChange,
                                 handleBlur,
