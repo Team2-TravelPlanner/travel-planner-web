@@ -1,7 +1,18 @@
 .app-header {
   height: 70px;
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
   background-color: lightgray;
+}
+.DropDown{
+  position: absolute;
+  right: 20px;
+  
+}
+.avatar {
+  position: relative;
+  right: 0px;
+  height: 30px;
+  width: 30px;
 }
