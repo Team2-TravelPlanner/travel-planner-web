@@ -7,10 +7,7 @@ import * as yup from 'yup';
 
 class Login extends React.Component {
     state = {
-        validated: false,
-        password: 0,
-        confirm_password: 0,
-        temp: true,
+        LoginStatus: false
     };
     //Schemas used to validate input of form.
     RegisterSchema = yup.object({
@@ -44,24 +41,12 @@ class Login extends React.Component {
     };
     //Handle Submit. TODO(Http request.)
     handleSubmitLogin = (event) => {
-        const form = event.currentTarget;
-        if (form.checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();
-        }
-
-        this.setState({ validated: true })
+        this.props.isLoginData(false);
+        this.setState({LoginStatus : true});
+        this.props.loginStatus(true);
     }
     handleSubmitRegister = (event) => {
-        const form = event.currentTarget;
-        const compare = this.state.password === this.state.confirm_password
-        console.log(compare)
-        if (form.checkValidity() === false || compare === false) {
-            event.preventDefault();
-            event.stopPropagation();
-        }
 
-        this.setState({ validated: true })
     }
     render() {
         return (
@@ -76,7 +61,7 @@ class Login extends React.Component {
                         {/* Formik and yup are used to validate input of form */}
                         <Formik
                             validationSchema={this.LoginSchema}
-                            onSubmit={console.log}
+                            onSubmit={this.handleSubmitLogin}
                             initialValues={{
                                 email: '',
                                 password: '',
