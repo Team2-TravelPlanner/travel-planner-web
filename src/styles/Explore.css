@@ -1,0 +1,24 @@
+.left-side {
+    position: fixed;
+    top: 100px;
+    left: 10px;
+    height: 760px;
+    padding: 20px;
+}
+
+.right-side {
+    margin-left: 380px;
+}
+
+.search{
+    text-align: left;
+    padding: 10px;
+}
+
+.search-result{
+    width: 30em;
+    height: 280px;
+    overflow: scroll;
+}
+
+
