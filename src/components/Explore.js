@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Card, ListGroup, FormControl, Form, Button} from 'react-bootstrap'
+import {Tabs,Tab,Card, ListGroup, FormControl, Form, Button} from 'react-bootstrap'
 import searchResults from "../data/SearchResults.js"
 class Explore extends Component {
       constructor(props) {
@@ -7,6 +7,7 @@ class Explore extends Component {
           this.state = {
               keyword: '',
               result: [],
+              category: ''
           }
       }
 
@@ -21,7 +22,11 @@ class Explore extends Component {
       onSearch = () => {
           let results = [];
           searchResults["places"].map(place => {
-              if (this.state.keyword !== '' && place["name"].toLowerCase().includes(this.state.keyword.toLowerCase())) {
+              if(place["category"].toLowerCase().includes(this.state.category.toLowerCase())){
+                  results.push(place["name"])
+              }
+
+              if (this.state.keyword !== '' && place["name"].toLowerCase().includes(this.state.keyword.toLowerCase()) && results.indexOf(place["name"]) === -1) {
                   results.push(place["name"])
               }
               return results
@@ -45,11 +50,30 @@ class Explore extends Component {
           return list
       }
 
+      selectCategory = (value) =>{
+          this.setState(
+              {
+                  category: value
+              },
+              () => console.log(this.state.category)
+          )
+      }
+
+
     render(){
         //console.log(searchResults['places'][0]['name'])
         return (
             <div>
             <div className="left-side">
+                <Tabs defaultActiveKey="profile" id="tab" onSelect={this.selectCategory}>
+                    <Tab eventKey="Park" title="Park">
+                    </Tab>
+                    <Tab eventKey="Museum" title="Museum">
+                    </Tab>
+                    <Tab eventKey="Plaza" title="Plaza">
+                    </Tab>
+                </Tabs>
+
                 <div className= "search">
                 <Form inline>
                     <FormControl type="text" placeholder="Search" className='mr-sm-2' style={{ width: '30em' }} onChange={this.onChangeKeyword}/>
