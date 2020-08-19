@@ -25,8 +25,8 @@ class Header extends React.Component {
                 alt="user pic"
               />
           }>
-            <Dropdown.Item class="dropdown-item" type="button" onClick={this.handleLogin}>Login</Dropdown.Item>
-            <Dropdown.Item class="dropdown-item" type="button" onClick={this.handleRegister}>Register</Dropdown.Item>
+            <Dropdown.Item class="dropdown-item" type="button" onClick={this.handleLogin}>Sign in</Dropdown.Item>
+            <Dropdown.Item class="dropdown-item" type="button" onClick={this.handleRegister}>Sign up</Dropdown.Item>
           </DropdownButton>
         </div>
       </div>

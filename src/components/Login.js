@@ -25,6 +25,16 @@ class Login extends React.Component {
         password: yup.string().required('Password is required'),
     })
     //When forms close, need to set the state of its parent(App) back to false. 
+    switchToRegister = () => {
+        this.props.isLoginData(false);
+        this.props.isRegisterData(true);
+    }
+
+    switchToLogin = () => {
+        this.props.isRegisterData(false);
+        this.props.isLoginData(true);
+    }
+
     handleLoginForm = () => {
         this.props.isLoginData(false);
     };
@@ -60,7 +70,7 @@ class Login extends React.Component {
                 {<Modal show={this.props.isLoginForm} onHide={this.handleLoginForm}> 
 
                     <Modal.Header closeButton>
-                        <Modal.Title>Login</Modal.Title>
+                        <Modal.Title>Sign In</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         {/* Formik and yup are used to validate input of form */}
@@ -108,12 +118,11 @@ class Login extends React.Component {
                                             {errors.password}
                                         </Form.Control.Feedback>
                                     </Form.Group>
-
-                                    <Button variant="secondary" onClick={this.handleLoginForm}>
-                                        Close
-                                    </Button>
-                                    <Button variant="primary" type="submit">
-                                        Submit
+                                    <Button size = "sm" block = "true" variant="link" onClick={this.switchToRegister}>
+                                        Switch to Sign up
+                                    </Button> {' '}
+                                    <Button block = "true" class = "Submit_Buttom" variant="primary" type="submit">
+                                        Log in
                                     </Button>
                                 </Form>
                                 )}
@@ -123,7 +132,7 @@ class Login extends React.Component {
 
                 {<Modal show={this.props.isRegisterForm} onHide={this.handleRegisterForm}>
                     <Modal.Header closeButton>
-                        <Modal.Title>Register</Modal.Title>
+                        <Modal.Title>Sign Up</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
 
@@ -187,12 +196,11 @@ class Login extends React.Component {
                                             {errors.confirm_password}
                                         </Form.Control.Feedback>
                                     </Form.Group>
-
-                                    <Button variant="secondary" onClick={this.handleLoginForm}>
-                                        Close
-                                    </Button>
-                                    <Button variant="primary" type="submit" >
-                                        Submit
+                                    <Button size = "sm" block = "true" variant="link" onClick={this.switchToLogin}>
+                                        Switch to Sign In
+                                    </Button> {' '}
+                                    <Button block = "true" class = "Submit_Buttom" variant="primary" type="submit" >
+                                        Join
                                     </Button>
                                 </Form>
                                 )}
