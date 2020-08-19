@@ -12,11 +12,48 @@
 
 .right-side {
     margin-left: 500px;
+    justify-content: center;
+    align-items: center;
     height: 760px;
-    background: hotpink;
 }
 
 .search-bar {
     padding: 10px 20px;
-    width: 450px;
+    width: auto;
 }
+
+.browse-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+    border: 2px solid #ccc;
+}
+
+.place-image {
+    height: 128px;
+    width: 128px;
+}
+
+.place-meta {
+    margin-left: 5px;
+}
+
+.place-name {
+    display: flex;
+    align-items: center;
+}
+
+.add-btn {
+    margin-left: auto;
+}
+
+.place-info {
+    font-size: large;
+    text-align: left;
+}
+
+
+
+
+
