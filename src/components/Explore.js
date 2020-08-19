@@ -24,6 +24,7 @@ class Explore extends Component {
               if (this.state.keyword !== '' && place["name"].toLowerCase().includes(this.state.keyword.toLowerCase())) {
                   results.push(place["name"])
               }
+              return results
           })
           this.setState(
               {
