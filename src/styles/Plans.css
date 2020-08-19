@@ -1,0 +1,25 @@
+.dayItem-part {
+    position: absolute;
+    top: 150px;
+    left: 350px;
+    height: 700px;
+    padding: 20px;
+}
+
+.map-part {
+    display: flex;
+    justify-content: center;
+    vertical-align: center;
+    position: absolute;
+    width: 1000px;
+    height: 600px;
+    margin-left: 400px;
+    horiz-align: right;
+    background-color: blanchedalmond;
+}
+
+.save-part{
+    position: absolute;
+    margin-left: 1300px;
+    margin-top: 700px;
+}
