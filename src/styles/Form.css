@@ -1,5 +1,9 @@
 .form {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   width: 600px;
   height: 100%;
   margin-top: 50px;

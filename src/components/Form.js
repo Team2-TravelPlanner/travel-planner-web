@@ -7,11 +7,12 @@ import "react-datepicker/dist/react-datepicker.css";
 class AutoForm extends React.Component {
 
   today = new Date();
+  defaultAddress = "5th Avenue at, Central Park S, New York, NY 10022";
 
   state = {
     style: "average",
     selectedCats: [],
-    address: "5th Avenue at, Central Park S, New York, NY 10022",
+    address: "",
     startDate: this.today,
     endDate: new Date().setDate(this.today.getDate() + 5)
   }
@@ -56,7 +57,8 @@ class AutoForm extends React.Component {
 
   handleSubmit = () => {
     const { style, selectedCats, address, startDate, endDate } = this.state;
-
+    // validate address, start and end date
+    
   }
 
   render() {
@@ -171,10 +173,11 @@ class AutoForm extends React.Component {
         <br />
         <div>
           <h4>Address you are staying at?</h4>
-          We can better plan better routes for you if you have a starting point
+          We can better plan routes for you if you have a starting point
           <Form.Control 
             type="text" 
             value={address} 
+            placeholder={this.defaultAddress}
             onChange={this.handleAddressChange} />
         </div>
         <br />
