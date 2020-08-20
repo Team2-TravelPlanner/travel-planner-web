@@ -1,5 +1,5 @@
 .left-side {
-    position: fixed;
+    position: absolute;
     top: 100px;
     left: 10px;
     height: 760px;
@@ -15,10 +15,18 @@
     padding: 10px;
 }
 
-.search-result{
+.search-result {
     width: 30em;
     height: 280px;
     overflow: scroll;
 }
 
+.search-item-select:hover{
+    background: #0dd910;
+}
+
+.buttons{
+   text-align: left;
+   padding-left: 10px;
+}
 

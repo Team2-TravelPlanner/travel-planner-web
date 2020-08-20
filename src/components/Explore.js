@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Tabs,Tab,Card, ListGroup, FormControl, Form, Button} from 'react-bootstrap'
+import {Card, ListGroup, FormControl, Form, Button} from 'react-bootstrap'
 import searchResults from "../data/SearchResults.js"
 class Explore extends Component {
       constructor(props) {
@@ -7,7 +7,11 @@ class Explore extends Component {
           this.state = {
               keyword: '',
               result: [],
-              category: ''
+              activeCategory: [],
+              Park: "outline-primary",
+              Museum: "outline-primary",
+              Plaza: "outline-primary",
+
           }
       }
 
@@ -19,14 +23,28 @@ class Explore extends Component {
 
       }
 
+      // 1. if a category is selected and search box is empty, show all the places in that category.
+      // 2. if a category is selected and search box is not empty, show all the places that matches the search keyword in that category.
       onSearch = () => {
           let results = [];
+
           searchResults["places"].map(place => {
-              if(place["category"].toLowerCase().includes(this.state.category.toLowerCase())){
+              // check whether the place is in the category
+              let inCategory = false;
+              this.state.activeCategory.map(category =>{
+                  if (place["category"].toLowerCase().includes(category.toLowerCase())){
+                         inCategory = true;
+                      }
+                   return 0 // add this line for the purpose of removing the warning
+              }
+
+              )
+
+              if(inCategory===true && this.state.keyword === ""){
                   results.push(place["name"])
               }
 
-              if (this.state.keyword !== '' && place["name"].toLowerCase().includes(this.state.keyword.toLowerCase()) && results.indexOf(place["name"]) === -1) {
+              else if (this.state.keyword !== '' && place["name"].toLowerCase().includes(this.state.keyword.toLowerCase()) && inCategory === true) {
                   results.push(place["name"])
               }
               return results
@@ -43,38 +61,48 @@ class Explore extends Component {
           let list = [];
           let i;
           for(i = 0; i < this.state.result.length; i++){
-               list.push( <ListGroup.Item key={i} action >
+               list.push( <ListGroup.Item key={i} action className = "search-item-select" >
                           {this.state.result[i]}
                            </ListGroup.Item>)
           }
           return list
       }
 
-      selectCategory = (value) =>{
-          this.setState(
-              {
-                  category: value
-              },
-              () => console.log(this.state.category)
-          )
-      }
+      selectCategory = (event) =>{
+          if(this.state[event.target.value] === "outline-primary") {
+              this.setState(
+                  {
+                      [event.target.value]: "primary",
+                      activeCategory: [...this.state.activeCategory, event.target.value]
+                  },
+                  () => console.log(this.state.activeCategory)
+              )
+
+          }
+             else{
+                  this.setState(
+                  {
+                      [event.target.value]: "outline-primary",
+                      activeCategory: this.state.activeCategory.filter(function (category){
+                          return category !== event.target.value
+                      })
+                  },
+                  () => console.log(this.state.activeCategory)
+              )
+              }
+          }
 
 
     render(){
-        //console.log(searchResults['places'][0]['name'])
         return (
             <div>
             <div className="left-side">
-                <Tabs defaultActiveKey="profile" id="tab" onSelect={this.selectCategory}>
-                    <Tab eventKey="Park" title="Park">
-                    </Tab>
-                    <Tab eventKey="Museum" title="Museum">
-                    </Tab>
-                    <Tab eventKey="Plaza" title="Plaza">
-                    </Tab>
-                </Tabs>
-
-                <div className= "search">
+                <div className="buttons">
+                    <Button variant={this.state.Park}  size = "sm" value = "Park" onClick = {this.selectCategory} >Park </Button>{" "}
+                    <Button variant={this.state.Museum}  size = "sm" value = "Museum" onClick = {this.selectCategory} >Museum </Button>{" "}
+                    <Button variant={this.state.Plaza}  size = "sm" value = "Plaza" onClick = {this.selectCategory} >Plaza </Button>{" "}
+                </div>
+            <div className= "search">
                 <Form inline>
                     <FormControl type="text" placeholder="Search" className='mr-sm-2' style={{ width: '30em' }} onChange={this.onChangeKeyword}/>
                     <Button variant="primary" onClick = {this.onSearch}>Search</Button>
