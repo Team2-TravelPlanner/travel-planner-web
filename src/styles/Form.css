@@ -1,0 +1,26 @@
+.form {
+  position: relative;
+  width: 600px;
+  height: 100%;
+  margin-top: 50px;
+}
+
+.form .form-group {
+  padding: 20px;
+  border: 1px solid rgb(126, 125, 125);
+  border-radius: 10px;
+}
+
+.form .button-group {
+  margin: 5px;
+}
+
+.form .date-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.form .date-item {
+  margin: 0 10px 0 10px;
+}

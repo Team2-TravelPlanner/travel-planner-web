@@ -1,6 +1,8 @@
 import React from 'react';
+<<<<<<< HEAD
 import { Switch, Route } from "react-router-dom";
 import Home from "./Home";
+import Form from "./Form";
 import NotFound from "./NotFound";
 
 class Main extends React.Component {
@@ -20,13 +22,12 @@ class Main extends React.Component {
             <NotFound />
           </Route>
           <Route exact path="/form">
-            <NotFound />
+            <Form />
           </Route>
           <Route path="/">
             <NotFound />
           </Route>
         </Switch>
-        
       </div>
     )
   }
