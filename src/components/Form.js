@@ -37,7 +37,6 @@ class AutoForm extends React.Component {
   }
 
   handleAddressChange = (e) => {
-    console.log(e.target.value);
     this.setState({
       address: e.target.value
     })

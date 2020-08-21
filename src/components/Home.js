@@ -6,10 +6,18 @@ import { backgrounds } from "../Backgrounds";
 
 class Home extends React.Component {
 
-  render() {
+  constructor() {
+    super();
     const random = Math.floor(Math.random() * backgrounds.length);
     const background = backgrounds[random];
-    
+    this.state = {
+      background: background
+    };
+  }
+
+  render() {
+
+    const { background } = this.state;
 
     var backgroundStyle = {
       backgroundImage: `url(${background.path})`
@@ -43,11 +51,9 @@ class Home extends React.Component {
               <li> I want fully automated trip planning</li>
               <li> I want Travel Planner to pick customized attractions for me</li>
             </ul>
-            <Link to="/form">
-              <Button variant="dark" size="lg" className="nav-button">
-                <span>Start Auto Planning</span>
-              </Button>
-            </Link>
+            <Button variant="dark" size="lg" className="nav-button" onClick={this.props.openForm}>
+              <span>Start Auto Planning</span>
+            </Button>
           </div>
         </div>
 

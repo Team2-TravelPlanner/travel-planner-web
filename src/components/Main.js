@@ -8,7 +8,14 @@ import { Modal } from "react-bootstrap";
 class Main extends React.Component {
 
   state = {
-    showForm: true
+    showForm: false
+  }
+
+  openForm = () => {
+    console.log("open form");
+    this.setState({
+      showForm: true
+    });
   }
 
   closeForm = () => {
@@ -32,25 +39,26 @@ class Main extends React.Component {
       <div className="main">
         <Switch>
           <Route exact path="/">
-            <Home />
+            <Home openForm={this.openForm} />
           </Route>
           <Route exact path="/explorer">
             <NotFound />
-          </Route>
-          <Route exact path="/form">
-            <Modal
-              show={showForm}
-              backdrop="static"
-              keyboard={false}>
-              <Modal.Body>
-                <Form close={this.closeForm} generateItinerary={this.generateItinerary} />
-              </Modal.Body>
-            </Modal>
           </Route>
           <Route path="/">
             <NotFound />
           </Route>
         </Switch>
+
+        <Modal
+          show={showForm}
+          backdrop="static"
+          keyboard={false}>
+          <Modal.Body>
+            <Form close={this.closeForm} generateItinerary={this.generateItinerary} />
+          </Modal.Body>
+        </Modal>
+
+
       </div>
     )
   }
