@@ -1,17 +1,33 @@
 import React from 'react';
-<<<<<<< HEAD
 import { Switch, Route } from "react-router-dom";
 import Home from "./Home";
 import Form from "./Form";
 import NotFound from "./NotFound";
+import { Modal } from "react-bootstrap";
 
 class Main extends React.Component {
 
   state = {
+    showForm: true
+  }
 
+  closeForm = () => {
+    this.setState({
+      showForm: false
+    });
+  }
+
+  generateItinerary = (options) => {
+    this.setState({
+      showForm: false
+    });
+
+    console.log(options);
   }
 
   render() {
+    const { showForm } = this.state;
+
     return (
       <div className="main">
         <Switch>
@@ -22,7 +38,14 @@ class Main extends React.Component {
             <NotFound />
           </Route>
           <Route exact path="/form">
-            <Form />
+            <Modal
+              show={showForm}
+              backdrop="static"
+              keyboard={false}>
+              <Modal.Body>
+                <Form close={this.closeForm} generateItinerary={this.generateItinerary} />
+              </Modal.Body>
+            </Modal>
           </Route>
           <Route path="/">
             <NotFound />

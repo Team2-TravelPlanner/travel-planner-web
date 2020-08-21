@@ -4,9 +4,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 600px;
+  width: 100%;
   height: 100%;
-  margin-top: 50px;
 }
 
 .form .form-group {
@@ -22,7 +21,7 @@
 .form .date-row {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: left;
 }
 
 .form .date-item {
