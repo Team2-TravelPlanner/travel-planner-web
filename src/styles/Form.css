@@ -18,12 +18,18 @@
   margin: 5px;
 }
 
+.form .description {
+  font-size: 12px;
+  font-style: italic;
+}
+
 .form .date-row {
   display: flex;
   flex-direction: row;
   justify-content: left;
+  align-items: flex-start;
 }
 
 .form .date-item {
-  margin: 0 10px 0 10px;
+  margin: 0 10px 0 0;
 }

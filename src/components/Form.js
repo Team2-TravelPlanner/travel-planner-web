@@ -10,7 +10,7 @@ class AutoForm extends React.Component {
   defaultAddress = "5th Avenue at, Central Park S, New York, NY 10022";
 
   state = {
-    style: "average",
+    style: "moderate",
     selectedCats: [],
     address: "",
     startDate: this.today,
@@ -87,8 +87,8 @@ class AutoForm extends React.Component {
               <ToggleButton value={"relaxed"} variant="outline-primary">
                 Relaxed
               </ToggleButton>
-              <ToggleButton value={"average"} variant="outline-primary">
-                Average
+              <ToggleButton value={"moderate"} variant="outline-primary">
+                Moderate
               </ToggleButton>
               <ToggleButton value={"packed"} variant="outline-primary">
                 Packed
@@ -184,7 +184,7 @@ class AutoForm extends React.Component {
           <br />
           <div>
             <h4>Address you are staying at?</h4>
-            We can better plan routes for you if you have a starting point
+            <span className="description">We can better plan routes for you if you have a starting point</span>
             <Form.Control 
               type="text" 
               value={address} 
@@ -194,11 +194,11 @@ class AutoForm extends React.Component {
           <br />
           <div className="date-row">
             <div className="date-item">
-              <h4>Starting Date</h4>
+              <h4>First Day</h4>
               <DatePicker selected={startDate} onChange={this.handleChangeStartDate} />
             </div>
             <div className="date-item">
-              <h4>Ending Date</h4>
+              <h4>Last Day</h4>
               <DatePicker selected={endDate} onChange={this.handleChangeEndDate} />
             </div>
           </div>        
