@@ -31,7 +31,6 @@ class Explore extends Component {
     // 2. if a category is selected and search box is not empty, show all the places that matches the search keyword in that category.
     onSearch = () => {
         let results = [];
-
         searchResults["places"].map(place => {
             // check whether the place is in the category
             let inCategory = false;
@@ -43,12 +42,17 @@ class Explore extends Component {
                 }
             )
 
-            if (inCategory === true && this.state.keyword === '') {
-                results.push(place)
-            } else if (this.state.keyword !== '' && place["name"].toLowerCase().includes(this.state.keyword.toLowerCase()) && inCategory === true) {
-                results.push(place)
-            } else if (this.state.keyword === '') {
-                results.push(place)
+            console.log(inCategory)
+            if(inCategory === true) {
+                if (this.state.keyword === '') {
+                    results.push(place)
+                } else if (this.state.keyword !== '' && place["name"].toLowerCase().includes(this.state.keyword.toLowerCase())) {
+                    results.push(place)
+                } else if (this.state.keyword === '') {
+                    results.push(place)
+                }
+            }else if (this.state.keyword === '' && this.state.activeCategory.length === 0){
+                    results.push(place)
             }
             return results
         })
@@ -139,7 +143,7 @@ class Explore extends Component {
                 },
                 () => console.log(this.state.activeCategory)
             )
-            this.onSearch()
+
 
         } else {
             this.setState(
@@ -151,7 +155,7 @@ class Explore extends Component {
                 },
                 () => console.log(this.state.activeCategory)
             )
-            this.onSearch()
+
         }
     }
 
