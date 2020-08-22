@@ -43,7 +43,7 @@ class Explore extends Component {
                 }
             )
 
-            if (inCategory === true && this.state.keyword === "") {
+            if (inCategory === true && this.state.keyword === '') {
                 results.push(place)
             } else if (this.state.keyword !== '' && place["name"].toLowerCase().includes(this.state.keyword.toLowerCase()) && inCategory === true) {
                 results.push(place)
@@ -139,6 +139,7 @@ class Explore extends Component {
                 },
                 () => console.log(this.state.activeCategory)
             )
+            this.onSearch()
 
         } else {
             this.setState(
@@ -150,6 +151,7 @@ class Explore extends Component {
                 },
                 () => console.log(this.state.activeCategory)
             )
+            this.onSearch()
         }
     }
 
