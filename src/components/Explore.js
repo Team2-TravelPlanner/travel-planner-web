@@ -29,7 +29,8 @@ class Explore extends Component {
 
     // 1. if a category is selected and search box is empty, show all the places in that category.
     // 2. if a category is selected and search box is not empty, show all the places that matches the search keyword in that category.
-    onSearch = () => {
+
+    findResult = () => {
         let results = [];
         searchResults["places"].map(place => {
             // check whether the place is in the category
@@ -51,11 +52,21 @@ class Explore extends Component {
                 } else if (this.state.keyword === '') {
                     results.push(place)
                 }
-            }else if (this.state.keyword === '' && this.state.activeCategory.length === 0){
+                // no category is selected
+            }else if(this.state.activeCategory.length === 0){
+                if (this.state.keyword === '') {
                     results.push(place)
+                } else if (place["name"].toLowerCase().includes(this.state.keyword.toLowerCase())) {
+                    results.push(place)
+                }
             }
             return results
         })
+        return results;
+    }
+
+    onSearch = () => {
+        let results = this.findResult();
         this.setState(
             {
                 result: results
@@ -135,14 +146,18 @@ class Explore extends Component {
     }
 
     selectCategory = (event) => {
+
         if (this.state[event.target.value] === "outline-primary") {
             this.setState(
                 {
                     [event.target.value]: "primary",
                     activeCategory: [...this.state.activeCategory, event.target.value]
                 },
-                () => console.log(this.state.activeCategory)
+                //() => console.log(this.state.activeCategory),
+                this.onSearch
+
             )
+
 
 
         } else {
@@ -153,8 +168,10 @@ class Explore extends Component {
                         return category !== event.target.value
                     })
                 },
-                () => console.log(this.state.activeCategory)
+                //() => console.log(this.state.activeCategory),
+                this.onSearch
             )
+
 
         }
     }
