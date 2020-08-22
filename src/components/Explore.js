@@ -11,7 +11,6 @@ class Explore extends Component {
               Park: "outline-primary",
               Museum: "outline-primary",
               Plaza: "outline-primary",
-
           }
       }
 
