@@ -1,7 +1,5 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
 import { Modal, Button, Form } from 'react-bootstrap'
-import { useFormik, yupToFormErrors } from 'formik';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 
@@ -50,7 +48,7 @@ class Login extends React.Component {
     }
     render() {
         return (
-            <div>
+            <div className=".login">
                 {/* Modal is the pop up window */}
                 {<Modal show={this.props.isLoginForm} onHide={this.handleLoginForm}> 
 
@@ -106,7 +104,7 @@ class Login extends React.Component {
                                     <Button size = "sm" block = "true" variant="link" onClick={this.switchToRegister}>
                                         Switch to Sign up
                                     </Button> {' '}
-                                    <Button block = "true" class = "Submit_Buttom" variant="primary" type="submit">
+                                    <Button block="true" className="Submit_Buttom" variant="primary" type="submit">
                                         Log in
                                     </Button>
                                 </Form>
@@ -184,7 +182,7 @@ class Login extends React.Component {
                                     <Button size = "sm" block = "true" variant="link" onClick={this.switchToLogin}>
                                         Switch to Sign In
                                     </Button> {' '}
-                                    <Button block = "true" class = "Submit_Buttom" variant="primary" type="submit" >
+                                    <Button block="true" className="Submit_Buttom" variant="primary" type="submit" >
                                         Join
                                     </Button>
                                 </Form>
