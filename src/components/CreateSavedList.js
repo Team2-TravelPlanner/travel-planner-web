@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import Accordion from "react-bootstrap/Accordion";
 import Button from "react-bootstrap/cjs/Button";
+import ListGroup from "react-bootstrap/cjs/ListGroup";
 import Card from "react-bootstrap/cjs/Card";
 import Spinner from "react-bootstrap/cjs/Spinner";
 
@@ -12,37 +12,29 @@ class CreateSavedList extends Component {
     render() {
         const { tripsInfo, isLoading } = this.props;
         const tripList = tripsInfo ? tripsInfo : [];
+        console.log(tripList);
 
         return (
             <div className="list-main">
-                <div className="left-side">
-                    {
-                        isLoading ?
-                            <Spinner animation="border" role="status" className="custom-spinner-border">
-                                <span className="sr-only">Loading...</span>
-                            </Spinner>
-                            :
-                            <Accordion className="custom-accordion">
-                                {tripList.map((trip)=>(
-                                    <Card>
-                                        <Accordion.Toggle as={Card.Header} eventKey={trip.id}>
-                                            {trip.name}
-                                        </Accordion.Toggle>
-                                        <Accordion.Collapse eventKey={trip.id}>
-                                            <Card.Body>
-                                                <p>Start date: {trip.startDate}</p>
-                                                <p>End date: {trip.endDate}</p>
-                                                <Button className="detail-btn">Show Plan</Button>
-                                            </Card.Body>
-                                        </Accordion.Collapse>
-                                    </Card>
-                                ))}
-                            </Accordion>
-                    }
-                </div>
-                <div className="right-side">
-                    Map
-                </div>
+                {
+                    isLoading ?
+                        <Spinner animation="border" role="status" className="custom-spinner-border">
+                            <span className="sr-only">Loading...</span>
+                        </Spinner>
+                        :
+                        <ListGroup>
+                            {tripList.map((trip) => (
+                                <Card>
+                                    <Card.Header>{trip.name}</Card.Header>
+                                    <Card.Body>
+                                        <p>Start date: {new Date(parseInt(trip.startDate)).toLocaleDateString()}</p>
+                                        <p>End date: {new Date(parseInt(trip.endDate)).toLocaleDateString()}</p>
+                                        <Button className="detail-btn">Show Plan</Button>
+                                    </Card.Body>
+                                </Card>
+                            ))}
+                        </ListGroup>
+                }
             </div>
         );
     }

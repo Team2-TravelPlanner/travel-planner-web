@@ -1,33 +1,11 @@
 .list-main {
-    justify-content: center;
-    align-items: center;
-    display: flex;
-    margin: 10px;
-    width: 1400px;
-    height: 600px;
-}
-
-.left-side {
-    width: 400px;
-    height: 600px;
-    float: left;
-}
-
-.right-side {
-    float: left;
-    width: 1000px;
-    height: 600px;
-    text-align: center;
-}
-
-.custom-accordion {
     height: 600px;
     overflow: scroll;
 }
 
 .detail-btn {
     float: right;
-    margin: 10px;
+    margin: 5px;
 }
 
 .custom-spinner-border {
