@@ -17,7 +17,6 @@ class App extends React.Component {
     isLoadingSavedTrips: false
   }
 
-
   getSavedTrips = () => {
     // fetch saved trip list
     // ...
@@ -29,8 +28,21 @@ class App extends React.Component {
 
   handleCloseSavedTrips = () => {
     this.setState({
-      showSavedTrips: false,
+      showSavedTrips: false
     });
+  }
+
+  handleOpenSavedTrips = () => {
+    this.getSavedTrips();
+    this.setState({
+      showSavedTrips: true
+    });
+  }
+
+  showTrip = (id) => {
+    this.setState({
+      showSavedTrips: false
+    })
   }
 
 //two call back functions used to get props from it's child(Header and Login)
@@ -55,16 +67,17 @@ class App extends React.Component {
 
     return (
       <div className="app">
-        <Header isLoginData = {this.loginCB}
-                isRegisterData = {this.registerCB}
-                isLogin = {this.state.LoginStatus}
-                LogOutData = {this.logOutCB}
+        <Header isLoginData={this.loginCB}
+                isRegisterData={this.registerCB}
+                isLogin={this.state.LoginStatus}
+                LogOutData={this.logOutCB}
+                handleOpenSavedTrips={this.handleOpenSavedTrips}
                 />
         <Login isLoginForm={this.state.isLoginForm} 
                isLoginData = {this.loginCB}
                isRegisterForm={this.state.isRegisterForm} 
-               isRegisterData = {this.registerCB}
-               loginStatus = {this.loginStatusCB}
+               isRegisterData={this.registerCB}
+               loginStatus={this.loginStatusCB}
                />        
         <Main />
         <Footer />
@@ -78,7 +91,10 @@ class App extends React.Component {
             <Modal.Title>Saved Trips</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <SavedTripsList isLoading={isLoadingSavedTrips} savedTrips={savedTrips} />
+            <SavedTripsList 
+              isLoading={isLoadingSavedTrips} 
+              savedTrips={savedTrips} 
+              showTrip={this.showTrip} />
           </Modal.Body>
         </Modal>
       </div>

@@ -16,10 +16,14 @@ class Header extends React.Component {
     this.props.LogOutData(true);
   }
 
+  handleOpenSavedTrips = () => {
+    this.props.handleOpenSavedTrips();
+  }
+
   showMenu = () => {
     if (this.props.isLogin) {
       return <div>
-        <Dropdown.Item className="dropdown-item" type="button" onClick={this.handleLogin}>Saved Trip</Dropdown.Item>
+        <Dropdown.Item className="dropdown-item" type="button" onClick={this.handleOpenSavedTrips}>Saved Trip</Dropdown.Item>
         <Dropdown.Divider />
         <Dropdown.Item className="dropdown-item" type="button" onClick={this.handleLogOut}>Log out</Dropdown.Item>
       </div>
