@@ -1,18 +1,11 @@
 import React, {Component} from 'react';
-import Button from "react-bootstrap/cjs/Button";
-import ListGroup from "react-bootstrap/cjs/ListGroup";
-import Card from "react-bootstrap/cjs/Card";
-import Spinner from "react-bootstrap/cjs/Spinner";
+import { Button, ListGroup, Card, Spinner } from "react-bootstrap";
+import trips from "../data/SavedTrips";
 
 class CreateSavedList extends Component {
-    constructor() {
-        super();
-    }
 
     render() {
-        const { tripsInfo, isLoading } = this.props;
-        const tripList = tripsInfo ? tripsInfo : [];
-        console.log(tripList);
+        const { isLoading } = this.props;
 
         return (
             <div className="list-main">
@@ -23,8 +16,8 @@ class CreateSavedList extends Component {
                         </Spinner>
                         :
                         <ListGroup>
-                            {tripList.map((trip) => (
-                                <Card>
+                            {trips.map((trip) => (
+                                <Card key={trip.id} className="card">
                                     <Card.Header>{trip.name}</Card.Header>
                                     <Card.Body>
                                         <p>Start date: {new Date(parseInt(trip.startDate)).toLocaleDateString()}</p>
