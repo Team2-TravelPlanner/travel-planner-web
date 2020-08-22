@@ -1,18 +1,18 @@
-.list-main {
+.saved-trips-list {
     height: 600px;
     overflow: scroll;
 }
 
-.detail-btn {
+.saved-trips-list .detail-btn {
     float: right;
     margin: 5px;
 }
 
-.custom-spinner-border {
+.saved-trips-list .custom-spinner-border {
     margin-top: 50%;
     margin-left: 50%;
 }
 
-.card {
+.saved-trips-list .card {
   margin: 5px;
 }

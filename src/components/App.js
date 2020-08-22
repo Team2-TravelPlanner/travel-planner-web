@@ -1,7 +1,10 @@
-import React from 'react';
+import React from "react";
 import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
+import SavedTripsList from "./SavedTripsList";
+import { Modal } from "react-bootstrap";
+import savedTrips from "../data/SavedTrips";
 import Login from "./Login"
 
 class App extends React.Component {
@@ -9,7 +12,27 @@ class App extends React.Component {
     isLoginForm: false,
     isRegisterForm: false,
     LoginStatus: false,
+    showSavedTrips: false,
+    savedTrips: [],
+    isLoadingSavedTrips: false
   }
+
+
+  getSavedTrips = () => {
+    // fetch saved trip list
+    // ...
+    this.setState({
+        savedTrips: savedTrips,
+        isLoadingSaved: false
+    });
+  }
+
+  handleCloseSavedTrips = () => {
+    this.setState({
+      showSavedTrips: false,
+    });
+  }
+
 //two call back functions used to get props from it's child(Header and Login)
   loginCB = (isLoginData) => {
     this.setState({isLoginForm: isLoginData})
@@ -28,6 +51,8 @@ class App extends React.Component {
   }
 
   render() {
+    const { showSavedTrips, savedTrips, isLoadingSavedTrips} = this.state;
+
     return (
       <div className="app">
         <Header isLoginData = {this.loginCB}
@@ -43,8 +68,21 @@ class App extends React.Component {
                />        
         <Main />
         <Footer />
+
+        <Modal
+          show={showSavedTrips}
+          onHide={this.handleCloseSavedTrips}
+          dialogClassName="custom-modal"
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>Saved Trips</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <SavedTripsList isLoading={isLoadingSavedTrips} savedTrips={savedTrips} />
+          </Modal.Body>
+        </Modal>
       </div>
-    )
+    );
   }
 }
 
