@@ -19,12 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="01786f17-39f3-43da-a286-9a2149a651a1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/images/delete.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/images/plus.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Explore.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Explore.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/Explore.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/Explore.css" afterDir="false" />
-    </list>
+    <list default="true" id="01786f17-39f3-43da-a286-9a2149a651a1" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -70,6 +65,15 @@
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="Settings.JavaScript" />
   </component>
+  <component name="RunManager">
+    <configuration name="start" type="js.build_tools.npm">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="start" />
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -103,6 +107,10 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="2011" y="173" width="1071" height="700" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1598059545841">
+      <screen x="1680" y="23" width="1920" height="1006" />
+    </state>
+    <state x="2011" y="173" width="1071" height="700" key="#com.intellij.execution.impl.EditConfigurationsDialog/1680.23.1920.1006/0.23.1680.1027@1680.23.1920.1006" timestamp="1598059545841" />
     <state x="860" y="386" key="SettingsEditor" timestamp="1597562848390">
       <screen x="0" y="23" width="2560" height="1351" />
     </state>
