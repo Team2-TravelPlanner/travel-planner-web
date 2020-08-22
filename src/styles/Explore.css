@@ -10,12 +10,12 @@
     margin-left: 380px;
 }
 
-.search{
+.search, .selected-items {
     text-align: left;
     padding: 10px;
 }
 
-.search-result {
+.search-result, .select-result {
     width: 30em;
     height: 280px;
     overflow: scroll;
@@ -30,3 +30,18 @@
    padding-left: 10px;
 }
 
+.search-item-select {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.add-btn {
+    margin-left: auto;
+    background-color: white;
+    border: white;
+}
+
+.add-btn:hover {
+    background-color: white;
+}
