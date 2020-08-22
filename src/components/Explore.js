@@ -29,6 +29,9 @@ class Explore extends Component {
 
     // 1. if a category is selected and search box is empty, show all the places in that category.
     // 2. if a category is selected and search box is not empty, show all the places that matches the search keyword in that category.
+    // 3. if no category is selected and search box is empty, show everything.
+    // 4. if no category is selected and search box not empty, show everything based on the keyword in all the categories.
+    // 5. Result is dynamically changed based on category selections.
 
     findResult = () => {
         let results = [];
