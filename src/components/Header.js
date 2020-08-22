@@ -1,6 +1,7 @@
 import React from 'react';
 import { Dropdown } from 'react-bootstrap'
-import avatar from "../assets/images/user_ava.png";
+import avatar from "../assets/images/user.svg";
+import { Link } from "react-router-dom";
 
 class Header extends React.Component {
   handleLogin = () => {
@@ -20,28 +21,39 @@ class Header extends React.Component {
       return <div>
         <Dropdown.Item className="dropdown-item" type="button" onClick={this.handleLogin}>Saved Trip</Dropdown.Item>
         <Dropdown.Divider />
-        <Dropdown.Item className="dropdown-item" type="button" onClick={this.handleLogOut}>Sign out</Dropdown.Item>
+        <Dropdown.Item className="dropdown-item" type="button" onClick={this.handleLogOut}>Log out</Dropdown.Item>
       </div>
     }
     else {
       return <div>
-        <Dropdown.Item className="dropdown-item" type="button" onClick={this.handleLogin}>Sign in</Dropdown.Item>
-        <Dropdown.Item className="dropdown-item" type="button" onClick={this.handleRegister}>Sign up</Dropdown.Item>
+        <Dropdown.Item className="dropdown-item" type="button" onClick={this.handleLogin}>Log in</Dropdown.Item>
+        <Dropdown.Item className="dropdown-item" type="button" onClick={this.handleRegister}>Register</Dropdown.Item>
       </div>
     }
   }
+  
+  customToggle = React.forwardRef(({ children, onClick }, ref) => (
+    <a
+      href="/"
+      ref={ref}
+      onClick={(e) => {
+        e.preventDefault();
+        onClick(e);
+      }}
+    >
+      {children}
+    </a>
+  ));
 
   render() {
     return (
       <div className="app-header">
-        <nav className="navbar navbar-light bg-light">
-          <a className="navbar-brand" href="/">
-            Planner
-          </a>
-        </nav>
+        <Link to="/" className="logo">
+          NYC Travel planner
+        </Link>
         <div className="DropDown">
           <Dropdown>
-            <Dropdown.Toggle id="dropdown-basic-button">
+            <Dropdown.Toggle as={this.customToggle} id="dropdown-custom-components">
               {<img className="avatar"
                 src={avatar}
                 alt="user pic"

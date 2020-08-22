@@ -102,7 +102,7 @@ class Login extends React.Component {
                                         </Form.Control.Feedback>
                                     </Form.Group>
                                     <Button size = "sm" block = "true" variant="link" onClick={this.switchToRegister}>
-                                        Switch to Sign up
+                                        Not registered? Sign up
                                     </Button> {' '}
                                     <Button block="true" className="Submit_Buttom" variant="primary" type="submit">
                                         Log in
@@ -115,7 +115,7 @@ class Login extends React.Component {
 
                 {<Modal show={this.props.isRegisterForm} onHide={this.handleRegisterForm}>
                     <Modal.Header closeButton>
-                        <Modal.Title>Sign Up</Modal.Title>
+                        <Modal.Title>Register</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
 
@@ -180,7 +180,7 @@ class Login extends React.Component {
                                         </Form.Control.Feedback>
                                     </Form.Group>
                                     <Button size = "sm" block = "true" variant="link" onClick={this.switchToLogin}>
-                                        Switch to Sign In
+                                        Aready registered? Log in
                                     </Button> {' '}
                                     <Button block="true" className="Submit_Buttom" variant="primary" type="submit" >
                                         Join

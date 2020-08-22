@@ -8,7 +8,7 @@ class Footer extends React.Component {
 
     return (
       <div className="app-footer">
-        &copy; Copyright {year}, Travel Planner 
+        &copy; Copyright {year}, NYC Travel Planner 
       </div>
     )
   }
