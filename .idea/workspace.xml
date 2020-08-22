@@ -19,9 +19,11 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="913ef3e5-dae0-4fb9-9ee9-f3bf0319fb56" name="Default Changelist" comment="Added categories for search">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="01786f17-39f3-43da-a286-9a2149a651a1" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/images/delete.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/images/plus.svg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Explore.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Explore.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/Explore.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/Explore.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,15 +39,16 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$" value="master" />
-      </map>
-    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectId" id="1g77lzIztpzD3N6kjtTVqnMaQf0" />
-  <component name="ProjectLevelVcsManager">
+  <component name="JsFlowSettings">
+    <service-enabled>true</service-enabled>
+    <exe-path />
+    <other-services-enabled>true</other-services-enabled>
+    <auto-save>true</auto-save>
+  </component>
+  <component name="ProjectId" id="1gAgR6woS0ade2XYCvrGoYKDwom" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectViewState">
@@ -53,93 +56,39 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="restartRequiresConfirmation" value="false" />
-    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+    <property name="settings.editor.selected.configurable" value="Settings.JavaScript" />
   </component>
-  <component name="RunManager">
-    <configuration name="start" type="js.build_tools.npm" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/package.json" />
-      <command value="start" />
-      <node-interpreter value="project" />
-      <envs />
-      <method v="2" />
-    </configuration>
+  <component name="SvnConfiguration">
+    <configuration />
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="913ef3e5-dae0-4fb9-9ee9-f3bf0319fb56" name="Default Changelist" comment="" />
-      <created>1597453931156</created>
+      <changelist id="01786f17-39f3-43da-a286-9a2149a651a1" name="Default Changelist" comment="" />
+      <created>1597562799931</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1597453931156</updated>
-      <workItem from="1597453932280" duration="1110000" />
-      <workItem from="1597795420593" duration="22670000" />
-      <workItem from="1597866932079" duration="33000" />
-      <workItem from="1597869613858" duration="19298000" />
-      <workItem from="1597950262101" duration="510000" />
-      <workItem from="1598054668678" duration="1171000" />
-      <workItem from="1598058185595" duration="1014000" />
+      <updated>1597562799931</updated>
+      <workItem from="1597562804111" duration="12323000" />
+      <workItem from="1597811222536" duration="5000" />
+      <workItem from="1597976146743" duration="99000" />
+      <workItem from="1597976248455" duration="13506000" />
     </task>
-    <task id="LOCAL-00001" summary="add explore message">
-      <created>1597798408691</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1597798408691</updated>
-    </task>
-    <task id="LOCAL-00002" summary="finish basic search functionality">
-      <created>1597822140654</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1597822140654</updated>
-    </task>
-    <task id="LOCAL-00003" summary="finish basic search functionality">
-      <created>1597822355175</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1597822355175</updated>
-    </task>
-    <task id="LOCAL-00004" summary="Add category">
-      <created>1597872732318</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1597872732318</updated>
-    </task>
-    <task id="LOCAL-00005" summary="Added categories for search">
-      <created>1597914161576</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1597914161576</updated>
-    </task>
-    <task id="LOCAL-00006" summary="Added categories for search">
-      <created>1598058219768</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1598058219768</updated>
-    </task>
-    <task id="LOCAL-00007" summary="Added categories for search">
-      <created>1598058339577</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1598058339577</updated>
-    </task>
-    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="3" />
+    <option name="version" value="2" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -153,85 +102,14 @@
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="add explore message" />
-    <MESSAGE value="Merge branch 'master' of https://github.com/Team2-TravelPlanner/travel-planner-web into explore&#10;&#10; Conflicts:&#10;&#9;src/components/Main.js" />
-    <MESSAGE value="complete basic search functionality" />
-    <MESSAGE value="finish basic search functionality" />
-    <MESSAGE value="Add category" />
-    <MESSAGE value="Added categories for search" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added categories for search" />
-  </component>
   <component name="WindowStateProjectService">
-    <state x="489" y="342" key="#Notifications" timestamp="1597914185033">
-      <screen x="0" y="23" width="1680" height="1027" />
+    <state x="860" y="386" key="SettingsEditor" timestamp="1597562848390">
+      <screen x="0" y="23" width="2560" height="1351" />
     </state>
-    <state x="489" y="342" key="#Notifications/1680.23.1920.1006/0.23.1680.1027@0.23.1680.1027" timestamp="1597914185033" />
-    <state x="1962" y="161" width="1071" height="700" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1597454278265">
-      <screen x="1680" y="23" width="1920" height="1057" />
+    <state x="860" y="386" key="SettingsEditor/2560.193.1920.1057/0.23.2560.1351@0.23.2560.1351" timestamp="1597562848390" />
+    <state x="1550" y="331" width="670" height="676" key="search.everywhere.popup" timestamp="1597563800281">
+      <screen x="0" y="23" width="2560" height="1351" />
     </state>
-    <state x="1962" y="161" width="1071" height="700" key="#com.intellij.execution.impl.EditConfigurationsDialog/1680.23.1920.1057/0.23.1680.976@1680.23.1920.1057" timestamp="1597454278265" />
-    <state x="2377" y="398" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1598059002386">
-      <screen x="1680" y="23" width="1920" height="1006" />
-    </state>
-    <state x="2377" y="398" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/1680.23.1920.1006/0.23.1680.1027@1680.23.1920.1006" timestamp="1598059002386" />
-    <state x="2019" y="46" key="CommitChangelistDialog2" timestamp="1598058630629">
-      <screen x="1680" y="23" width="1920" height="1006" />
-    </state>
-    <state x="297" y="46" key="CommitChangelistDialog2/1680.23.1920.1006/0.23.1680.1027@0.23.1680.1027" timestamp="1597914569802" />
-    <state x="2019" y="46" key="CommitChangelistDialog2/1680.23.1920.1006/0.23.1680.1027@1680.23.1920.1006" timestamp="1598058630629" />
-    <state x="297" y="45" key="CommitChangelistDialog2/1680.23.1920.1057/0.23.1680.976@0.23.1680.976" timestamp="1597872732117" />
-    <state x="1832" y="69" key="DiffContextDialog" timestamp="1598058949129">
-      <screen x="1680" y="23" width="1920" height="1006" />
-    </state>
-    <state x="1832" y="69" key="DiffContextDialog/1680.23.1920.1006/0.23.1680.1027@1680.23.1920.1006" timestamp="1598058949129" />
-    <state width="828" height="337" key="GridCell.Tab.0.bottom" timestamp="1598057601182">
-      <screen x="1680" y="23" width="1920" height="1006" />
-    </state>
-    <state width="828" height="135" key="GridCell.Tab.0.bottom/1680.23.1920.1006/0.23.1680.1027@0.23.1680.1027" timestamp="1597954737018" />
-    <state width="828" height="337" key="GridCell.Tab.0.bottom/1680.23.1920.1006/0.23.1680.1027@1680.23.1920.1006" timestamp="1598057601182" />
-    <state width="829" height="221" key="GridCell.Tab.0.bottom/1680.23.1920.1057/0.23.1680.976@0.23.1680.976" timestamp="1597871752942" />
-    <state width="1328" height="256" key="GridCell.Tab.0.bottom/1680.23.1920.1057/0.23.1680.976@1680.23.1920.1057" timestamp="1597454625596" />
-    <state width="828" height="337" key="GridCell.Tab.0.center" timestamp="1598057601181">
-      <screen x="1680" y="23" width="1920" height="1006" />
-    </state>
-    <state width="828" height="135" key="GridCell.Tab.0.center/1680.23.1920.1006/0.23.1680.1027@0.23.1680.1027" timestamp="1597954737017" />
-    <state width="828" height="337" key="GridCell.Tab.0.center/1680.23.1920.1006/0.23.1680.1027@1680.23.1920.1006" timestamp="1598057601181" />
-    <state width="829" height="221" key="GridCell.Tab.0.center/1680.23.1920.1057/0.23.1680.976@0.23.1680.976" timestamp="1597871752941" />
-    <state width="1328" height="256" key="GridCell.Tab.0.center/1680.23.1920.1057/0.23.1680.976@1680.23.1920.1057" timestamp="1597454625595" />
-    <state width="828" height="337" key="GridCell.Tab.0.left" timestamp="1598057601181">
-      <screen x="1680" y="23" width="1920" height="1006" />
-    </state>
-    <state width="828" height="135" key="GridCell.Tab.0.left/1680.23.1920.1006/0.23.1680.1027@0.23.1680.1027" timestamp="1597954737016" />
-    <state width="828" height="337" key="GridCell.Tab.0.left/1680.23.1920.1006/0.23.1680.1027@1680.23.1920.1006" timestamp="1598057601181" />
-    <state width="829" height="221" key="GridCell.Tab.0.left/1680.23.1920.1057/0.23.1680.976@0.23.1680.976" timestamp="1597871752941" />
-    <state width="1328" height="256" key="GridCell.Tab.0.left/1680.23.1920.1057/0.23.1680.976@1680.23.1920.1057" timestamp="1597454625594" />
-    <state width="828" height="337" key="GridCell.Tab.0.right" timestamp="1598057601182">
-      <screen x="1680" y="23" width="1920" height="1006" />
-    </state>
-    <state width="828" height="135" key="GridCell.Tab.0.right/1680.23.1920.1006/0.23.1680.1027@0.23.1680.1027" timestamp="1597954737017" />
-    <state width="828" height="337" key="GridCell.Tab.0.right/1680.23.1920.1006/0.23.1680.1027@1680.23.1920.1006" timestamp="1598057601182" />
-    <state width="829" height="221" key="GridCell.Tab.0.right/1680.23.1920.1057/0.23.1680.976@0.23.1680.976" timestamp="1597871752942" />
-    <state width="1328" height="256" key="GridCell.Tab.0.right/1680.23.1920.1057/0.23.1680.976@1680.23.1920.1057" timestamp="1597454625595" />
-    <state x="403" y="249" key="MultipleFileMergeDialog" timestamp="1597822021461">
-      <screen x="0" y="23" width="1680" height="1027" />
-    </state>
-    <state x="403" y="249" key="MultipleFileMergeDialog/1680.23.1920.1006/0.23.1680.1027@0.23.1680.1027" timestamp="1597822021461" />
-    <state x="403" y="238" key="MultipleFileMergeDialog/1680.23.1920.1057/0.23.1680.976@0.23.1680.976" timestamp="1597798472950" />
-    <state x="2104" y="230" key="Vcs.Push.Dialog.v2" timestamp="1598059199973">
-      <screen x="1680" y="23" width="1920" height="1006" />
-    </state>
-    <state x="368" y="231" key="Vcs.Push.Dialog.v2/1680.23.1920.1006/0.23.1680.1027@0.23.1680.1027" timestamp="1597914572970" />
-    <state x="2104" y="230" key="Vcs.Push.Dialog.v2/1680.23.1920.1006/0.23.1680.1027@1680.23.1920.1006" timestamp="1598059199973" />
-    <state x="248" y="218" key="Vcs.Push.Dialog.v2/1680.23.1920.1057/0.23.1680.976@0.23.1680.976" timestamp="1597798424046" />
-    <state x="2198" y="236" key="Vcs.Push.Dialog.v2/1680.23.1920.1057/0.23.1680.976@1680.23.1920.1057" timestamp="1597454688965" />
-    <state x="2428" y="432" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1598058964544">
-      <screen x="1680" y="23" width="1920" height="1006" />
-    </state>
-    <state x="2428" y="432" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/1680.23.1920.1006/0.23.1680.1027@1680.23.1920.1006" timestamp="1598058964544" />
-    <state x="2373" y="412" key="git4idea.ui.GitResetDialog" timestamp="1598058977487">
-      <screen x="1680" y="23" width="1920" height="1006" />
-    </state>
-    <state x="2373" y="412" key="git4idea.ui.GitResetDialog/1680.23.1920.1006/0.23.1680.1027@1680.23.1920.1006" timestamp="1598058977487" />
+    <state x="1550" y="331" width="670" height="676" key="search.everywhere.popup/2560.193.1920.1057/0.23.2560.1351@0.23.2560.1351" timestamp="1597563800281" />
   </component>
 </project>
