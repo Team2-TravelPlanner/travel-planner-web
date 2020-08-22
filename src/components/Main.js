@@ -12,7 +12,6 @@ class Main extends React.Component {
   }
 
   openForm = () => {
-    console.log("open form");
     this.setState({
       showForm: true
     });
