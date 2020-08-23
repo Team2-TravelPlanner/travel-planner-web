@@ -179,6 +179,13 @@ class Explore extends Component {
         }
     }
 
+    handleKeyPress = (target) => {
+        if(target.key === "Enter"){
+          target.preventDefault()
+          this.onSearch();
+        }
+    }
+
 
     render() {
         return (
@@ -196,8 +203,8 @@ class Explore extends Component {
                     <div className="search">
                         <Form inline>
                             <FormControl type="text" placeholder="Search" className='mr-sm-2' style={{width: '30em'}}
-                                         onChange={this.onChangeKeyword}/>
-                            <Button variant="primary" onClick={this.onSearch}>Search</Button>
+                                         onChange={this.onChangeKeyword} onKeyPress = {this.handleKeyPress}/>
+                            <Button variant="primary" onClick={this.onSearch} >Search</Button>
                         </Form>
                         <br/>
                         <Card style={{width: '30em'}}>
