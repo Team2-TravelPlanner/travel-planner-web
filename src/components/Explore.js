@@ -29,9 +29,12 @@ class Explore extends Component {
 
     // 1. if a category is selected and search box is empty, show all the places in that category.
     // 2. if a category is selected and search box is not empty, show all the places that matches the search keyword in that category.
-    onSearch = () => {
-        let results = [];
+    // 3. if no category is selected and search box is empty, show everything.
+    // 4. if no category is selected and search box not empty, show everything based on the keyword in all the categories.
+    // 5. Result is dynamically changed based on category selections.
 
+    findResult = () => {
+        let results = [];
         searchResults["places"].map(place => {
             // check whether the place is in the category
             let inCategory = false;
@@ -43,15 +46,30 @@ class Explore extends Component {
                 }
             )
 
-            if (inCategory === true && this.state.keyword === "") {
-                results.push(place)
-            } else if (this.state.keyword !== '' && place["name"].toLowerCase().includes(this.state.keyword.toLowerCase()) && inCategory === true) {
-                results.push(place)
-            } else if (this.state.keyword === '') {
-                results.push(place)
+            console.log(inCategory)
+            if(inCategory === true) {
+                if (this.state.keyword === '') {
+                    results.push(place)
+                } else if (this.state.keyword !== '' && place["name"].toLowerCase().includes(this.state.keyword.toLowerCase())) {
+                    results.push(place)
+                } else if (this.state.keyword === '') {
+                    results.push(place)
+                }
+                // no category is selected
+            }else if(this.state.activeCategory.length === 0){
+                if (this.state.keyword === '') {
+                    results.push(place)
+                } else if (place["name"].toLowerCase().includes(this.state.keyword.toLowerCase())) {
+                    results.push(place)
+                }
             }
             return results
         })
+        return results;
+    }
+
+    onSearch = () => {
+        let results = this.findResult();
         this.setState(
             {
                 result: results
@@ -131,14 +149,19 @@ class Explore extends Component {
     }
 
     selectCategory = (event) => {
+
         if (this.state[event.target.value] === "outline-primary") {
             this.setState(
                 {
                     [event.target.value]: "primary",
                     activeCategory: [...this.state.activeCategory, event.target.value]
                 },
-                () => console.log(this.state.activeCategory)
+                //() => console.log(this.state.activeCategory),
+                this.onSearch
+
             )
+
+
 
         } else {
             this.setState(
@@ -148,8 +171,11 @@ class Explore extends Component {
                         return category !== event.target.value
                     })
                 },
-                () => console.log(this.state.activeCategory)
+                //() => console.log(this.state.activeCategory),
+                this.onSearch
             )
+
+
         }
     }
 
