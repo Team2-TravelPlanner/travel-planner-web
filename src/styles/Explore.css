@@ -40,6 +40,10 @@
     margin-left: auto;
     background-color: white;
     border: white;
+    width: 32px;
+    height: 32px;
+    alt: "book";
+    title: "Bootstrap";
 }
 
 .add-btn:hover {

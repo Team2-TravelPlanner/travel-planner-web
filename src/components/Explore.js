@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Card, ListGroup, FormControl, Form, Button} from 'react-bootstrap'
 import plus from "../images/plus.svg"
+import checked from "../images/checked.svg"
 import del from "../images/delete.svg"
 import searchResults from "../data/SearchResults.js"
 
@@ -81,21 +82,28 @@ class Explore extends Component {
     showResult = () => {
         let list = [];
         let i;
-        const {result} = this.state;
+        const {result, selected} = this.state;
         for (i = 0; i < result.length; i++) {
             let cur_place = result[i];
-            console.log(cur_place);
             list.push(<ListGroup.Item key={i} action className="search-item-select">
-                {cur_place["name"]}
-                <img className="add-btn"
-                     src={plus}
-                     alt="book"
-                     width="32"
-                     height="32"
-                     title="Bootstrap"
-                     data-place={cur_place.id}
-                     onClick={this.onSelect}
-                />
+                {cur_place.name}
+                {
+                    selected.some(entry => entry.id === cur_place.id)
+                        ?
+                        <img
+                            className="add-btn"
+                            src={checked}
+                            alt="book"
+                            title="Bootstrap"/>
+                        :
+                        <img
+                            className="add-btn"
+                            src={plus}
+                            alt="book"
+                            title="Bootstrap"
+                            data-place={cur_place.id}
+                            onClick={this.onSelect} />
+                }
             </ListGroup.Item>)
         }
         return list
@@ -108,12 +116,10 @@ class Explore extends Component {
         for (i = 0; i < selected.length; i++) {
             let cur_place = selected[i];
             list.push(<ListGroup.Item key={i} action className="search-item-select">
-                {cur_place["name"]}
+                {cur_place.name}
                 <img className="add-btn"
                      src={del}
                      alt="book"
-                     width="32"
-                     height="32"
                      title="Bootstrap"
                      data-place={cur_place.id}
                      onClick={this.onDeselect}
@@ -124,27 +130,21 @@ class Explore extends Component {
     }
 
     onSelect = (e) => {
-        let selectedItem = this.state.result.filter(place => place.id === e.target.dataset.place)[0];
         const {selected, result} = this.state;
+        const selectedItemId = e.target.dataset.place;
+        const selectedItem = result.filter(place => place.id === selectedItemId)[0];
+        const addBefore = selected.some(entry => entry.id === selectedItemId);
         this.setState({
-            selected: [...selected, selectedItem],
-            result: result.filter(unselect =>
-                (unselect.id !== selectedItem.id)
-            ),
+            selected: addBefore ? selected : [...selected, selectedItem],
         })
     }
 
 
     onDeselect = (e) => {
-        let deselectedItem = this.state.selected.filter(place => place.id === e.target.dataset.place)[0];
         const {selected, result} = this.state;
+        const deselectedItemId = e.target.dataset.place;
         this.setState({
-            selected: selected.filter(selected => selected.id !== deselectedItem.id),
-            result: [...result, deselectedItem],
-        },
-        () => {
-                console.log(selected);
-                console.log(result);
+            selected: selected.filter(selected => selected.id !== deselectedItemId),
         })
     }
 
