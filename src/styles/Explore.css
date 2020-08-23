@@ -10,7 +10,19 @@
     margin-left: 380px;
 }
 
-.search, .selected-items {
+.buttons{
+    text-align: left;
+    padding-left: 10px;
+    justify-content: center;
+}
+
+.search-bar {
+    display: inline-flex;
+    width: 30em;
+    padding: 0 0 10px 0;
+}
+
+.search-items, .selected-items {
     text-align: left;
     padding: 10px;
 }
@@ -21,19 +33,14 @@
     overflow: scroll;
 }
 
-.search-item-select:hover{
-    background: #0dd910;
-}
-
-.buttons{
-   text-align: left;
-   padding-left: 10px;
-}
-
 .search-item-select {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.search-item-select:hover{
+    background: #0dd910;
 }
 
 .add-btn {
@@ -46,6 +53,3 @@
     title: "Bootstrap";
 }
 
-.add-btn:hover {
-    background-color: white;
-}

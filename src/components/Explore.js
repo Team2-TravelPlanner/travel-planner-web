@@ -141,7 +141,7 @@ class Explore extends Component {
 
 
     onDeselect = (e) => {
-        const {selected, result} = this.state;
+        const {selected} = this.state;
         const deselectedItemId = e.target.dataset.place;
         this.setState({
             selected: selected.filter(selected => selected.id !== deselectedItemId),
@@ -200,8 +200,8 @@ class Explore extends Component {
                                 onClick={this.selectCategory}>Plaza </Button>{" "}
                     </div>
 
-                    <div className="search">
-                        <Form inline>
+                    <div className="search-items">
+                        <Form className="search-bar">
                             <FormControl type="text" placeholder="Search" className='mr-sm-2' style={{width: '30em'}}
                                          onChange={this.onChangeKeyword} onKeyPress = {this.handleKeyPress}/>
                             <Button variant="primary" onClick={this.onSearch} >Search</Button>
