@@ -36,35 +36,20 @@ class Explore extends Component {
 
     findResult = () => {
         let results = [];
+        const { activeCategory, keyword } = this.state;
         searchResults["places"].map(place => {
             // check whether the place is in the category
-            let inCategory = false;
-            this.state.activeCategory.map(category => {
-                    if (place["category"].toLowerCase().includes(category.toLowerCase())) {
-                        inCategory = true;
-                    }
-                    return 0 // add this line for the purpose of removing the warning
-                }
-            )
+            let matchCategory = activeCategory.some(category =>
+                place["category"].toLowerCase().includes(category.toLowerCase())
+            );
+            // check whether the name of place matches the user's input keyword
+            let matchKeyword = place["name"].toLowerCase().includes(keyword.toLowerCase());
 
-            console.log(inCategory)
-            if(inCategory === true) {
-                if (this.state.keyword === '') {
-                    results.push(place)
-                } else if (this.state.keyword !== '' && place["name"].toLowerCase().includes(this.state.keyword.toLowerCase())) {
-                    results.push(place)
-                } else if (this.state.keyword === '') {
-                    results.push(place)
-                }
-                // no category is selected
-            }else if(this.state.activeCategory.length === 0){
-                if (this.state.keyword === '') {
-                    results.push(place)
-                } else if (place["name"].toLowerCase().includes(this.state.keyword.toLowerCase())) {
-                    results.push(place)
-                }
+            // console.log(matchCategory)
+            if((activeCategory.length === 0 || matchCategory) &&
+                (keyword === '' || matchKeyword)) {
+                results.push(place);
             }
-            return results
         })
         return results;
     }
