@@ -1,16 +1,13 @@
 import React, {Component} from 'react';
 import Nav from 'react-bootstrap/Nav';
 import Tab from 'react-bootstrap/Tab'
-import TabContainer from 'react-bootstrap/TabContainer'
-import TabPane from 'react-bootstrap/TabPane'
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Form from 'react-bootstrap/Form'
 import ListGroup from "react-bootstrap/ListGroup";
-import Card from "react-bootstrap/Card";
-import Accordion from 'react-bootstrap/Accordion';
 import Button from "react-bootstrap/Button";
-import NavItem from "react-bootstrap/NavItem";
+import Card from "react-bootstrap/Card";
+import Form from 'react-bootstrap/Form'
+import Table from "react-bootstrap/Table";
 
 class Plans extends Component {
     constructor(props, context) {
@@ -38,38 +35,212 @@ class Plans extends Component {
             <div className='main'>
                 <div className="dayItem-part">
                     <Tab.Container id="left-tabs-example" defaultActiveKey="first">
-                        <Col sm={9}>
-                            <Tab.Content>
-                                <Tab.Pane eventKey="first">
-                                    <ListGroup>
-                                        <ListGroup.Item>Central Park</ListGroup.Item>
-                                    </ListGroup>
-                                </Tab.Pane>
-                                <Tab.Pane eventKey="second">
-                                    <ListGroup>
-                                        <ListGroup.Item>Museum</ListGroup.Item>
-                                    </ListGroup>
-                                </Tab.Pane>
-                            </Tab.Content>
-                        </Col>
+                        <Row>
+                            <Col sm={9}>
+                                <div className='list-box'>
+                                    <Tab.Content>
+                                        <Tab.Pane eventKey="first">
+                                            <div className='table-head'>
+                                                <Table>
+                                                    <thead>
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th>Place</th>
+                                                        <th>Start Time</th>
+                                                        <th>End Time</th>
+                                                    </tr>
+                                                    </thead>
+                                                </Table>
+                                            </div>
 
-                        <Col sm={5}>
-                            <Nav variant="pills" className="flex-column">
-                                <Nav.Item>
-                                    <Nav.Link eventKey="first">Day 1</Nav.Link>
-                                </Nav.Item>
-                                <Nav.Item>
-                                    <Nav.Link eventKey="second">Day 2</Nav.Link>
-                                </Nav.Item>
-                            </Nav>
-                        </Col>
+                                            <div className='table-content'>
+                                                <Table>
+                                                    <thead>
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th>Place</th>
+                                                        <th>Start Time</th>
+                                                        <th>End Time</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>1</td>
+                                                            <td>Central Park</td>
+                                                            <td>10 : 00 AM</td>
+                                                            <td>11 : 00 AM</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>2</td>
+                                                            <td>Museum</td>
+                                                            <td>11 : 30 AM</td>
+                                                            <td>12 : 30 PM</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>3</td>
+                                                            <td>Museum</td>
+                                                            <td>11 : 30 AM</td>
+                                                            <td>12 : 30 PM</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>4</td>
+                                                            <td>Museum</td>
+                                                            <td>11 : 30 AM</td>
+                                                            <td>12 : 30 PM</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>5</td>
+                                                            <td>Museum</td>
+                                                            <td>11 : 30 AM</td>
+                                                            <td>12 : 30 PM</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>6</td>
+                                                            <td>Museum</td>
+                                                            <td>11 : 30 AM</td>
+                                                            <td>12 : 30 PM</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>7</td>
+                                                            <td>Museum</td>
+                                                            <td>11 : 30 AM</td>
+                                                            <td>12 : 30 PM</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>8</td>
+                                                            <td>Museum</td>
+                                                            <td>11 : 30 AM</td>
+                                                            <td>12 : 30 PM</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>9</td>
+                                                            <td>Museum</td>
+                                                            <td>11 : 30 AM</td>
+                                                            <td>12 : 30 PM</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>9</td>
+                                                            <td>Museum</td>
+                                                            <td>11 : 30 AM</td>
+                                                            <td>12 : 30 PM</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </Table>
+                                            </div>
+                                        </Tab.Pane>
+
+
+                                        <Tab.Pane eventKey="second">
+                                            <div className='table-head'>
+                                                <Table>
+                                                    <thead>
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th>Place</th>
+                                                        <th>Start Time</th>
+                                                        <th>End Time</th>
+                                                    </tr>
+                                                    </thead>
+                                                </Table>
+                                            </div>
+
+                                            <div className='table-content'>
+                                                <Table>
+                                                    <thead>
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th>Place</th>
+                                                        <th>Start Time</th>
+                                                        <th>End Time</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr>
+                                                        <td>1</td>
+                                                        <td>Central Park</td>
+                                                        <td>10 : 00 AM</td>
+                                                        <td>11 : 00 AM</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>2</td>
+                                                        <td>Museum</td>
+                                                        <td>11 : 30 AM</td>
+                                                        <td>12 : 30 PM</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>3</td>
+                                                        <td>Museum</td>
+                                                        <td>11 : 30 AM</td>
+                                                        <td>12 : 30 PM</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>4</td>
+                                                        <td>Museum</td>
+                                                        <td>11 : 30 AM</td>
+                                                        <td>12 : 30 PM</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>5</td>
+                                                        <td>Museum</td>
+                                                        <td>11 : 30 AM</td>
+                                                        <td>12 : 30 PM</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>6</td>
+                                                        <td>Museum</td>
+                                                        <td>11 : 30 AM</td>
+                                                        <td>12 : 30 PM</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>7</td>
+                                                        <td>Museum</td>
+                                                        <td>11 : 30 AM</td>
+                                                        <td>12 : 30 PM</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>8</td>
+                                                        <td>Museum</td>
+                                                        <td>11 : 30 AM</td>
+                                                        <td>12 : 30 PM</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>9</td>
+                                                        <td>Museum</td>
+                                                        <td>11 : 30 AM</td>
+                                                        <td>12 : 30 PM</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>9</td>
+                                                        <td>Museum</td>
+                                                        <td>11 : 30 AM</td>
+                                                        <td>12 : 30 PM</td>
+                                                    </tr>
+                                                    </tbody>
+                                                </Table>
+                                            </div>
+                                        </Tab.Pane>
+                                    </Tab.Content>
+                                </div>
+                            </Col>
+
+                            <Col sm={3}>
+                                <Nav variant="pills" className="flex-column">
+                                    <Nav.Item>
+                                        <Nav.Link eventKey="first">Day 1</Nav.Link>
+                                    </Nav.Item>
+                                    <Nav.Item>
+                                        <Nav.Link eventKey="second">Day 2</Nav.Link>
+                                    </Nav.Item>
+                                </Nav>
+                            </Col>
+
+                        </Row>
                     </Tab.Container>
                 </div>
 
-
-                <div className="map-part">
-                    map
-                </div>
+                {/*<div className="map-part">*/}
+                {/*    map*/}
+                {/*</div>*/}
 
                 <div className = "save-part">
                     <Button
