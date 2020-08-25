@@ -1,7 +1,7 @@
 .dayItem-part {
     position: absolute;
     top: 150px;
-    left: 350px;
+    left: 10px;
     height: 700px;
     padding: 20px;
 }
@@ -11,15 +11,33 @@
     justify-content: center;
     vertical-align: center;
     position: absolute;
-    width: 1000px;
-    height: 600px;
+    width: 800px;
+    height: 500px;
     margin-left: 400px;
     horiz-align: right;
     background-color: blanchedalmond;
 }
 
 .save-part{
+    display: flex;
     position: absolute;
-    margin-left: 1300px;
-    margin-top: 700px;
+    margin-left: 1100px;
+    margin-top: 600px;
+}
+.table-head{
+    margin-top: -1px;
+}
+.table-content{
+    margin-top: -15px;
+    overflow: scroll;
+    height: 445px;
+}
+
+.list-box{
+    height: 500px;
+    width: 400px;
+    border-style: solid;
+    border-radius: 6px;
+    border-width: 2px;
+    border-color: lightgray;
 }
