@@ -8,7 +8,7 @@
 @import "./styles/Footer.css";
 @import "./styles/NotFound.css";
 @import "./styles/SavedTripsList.css";
-@import "./styles/Plans.css";
+@import "./styles/Trip.css";
 
 body {
   margin: 0;

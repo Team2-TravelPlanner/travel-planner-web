@@ -1,0 +1,33 @@
+.trip {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.dayItem-part {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 10px;
+  width: 450px;
+  height: 500px;
+  
+}
+
+.tab {
+  overflow-y: scroll;
+  height: 500px;
+  border: 1px solid lightgray;
+}
+
+.table-row {
+  cursor: pointer;
+}
+
+
+.map-part {
+  margin-left: 470px;
+  width: calc(100% - 470px);
+  height: 100%;
+  background-color: lightblue;
+}

@@ -4,7 +4,7 @@ import Home from "./Home";
 import Form from "./Form";
 import NotFound from "./NotFound";
 import { Modal } from "react-bootstrap";
-import Plans from "./Plans"
+import Trip from "./Trip"
 
 class Main extends React.Component {
 
@@ -45,7 +45,7 @@ class Main extends React.Component {
             <NotFound />
           </Route>
           <Route path="/trip">
-            <Plan />
+            <Trip />
           </Route>
           <Route path="/">
             <NotFound />
