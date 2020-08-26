@@ -6,7 +6,7 @@ import {
 } from "react-google-maps";
 
 import locations from "../data/SearchResults";
-import PlaceMarkers from "./PlaceMarkers";
+import PlaceMarker from "./PlaceMarkers";
 
 // This is the Map class.
 // Need the following components:
@@ -15,10 +15,10 @@ import PlaceMarkers from "./PlaceMarkers";
 // day and order of each location.
 class Map extends React.Component {
 
-    // state = {
-    //     isOpen: false,
-    // }
-    //
+  state = {
+    selectedPlace: this.props.seletecPlaceId !== undefined? this.props.seletecPlaceId : null
+  }
+
     getMapRef = (mapInstance) => {
         this.map = mapInstance;
         window.map = mapInstance;
@@ -45,16 +45,28 @@ class Map extends React.Component {
         y: -(height / 2),
     })
 
+    handleToggleMarker = (place) => {
+      this.setState({
+        selectedPlace: place.id
+      });
+    }
+
     render() {
-        console.log(locations.places[1])
         return (
             <GoogleMap
                 ref={this.getMapRef()}
                 zoom={13}
                 center={{ lat: 40.78, lng: -73.935242 }}
                 onLoad={this.handleMapMounted}
+                onClick={this.handleMapClick}
             >
-                {locations.places.map(place => <PlaceMarkers place={place} key={place.imageUrl} map={this.map}/>)}
+                {locations.places.map(place => 
+                  <PlaceMarker 
+                    place={place} 
+                    key={place.id} 
+                    map={this.map} 
+                    toggleMarker={() => this.handleToggleMarker(place)} 
+                    isOpen={this.state.selectedPlace && this.state.selectedPlace === place.id} />)}
             </GoogleMap>
         );
     }

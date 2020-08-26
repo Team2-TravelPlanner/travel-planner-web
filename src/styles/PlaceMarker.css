@@ -1,0 +1,28 @@
+.marker-popup {
+  width: 400px;
+  height: 300px;
+  display: flex;
+}
+
+.marker-popup .marker-image {
+  width: 50%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.marker-popup .marker-info {
+  padding: 10px;
+}
+
+.marker-popup .marker-cat {
+  display: inline-block;
+  padding: 3px;
+  background-color: lightgray;
+  border-radius: 3px;
+  font-size: 10px;
+  font-weight: bold;
+}
+
+.marker-popup .marker-desc {
+  font-size: 16px;
+}
