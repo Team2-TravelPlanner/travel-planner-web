@@ -3,6 +3,7 @@ import Map from "./NewYorkMap";
 import { Tab, Button, Table, Tabs } from "react-bootstrap";
 import trip from "../data/Trip";
 
+// Open either by tripId of by tripPlan
 class Trip extends Component {
   constructor(props, context) {
     super(props, context);
@@ -20,6 +21,9 @@ class Trip extends Component {
   };
 
   render() {
+    console.log("tripId: ", this.props.tripId);
+    console.log("tripPlan: ", this.props.tripPlan);
+
     const { isSaving } = this.state;
     const itinerary = trip.itinerary;
     const days = itinerary.length;
@@ -29,7 +33,7 @@ class Trip extends Component {
         <div className="dayItem-part">
           <Tabs defaultActiveKey={1} variant="tabs">
             {itinerary.map((day, index) => (
-              <Tab eventKey={index + 1} title={`Day ${index + 1}`}>
+              <Tab eventKey={index + 1} title={`Day ${index + 1}`} key={index + 1}>
                 <div className="tab">
                   <Table bordered hover>
                     <thead>

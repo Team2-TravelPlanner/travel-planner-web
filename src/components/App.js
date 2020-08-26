@@ -6,6 +6,7 @@ import SavedTripsList from "./SavedTripsList";
 import { Modal } from "react-bootstrap";
 import savedTrips from "../data/SavedTrips";
 import Login from "./Login"
+import { withRouter } from "react-router-dom";
 
 class App extends React.Component {
   state = { //states used to activated login or register form.
@@ -39,13 +40,14 @@ class App extends React.Component {
     });
   }
 
-  showTrip = (id) => {
+  openTripById = (id) => {
     this.setState({
       showSavedTrips: false
-    })
+    });
+
+    this.props.history.push(`/trip/${id}`);
   }
 
-//two call back functions used to get props from it's child(Header and Login)
   loginCB = (isLoginData) => {
     this.setState({isLoginForm: isLoginData})
   }
@@ -94,7 +96,7 @@ class App extends React.Component {
             <SavedTripsList 
               isLoading={isLoadingSavedTrips} 
               savedTrips={savedTrips} 
-              showTrip={this.showTrip} />
+              openTrip={this.openTripById} />
           </Modal.Body>
         </Modal>
       </div>
@@ -102,4 +104,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default withRouter(App);
