@@ -23,7 +23,6 @@ class Trip extends Component {
   };
 
   handleDaySelected = (daySelected) => {
-    console.log(typeof(daySelected));
     this.setState({
       daySelected: daySelected - 1,   // to index
       placeSelected: null
