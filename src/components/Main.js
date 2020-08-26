@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import { Switch, Route } from "react-router-dom";
 import Home from "./Home";
 import Form from "./Form";
@@ -59,7 +59,14 @@ class Main extends React.Component {
 
 
       </div>
-    )
+  
+        //   <Map
+        //     googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyD3CEh9DXuyjozqptVB5LA-dN7MxWWkr9s&v=3.exp&libraries=geometry,drawing,places"
+        //     loadingElement={<div style={{ height: `100%`}} />}
+        //     containerElement={<div style={{ height: `600px` }} />}
+        //     mapElement={<div style={{ height: `100%`}} />}
+        // />
+    );
   }
 }
 
