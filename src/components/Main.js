@@ -1,4 +1,5 @@
 import Map from "./NewYorkMap"
+import React from "react";
 import locations from "../data/SearchResults"
 
 class Main extends React.Component {
