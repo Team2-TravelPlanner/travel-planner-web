@@ -8,11 +8,6 @@ import {
 import PlaceMarker from "./PlaceMarkers";
 import PropTypes from "prop-types";
 
-// This is the Map class.
-// Need the following components:
-// From Searching: a list of locations with the name, type, position, description, URL and picture of each location
-// From schedule: A list of locations with the name, type, position, description, URL and picture along with the specific
-// day and order of each location.
 class Map extends React.Component {
   
   static propTypes = {
@@ -22,13 +17,13 @@ class Map extends React.Component {
   }
 
   state = {
-    selectedPlace: this.props.seletecPlaceId !== undefined? this.props.seletecPlaceId : null
+    selectedPlace: this.props.seletecPlaceId? this.props.seletecPlaceId : null
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevProps.places !== this.props.places) {
+  componentDidUpdate(prevProps) {
+    if (prevProps.places !== this.props.places) {  // when map is showing a different set of places, remove selected marker
       this.setState({
-        selectedPlace: null
+        selectedPlace: this.props.selectedPlaceId
       })
     }
   }
