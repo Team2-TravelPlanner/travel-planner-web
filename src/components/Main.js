@@ -4,6 +4,7 @@ import Home from "./Home";
 import Form from "./Form";
 import NotFound from "./NotFound";
 import { Modal } from "react-bootstrap";
+import Trip from "./Trip"
 
 class Main extends React.Component {
 
@@ -43,6 +44,9 @@ class Main extends React.Component {
           <Route exact path="/explorer">
             <NotFound />
           </Route>
+          <Route path="/trip">
+            <Trip />
+          </Route>
           <Route path="/">
             <NotFound />
           </Route>
@@ -56,16 +60,7 @@ class Main extends React.Component {
             <Form close={this.closeForm} generateItinerary={this.generateItinerary} />
           </Modal.Body>
         </Modal>
-
-
       </div>
-  
-        //   <Map
-        //     googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyD3CEh9DXuyjozqptVB5LA-dN7MxWWkr9s&v=3.exp&libraries=geometry,drawing,places"
-        //     loadingElement={<div style={{ height: `100%`}} />}
-        //     containerElement={<div style={{ height: `600px` }} />}
-        //     mapElement={<div style={{ height: `100%`}} />}
-        // />
     );
   }
 }
