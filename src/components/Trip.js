@@ -8,11 +8,9 @@ class Trip extends Component {
 
   dateOptions = { year: 'numeric', month: 'numeric', day: 'numeric' };
 
-  constructor(props, context) {
-    super(props, context);
-    this.state = {
-      isSaving: false,
-    };
+  state = {
+    isSaving: false,
+    daySelected: 0
   }
 
   handleSave = () => {
@@ -23,6 +21,13 @@ class Trip extends Component {
     }, 2000);
   };
 
+  handleDaySelected = (daySelected) => {
+    console.log(typeof(daySelected));
+    this.setState({
+      daySelected: daySelected - 1   // to index
+    });
+  }
+
   render() {
 
     const { tripId, tripPlan } = this.props;
@@ -32,9 +37,12 @@ class Trip extends Component {
     const { isSaving } = this.state;
     const itinerary = trip.itinerary;
     const days = itinerary.length;
-    console.log(trip.startDate);
     const startDate = new Date(parseInt(trip.startDate)).toLocaleDateString(undefined, this.dateOptions);
     const endDate = new Date(parseInt(trip.endDate)).toLocaleDateString(undefined, this.dateOptions);
+
+    const places = trip.itinerary[this.state.daySelected].map( item => (
+      item.place
+    ));
 
     return (
       <div className="trip">
@@ -56,9 +64,12 @@ class Trip extends Component {
           <div className="travel-dates">
             {startDate} - {endDate}
           </div>
-          <Tabs defaultActiveKey={1} variant="tabs">
+          <Tabs defaultActiveKey={1} variant="tabs" onSelect={this.handleDaySelected}>
             {itinerary.map((day, index) => (
-              <Tab eventKey={index + 1} title={`Day ${index + 1}`} key={index + 1}>
+              <Tab 
+                  eventKey={index + 1} 
+                  title={`Day ${index + 1}`} 
+                  key={index + 1}>
                 <div className="tab">
                   <Table bordered hover>
                     <thead>
@@ -92,6 +103,7 @@ class Trip extends Component {
             loadingElement={<div style={{ height: `100%` }} />}
             containerElement={<div style={{ height: `100%` }} />}
             mapElement={<div style={{ height: `100%` }} />}
+            places={places}
           />
         </div>
       </div>
