@@ -15,10 +15,6 @@ import PlaceMarkers from "./PlaceMarkers";
 // day and order of each location.
 class Map extends React.Component {
 
-    // state = {
-    //     isOpen: false,
-    // }
-    //
     getMapRef = (mapInstance) => {
         this.map = mapInstance;
         window.map = mapInstance;
@@ -45,6 +41,10 @@ class Map extends React.Component {
         y: -(height / 2),
     })
 
+    handleMapClick = (marker, event) => {
+      console.log(marker);
+    }
+
     render() {
         console.log(locations.places[1])
         return (
@@ -53,6 +53,7 @@ class Map extends React.Component {
                 zoom={13}
                 center={{ lat: 40.78, lng: -73.935242 }}
                 onLoad={this.handleMapMounted}
+                onClick={this.handleMapClick}
             >
                 {locations.places.map(place => <PlaceMarkers place={place} key={place.imageUrl} map={this.map}/>)}
             </GoogleMap>
