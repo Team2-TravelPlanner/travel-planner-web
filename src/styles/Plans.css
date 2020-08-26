@@ -3,7 +3,7 @@
     top: 150px;
     left: 10px;
     height: 700px;
-    padding: 20px;
+    padding: 0px;
 }
 
 .map-part {
@@ -21,16 +21,16 @@
 .save-part{
     display: flex;
     position: absolute;
-    margin-left: 1100px;
-    margin-top: 600px;
+    right: 90px;
+    bottom: 30px;
 }
 .table-head{
     margin-top: -1px;
 }
+
 .table-content{
-    margin-top: -15px;
     overflow: scroll;
-    height: 445px;
+    height: 490px;
 }
 
 .list-box{
@@ -40,4 +40,18 @@
     border-radius: 6px;
     border-width: 2px;
     border-color: lightgray;
+}
+
+.nav-bar{
+    position: absolute;
+    left: 400px;
+    width: 80px;
+    border-style: solid;
+    border-radius: 6px;
+    border-width: 2px;
+    border-color: #007bff;
+}
+
+.nav-content{
+    position: absolute;
 }

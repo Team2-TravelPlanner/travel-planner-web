@@ -8,6 +8,7 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Form from 'react-bootstrap/Form'
 import Table from "react-bootstrap/Table";
+import ButtonGroup from "react-bootstrap/ButtonGroup";
 
 class Plans extends Component {
     constructor(props, context) {
@@ -28,34 +29,24 @@ class Plans extends Component {
         }, 2000);
     }
 
+    clickTableRow() {
+        alert("Highlight on map");
+    }
     render() {
         const { isSaving } = this.state;
 
         return (
             <div className='main'>
-                <div className="dayItem-part">
+                <div className='dayItem-part'>
                     <Tab.Container id="left-tabs-example" defaultActiveKey="first">
                         <Row>
-                            <Col sm={9}>
+                            <Col className='nav-content'>
 
                                 <div className='list-box'>
                                     <Tab.Content>
                                         <Tab.Pane eventKey="first">
-                                            <div className='table-head'>
-                                                <Table>
-                                                    <thead>
-                                                    <tr>
-                                                        <th>#</th>
-                                                        <th>Place</th>
-                                                        <th>Start Time</th>
-                                                        <th>End Time</th>
-                                                    </tr>
-                                                    </thead>
-                                                </Table>
-                                            </div>
-
                                             <div className='table-content'>
-                                                <Table>
+                                                <Table hover>
                                                     <thead>
                                                     <tr>
                                                         <th>#</th>
@@ -65,61 +56,62 @@ class Plans extends Component {
                                                     </tr>
                                                     </thead>
                                                     <tbody>
-                                                    <tr>
+                                                    <tr onClick={this.clickTableRow}>
                                                         <td>1</td>
                                                         <td>Central Park</td>
                                                         <td>10 : 00 AM</td>
                                                         <td>11 : 00 AM</td>
+
                                                     </tr>
-                                                    <tr>
+                                                    <tr onClick={this.clickTableRow}>
                                                         <td>2</td>
                                                         <td>Museum</td>
                                                         <td>11 : 30 AM</td>
                                                         <td>12 : 30 PM</td>
                                                     </tr>
-                                                    <tr>
+                                                    <tr onClick={this.clickTableRow}>
                                                         <td>3</td>
                                                         <td>Museum</td>
                                                         <td>11 : 30 AM</td>
                                                         <td>12 : 30 PM</td>
                                                     </tr>
-                                                    <tr>
+                                                    <tr onClick={this.clickTableRow}>
                                                         <td>4</td>
                                                         <td>Museum</td>
                                                         <td>11 : 30 AM</td>
                                                         <td>12 : 30 PM</td>
                                                     </tr>
-                                                    <tr>
+                                                    <tr onClick={this.clickTableRow}>
                                                         <td>5</td>
                                                         <td>Museum</td>
                                                         <td>11 : 30 AM</td>
                                                         <td>12 : 30 PM</td>
                                                     </tr>
-                                                    <tr>
+                                                    <tr onClick={this.clickTableRow}>
                                                         <td>6</td>
                                                         <td>Museum</td>
                                                         <td>11 : 30 AM</td>
                                                         <td>12 : 30 PM</td>
                                                     </tr>
-                                                    <tr>
+                                                    <tr onClick={this.clickTableRow}>
                                                         <td>7</td>
                                                         <td>Museum</td>
                                                         <td>11 : 30 AM</td>
                                                         <td>12 : 30 PM</td>
                                                     </tr>
-                                                    <tr>
+                                                    <tr onClick={this.clickTableRow}>
                                                         <td>8</td>
                                                         <td>Museum</td>
                                                         <td>11 : 30 AM</td>
                                                         <td>12 : 30 PM</td>
                                                     </tr>
-                                                    <tr>
+                                                    <tr onClick={this.clickTableRow}>
                                                         <td>9</td>
                                                         <td>Museum</td>
                                                         <td>11 : 30 AM</td>
                                                         <td>12 : 30 PM</td>
                                                     </tr>
-                                                    <tr>
+                                                    <tr onClick={this.clickTableRow}>
                                                         <td>9</td>
                                                         <td>Museum</td>
                                                         <td>11 : 30 AM</td>
@@ -129,7 +121,6 @@ class Plans extends Component {
                                                 </Table>
                                             </div>
                                         </Tab.Pane>
-
 
                                         <Tab.Pane eventKey="second">
                                             <div className='table-head'>
@@ -224,7 +215,7 @@ class Plans extends Component {
                                 </div>
                             </Col>
 
-                            <Col sm={3}>
+                            <Col sm={20} className='nav-bar'>
                                 <Nav variant="pills" className="flex-column">
                                     <Nav.Item>
                                         <Nav.Link eventKey="first">Day 1</Nav.Link>
@@ -239,11 +230,11 @@ class Plans extends Component {
                     </Tab.Container>
                 </div>
 
-                {/*<div className="map-part">*/}
-                {/*    map*/}
-                {/*</div>*/}
+                <div className='map-part'>
+                    map
+                </div>
 
-                <div className = "save-part">
+                <div className = 'save-part'>
                     <Button
                         bsStyle="primary"
                         disabled={isSaving}

@@ -1,10 +1,14 @@
 import React from 'react';
 
 class Footer extends React.Component {
+
   render() {
+    const now = new Date();
+    const year = now.getFullYear();
+
     return (
-      <div class="app-footer">
-        Footer
+      <div className="app-footer">
+        &copy; Copyright {year}, NYC Travel Planner 
       </div>
     )
   }

@@ -1,22 +1,72 @@
 import React from 'react';
-import {Switch, Route, Redirect} from "react-router-dom";
-import Plans from "./Plans"
+import { Switch, Route } from "react-router-dom";
+import Home from "./Home";
+import Form from "./Form";
+import NotFound from "./NotFound";
+import { Modal } from "react-bootstrap";
+import Trip from "./Trip"
+import Plans from "./Plans";
 
 class Main extends React.Component {
+
+  state = {
+    showForm: false
+  }
+
+  openForm = () => {
+    this.setState({
+      showForm: true
+    });
+  }
+
+  closeForm = () => {
+    this.setState({
+      showForm: false
+    });
+  }
+
+  generateItinerary = (options) => {
+    this.setState({
+      showForm: false
+    });
+
+    console.log(options);
+  }
+
   render() {
+    const { showForm } = this.state;
+
     return (
       <div className="main">
-        <switch>
-            <Route path="/plans" render={this.getPlanDisplay}/>
-        </switch>
+        <Switch>
+          <Route exact path="/">
+            <Home openForm={this.openForm} />
+          </Route>
+          <Route exact path="/explorer">
+            <NotFound />
+          </Route>
+          <Route path="/trip">
+            <Trip />
+          </Route>
+          <Route path="/plans">
+            <Plans />
+          </Route>
+          <Route path="/">
+            <NotFound />
+          </Route>
+        </Switch>
+
+        <Modal
+          show={showForm}
+          backdrop="static"
+          keyboard={false}>
+          <Modal.Body>
+            <Form close={this.closeForm} generateItinerary={this.generateItinerary} />
+          </Modal.Body>
+        </Modal>
       </div>
     )
   }
-    getPlanDisplay = () => {
-        // return this.props.isLoggedIn ?
-        //     <Redirect to="/plansDisplay"/> : <Login handleLoginSucceed={this.props.handleLoginSucceed}/>
-        return <Plans />
-    }
 }
 
 export default Main;
