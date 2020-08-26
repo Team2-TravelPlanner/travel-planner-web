@@ -77,7 +77,7 @@ class Main extends React.Component {
           backdrop="static"
           keyboard={false}>
           <Modal.Body>
-            <Form close={this.closeForm} generateItinerary={this.generateItinerary} />
+            <Form close={this.closeForm} submit={this.generateItinerary} type="long"/>
           </Modal.Body>
         </Modal>
       </div>
