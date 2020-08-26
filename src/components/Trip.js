@@ -44,11 +44,11 @@ class Trip extends Component {
               <h3>{trip.name}</h3>
               :
               <Form.Group>
-                <Form.Control size="lg" type="text" placeholder="Large text" />
+                <Form.Control size="lg" type="text" placeholder="Unsaved Trip" />
                 <Button
                   disabled={isSaving}
                   onClick={!isSaving ? this.handleSave : null}>
-                    {isSaving ? "Saving..." : "Save Plan"}
+                    {isSaving ? "Saving..." : "Save Trip"}
                 </Button>
               </Form.Group>
             }
