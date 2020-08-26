@@ -3,8 +3,8 @@ import { Button, ListGroup, Card, Spinner } from "react-bootstrap";
 
 class SavedTripsList extends Component {
 
-  handleShowTrip = (id) => {
-    this.props.showTrip(id);
+  handleOpenTrip = (id) => {
+    this.props.openTrip(id);
   }
   render() {
     const { savedTrips, isLoading } = this.props;
@@ -33,7 +33,7 @@ class SavedTripsList extends Component {
                     End date:{" "}
                     {new Date(parseInt(trip.endDate)).toLocaleDateString()}
                   </p>
-                  <Button className="detail-btn" onClick={ () => this.handleShowTrip(trip.id)}>Show Plan</Button>
+                  <Button className="detail-btn" onClick={ () => this.handleOpenTrip(trip.id)}>Open Trip</Button>
                 </Card.Body>
               </Card>
             ))}

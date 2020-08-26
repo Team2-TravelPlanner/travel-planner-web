@@ -9,7 +9,8 @@ import Trip from "./Trip"
 class Main extends React.Component {
 
   state = {
-    showForm: false
+    showForm: false,
+    tripPlan: null
   }
 
   openForm = () => {
@@ -32,6 +33,19 @@ class Main extends React.Component {
     console.log(options);
   }
 
+  openTripByPlan(plan) {
+    // open an unsaved plan object
+    this.setState({
+      tripPlan: plan
+    }).then( () => {
+      this.props.history.location.push("/trip");
+    });
+  }
+
+  openTripById(tripId) {
+    this.props.history.location.push(`/trip/${tripId}`);
+  }
+
   render() {
     const { showForm } = this.state;
 
@@ -44,9 +58,15 @@ class Main extends React.Component {
           <Route exact path="/explorer">
             <NotFound />
           </Route>
-          <Route path="/trip">
-            <Trip />
-          </Route>
+          <Route path="/trip/:id?" render={(props) =>{
+            {
+              return props.match.params.id? 
+                <Trip tripId={props.match.params.id}/>
+                :
+                <Trip tripPlan={this.state.tripPlan}/>
+            }
+            
+          }} />
           <Route path="/">
             <NotFound />
           </Route>
