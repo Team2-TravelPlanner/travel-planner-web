@@ -9,34 +9,17 @@ class PlaceMarker extends React.Component {
 
     static propTypes = {
         place: PropTypes.object.isRequired,
+        
     }
-
-    state = {
-        isOpen: false,
-    }
-
-    handleToggle = () => {
-        this.setState((prevState) => ({ isOpen: !prevState.isOpen }));
-        // if (this.props.map.zoom < 13) {
-        //     this.props.map.zoom = 13;
-        // }
-
-    }
-
-    // zoom = () => {
-    //     if (zoom < 13) {
-    //         setZoom(13);
-    //     }
-    // }
 
     render() {
         const { name, address, message, imageUrl, category, info, lat, lon, website } = this.props.place;
         return (
             <Marker
                 position={{ lat:lat, lng: lon }}
-                onClick={this.handleToggle}
+                onClick={this.props.toggleMarker}
             >
-                {this.state.isOpen ? (
+                {this.props.isOpen ? (
                     <InfoWindow>
                         <div className="marker-popup">
                             <img src={imageUrl} alt={message} className="marker-image"/>
