@@ -10,7 +10,8 @@ class Trip extends Component {
 
   state = {
     isSaving: false,
-    daySelected: 0
+    daySelected: 0,
+    placeSelected: null
   }
 
   handleSave = () => {
@@ -24,8 +25,15 @@ class Trip extends Component {
   handleDaySelected = (daySelected) => {
     console.log(typeof(daySelected));
     this.setState({
-      daySelected: daySelected - 1   // to index
+      daySelected: daySelected - 1,   // to index
+      placeSelected: null
     });
+  }
+
+  handlePlaceSelected = (placeId) => {
+    this.setState({
+      placeSelected: placeId
+    })
   }
 
   render() {
@@ -82,7 +90,7 @@ class Trip extends Component {
                     </thead>
                     <tbody>
                       {day.map((item, index) => (
-                        <tr key={index} className="table-row">
+                        <tr key={index} className="table-row" onMouseDownCapture={ () => this.handlePlaceSelected(item.place.id)}>
                           <td>{index + 1}</td>
                           <td>{item.place.name}</td>
                           <td>{item.start}</td>
@@ -104,6 +112,7 @@ class Trip extends Component {
             containerElement={<div style={{ height: `100%` }} />}
             mapElement={<div style={{ height: `100%` }} />}
             places={places}
+            selectedPlaceId={this.state.placeSelected}
           />
         </div>
       </div>
