@@ -2,7 +2,7 @@ import React from 'react';
 import { Marker, InfoWindow } from 'react-google-maps';
 import PropTypes from 'prop-types';
 
-class AroundMarker extends React.Component {
+class PlaceMarker extends React.Component {
     static propTypes = {
         place: PropTypes.object.isRequired,
     }
@@ -49,4 +49,4 @@ class AroundMarker extends React.Component {
     }
 }
 
-export default AroundMarker;
+export default PlaceMarker;
