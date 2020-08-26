@@ -4,7 +4,7 @@
   height: 100%;
 }
 
-.dayItem-part {
+.trip .dayItem-part {
   position: absolute;
   top: 10px;
   left: 10px;
@@ -14,18 +14,23 @@
   
 }
 
-.tab {
+.trip .travel-dates {
+  font-weight: bold;
+  margin: 10px 0 30px 0;
+}
+
+.trip .tab {
   overflow-y: scroll;
   height: 500px;
   border: 1px solid lightgray;
 }
 
-.table-row {
+.trip .table-row {
   cursor: pointer;
 }
 
 
-.map-part {
+.trip .map-part {
   margin-left: 470px;
   width: calc(100% - 470px);
   height: 100%;

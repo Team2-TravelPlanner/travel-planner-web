@@ -1,10 +1,13 @@
 import React, { Component } from "react";
 import Map from "./NewYorkMap";
-import { Tab, Button, Table, Tabs } from "react-bootstrap";
+import { Tab, Button, Table, Tabs, Form } from "react-bootstrap";
 import trip from "../data/Trip";
 
 // Open either by tripId of by tripPlan
 class Trip extends Component {
+
+  dateOptions = { year: 'numeric', month: 'numeric', day: 'numeric' };
+
   constructor(props, context) {
     super(props, context);
     this.state = {
@@ -12,7 +15,7 @@ class Trip extends Component {
     };
   }
 
-  handleClick = () => {
+  handleSave = () => {
     this.setState({ isSaving: true });
 
     setTimeout(() => {
@@ -21,16 +24,38 @@ class Trip extends Component {
   };
 
   render() {
-    console.log("tripId: ", this.props.tripId);
-    console.log("tripPlan: ", this.props.tripPlan);
+
+    const { tripId, tripPlan } = this.props;
+    console.log("tripId: ", tripId);
+    console.log("tripPlan: ", tripPlan);
 
     const { isSaving } = this.state;
     const itinerary = trip.itinerary;
     const days = itinerary.length;
+    console.log(trip.startDate);
+    const startDate = new Date(parseInt(trip.startDate)).toLocaleDateString(undefined, this.dateOptions);
+    const endDate = new Date(parseInt(trip.endDate)).toLocaleDateString(undefined, this.dateOptions);
 
     return (
       <div className="trip">
         <div className="dayItem-part">
+          <header>
+            {tripId?
+              <h3>{trip.name}</h3>
+              :
+              <Form.Group>
+                <Form.Control size="lg" type="text" placeholder="Large text" />
+                <Button
+                  disabled={isSaving}
+                  onClick={!isSaving ? this.handleSave : null}>
+                    {isSaving ? "Saving..." : "Save Plan"}
+                </Button>
+              </Form.Group>
+            }
+          </header>
+          <div className="travel-dates">
+            {startDate} - {endDate}
+          </div>
           <Tabs defaultActiveKey={1} variant="tabs">
             {itinerary.map((day, index) => (
               <Tab eventKey={index + 1} title={`Day ${index + 1}`} key={index + 1}>
@@ -59,12 +84,6 @@ class Trip extends Component {
               </Tab>
             ))}
           </Tabs>
-          <Button
-            disabled={isSaving}
-            onClick={!isSaving ? this.handleClick : null}
-          >
-            {isSaving ? "Saving..." : "Save Plan"}
-          </Button>
         </div>
 
         <div className="map-part">

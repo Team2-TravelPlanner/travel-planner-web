@@ -1,6 +1,6 @@
 const trip = {
   id: "",
-  name: "",
+  name: "My NY Trip",
   origin: {lat: 40.7822222, lon: -73.9811111},
   startDate: "1608451200000",
   endDate: "1608883200000",
