@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Card, ListGroup, FormControl, Form, Button, Modal} from 'react-bootstrap'
 import NewYorkMap from "./NewYorkMap";
+import SelfPlanForm from "./Form";
 import plus from "../assets/images/plus.svg"
 import checked from "../assets/images/checked.svg"
 import del from "../assets/images/delete.svg"
@@ -40,6 +41,7 @@ class Explore extends Component {
     findResult = () => {
         let results = [];
         const { activeCategory, keyword } = this.state;
+        // fetch data from backend to substitute for searchResults["places"]
         searchResults["places"].map(place => {
             // check whether the place is in the category
             let matchCategory = activeCategory.some(category =>
@@ -209,11 +211,12 @@ class Explore extends Component {
         });
 
         console.log(options);
+        console.log(this.state.selected);
         // send data to backend
     }
 
     render() {
-        const { result, selected, showForm } = this.state;
+        const { result, showForm } = this.state;
         return (
             <div className="explorer">
                 <div className="left-side">
@@ -271,7 +274,10 @@ class Explore extends Component {
                     backdrop="static"
                     keyboard={false}>
                     <Modal.Body>
-                        <Form close={this.closeForm} submit={this.generateItinerary} type="long"/>
+                        <SelfPlanForm
+                            close={this.closeForm}
+                            submit={this.generateItinerary}
+                            />
                     </Modal.Body>
                 </Modal>
 
