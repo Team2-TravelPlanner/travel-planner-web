@@ -15,10 +15,10 @@ class Explore extends Component {
             result: [],
             selected: [],
             activeCategory: [],
+            placeToView: null,
             Park: "outline-primary",
             Museum: "outline-primary",
             Plaza: "outline-primary",
-
         }
     }
 
@@ -72,10 +72,15 @@ class Explore extends Component {
         const {result, selected} = this.state;
         for (i = 0; i < result.length; i++) {
             let cur_place = result[i];
-            list.push(<ListGroup.Item key={i} action className="search-item-select">
+            let cur_id = cur_place.id;
+            list.push(<ListGroup.Item
+                    key={i}
+                    className="search-item-select"
+                    action
+                    onClick={() => this.viewPlaceDetail(cur_id)}>
                 {cur_place.name}
                 {
-                    selected.some(entry => entry.id === cur_place.id)
+                    selected.some(entry => entry.id === cur_id)
                         ?
                         <img
                             className="add-btn"
@@ -88,7 +93,7 @@ class Explore extends Component {
                             src={plus}
                             alt="book"
                             title="Bootstrap"
-                            data-place={cur_place.id}
+                            data-place={cur_id}
                             onClick={this.onSelect} />
                 }
             </ListGroup.Item>)
@@ -102,18 +107,30 @@ class Explore extends Component {
         const {selected} = this.state;
         for (i = 0; i < selected.length; i++) {
             let cur_place = selected[i];
-            list.push(<ListGroup.Item key={i} action className="search-item-select">
+            let cur_id = cur_place.id;
+            list.push(<ListGroup.Item
+                                    key={i}
+                                    className="search-item-select"
+                                    action
+                                    onClick={() => this.viewPlaceDetail(cur_id)}>
                 {cur_place.name}
                 <img className="add-btn"
                      src={del}
                      alt="book"
                      title="Bootstrap"
-                     data-place={cur_place.id}
+                     data-place={cur_id}
                      onClick={this.onDeselect}
                 />
             </ListGroup.Item>)
         }
         return list
+    }
+
+    viewPlaceDetail = (placeId) => {
+        console.log(placeId);
+        this.setState({
+           placeToView: placeId,
+        })
     }
 
     onSelect = (e) => {
@@ -209,6 +226,12 @@ class Explore extends Component {
                             </ListGroup>
                         </Card>
                     </div>
+
+                    <div className="generate-btn">
+                        <Button>
+                            Generate Your Plan
+                        </Button>
+                    </div>
                 </div>
 
                 <div className="right-side">
@@ -217,7 +240,8 @@ class Explore extends Component {
                         loadingElement={<div style={{ height: `100%` }} />}
                         containerElement={<div style={{ height: `760px` }} />}
                         mapElement={<div style={{ height: `100%` }} />}
-                        places={result}
+                        places={selected}
+                        selectedPlaceId={this.state.placeToView}
                     />
                 </div>
             </div>

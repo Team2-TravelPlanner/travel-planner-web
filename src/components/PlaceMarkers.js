@@ -3,6 +3,8 @@ import { Marker, InfoWindow } from 'react-google-maps';
 import { Image } from "react-bootstrap";
 import PropTypes from 'prop-types';
 
+import greenIcon from "../assets/images/green-icon.svg";
+
 class PlaceMarker extends React.Component {
 
   MAP_DIR_BASE = "https://www.google.com/maps/dir/?api=1";
@@ -14,10 +16,15 @@ class PlaceMarker extends React.Component {
 
     render() {
         const { name, address, message, imageUrl, category, info, lat, lon, website } = this.props.place;
+        const customizedIcon = {
+            url: greenIcon,
+            scaledSize: new window.google.maps.Size(26, 41),
+        }
         return (
             <Marker
                 position={{ lat:lat, lng: lon }}
                 onClick={this.props.toggleMarker}
+                Icon={customizedIcon}
             >
                 {this.props.isOpen ? (
                     <InfoWindow>
