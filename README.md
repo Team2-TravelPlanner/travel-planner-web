@@ -11,6 +11,7 @@ Travel Planner is a smart planner for the city of New York.
   <SavedTrips>         --> a modal for listing saved trips
   <Header>             --> with links to open login, logout, view saved trips
   <Main>               --> switches between sub components
+    <Home>             --> Navigation to SelftPlanner or AutoPlanner
     <SelfPlanner>      --> map to search, browse, select POIs
     <AutoPlanner>      --> interactive form of questions
     <Trip>             --> map and schedule of generated trip or existing trip
