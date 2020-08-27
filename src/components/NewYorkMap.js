@@ -21,7 +21,9 @@ class Map extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.places !== this.props.places) {  // when map is showing a different set of places, remove selected marker
+    // if update is happening because of parent changes props
+    // reset selected place
+    if (prevProps !== this.props) {  
       this.setState({
         selectedPlace: this.props.selectedPlaceId
       })
