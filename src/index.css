@@ -6,10 +6,12 @@
 @import "./styles/Form.css";
 @import "./styles/Main.css";
 @import "./styles/Footer.css";
+@import "./styles/Explore.css";
 @import "./styles/NotFound.css";
 @import "./styles/SavedTripsList.css";
 @import "./styles/Trip.css";
 @import "./styles/PlaceMarker.css";
+
 
 body {
   margin: 0;

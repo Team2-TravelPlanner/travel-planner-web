@@ -1,0 +1,69 @@
+.explorer {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.left-side {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    height: 760px;
+}
+
+.right-side {
+    margin-left: 520px;
+    width: calc(100% - 520px);
+    height: 760px;
+    background-color: lightblue;
+}
+
+.buttons{
+    text-align: left;
+    padding-left: 10px;
+    justify-content: center;
+}
+
+.search-bar {
+    display: inline-flex;
+    width: 30em;
+    padding: 0 0 10px 0;
+}
+
+.search-items, .selected-items {
+    text-align: left;
+    padding: 10px;
+}
+
+.search-result, .select-result {
+    width: 30em;
+    height: 280px;
+    overflow: scroll;
+}
+
+.search-item-select {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-item-select:hover{
+    background: #0dd910;
+}
+
+.add-btn {
+    margin-left: auto;
+    background-color: white;
+    border: white;
+    width: 32px;
+    height: 32px;
+    alt: "book";
+    title: "Bootstrap";
+}
+
+.generate-btn {
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+}
+

@@ -1,10 +1,13 @@
-import React from "react";
+import React from 'react';
+
 import { Switch, Route } from "react-router-dom";
 import Home from "./Home";
 import Form from "./Form";
+import Explore from "./Explore";
 import NotFound from "./NotFound";
 import { Modal } from "react-bootstrap";
 import Trip from "./Trip"
+
 
 class Main extends React.Component {
 
@@ -51,12 +54,13 @@ class Main extends React.Component {
 
     return (
       <div className="main">
+
         <Switch>
           <Route exact path="/">
             <Home openForm={this.openForm} />
           </Route>
           <Route exact path="/explorer">
-            <NotFound />
+            <Explore/>
           </Route>
           <Route path="/trip/:id?" render={(props) =>{
             {
@@ -80,6 +84,7 @@ class Main extends React.Component {
             <Form close={this.closeForm} submit={this.generateItinerary} type="long"/>
           </Modal.Body>
         </Modal>
+
       </div>
     );
   }
