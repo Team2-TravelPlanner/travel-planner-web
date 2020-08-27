@@ -16,15 +16,15 @@ class PlaceMarker extends React.Component {
 
     render() {
         const { name, address, message, imageUrl, category, info, lat, lon, website } = this.props.place;
-        const customizedIcon = {
-            url: greenIcon,
-            scaledSize: new window.google.maps.Size(26, 41),
-        }
+        // const customizedIcon = {
+        //     url: greenIcon,
+        //     scaledSize: new window.google.maps.Size(26, 41),
+        // }
         return (
             <Marker
                 position={{ lat:lat, lng: lon }}
                 onClick={this.props.toggleMarker}
-                Icon={customizedIcon}
+                // icon={customizedIcon}
             >
                 {this.props.isOpen ? (
                     <InfoWindow>

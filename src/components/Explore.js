@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Card, ListGroup, FormControl, Form, Button} from 'react-bootstrap'
+import {Card, ListGroup, FormControl, Form, Button, Modal} from 'react-bootstrap'
 import NewYorkMap from "./NewYorkMap";
 import plus from "../assets/images/plus.svg"
 import checked from "../assets/images/checked.svg"
@@ -16,6 +16,7 @@ class Explore extends Component {
             selected: [],
             activeCategory: [],
             placeToView: null,
+            showForm: false,
             Park: "outline-primary",
             Museum: "outline-primary",
             Plaza: "outline-primary",
@@ -190,9 +191,29 @@ class Explore extends Component {
         }
     }
 
+    openForm = () => {
+        this.setState({
+            showForm: true
+        });
+    }
+
+    closeForm = () => {
+        this.setState({
+            showForm: false
+        });
+    }
+
+    generateItinerary = (options) => {
+        this.setState({
+            showForm: false
+        });
+
+        console.log(options);
+        // send data to backend
+    }
 
     render() {
-        const { result, selected } = this.state;
+        const { result, selected, showForm } = this.state;
         return (
             <div className="explorer">
                 <div className="left-side">
@@ -228,7 +249,7 @@ class Explore extends Component {
                     </div>
 
                     <div className="generate-btn">
-                        <Button>
+                        <Button onClick={this.openForm}>
                             Generate Your Plan
                         </Button>
                     </div>
@@ -240,10 +261,20 @@ class Explore extends Component {
                         loadingElement={<div style={{ height: `100%` }} />}
                         containerElement={<div style={{ height: `760px` }} />}
                         mapElement={<div style={{ height: `100%` }} />}
-                        places={selected}
+                        places={result}
                         selectedPlaceId={this.state.placeToView}
                     />
                 </div>
+
+                <Modal
+                    show={showForm}
+                    backdrop="static"
+                    keyboard={false}>
+                    <Modal.Body>
+                        <Form close={this.closeForm} submit={this.generateItinerary} type="long"/>
+                    </Modal.Body>
+                </Modal>
+
             </div>
         );
     }
