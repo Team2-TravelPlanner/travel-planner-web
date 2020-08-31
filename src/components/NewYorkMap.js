@@ -3,11 +3,18 @@ import {
     withScriptjs,
     withGoogleMap,
     GoogleMap,
+    Polyline,
+    DirectionsRenderer,
 } from "react-google-maps";
-
 import PlaceMarker from "./PlaceMarkers";
 import PropTypes from "prop-types";
+import locations from "../data/SearchResults";
 
+// This is the Map class.
+// Need the following components:
+// From Searching: a list of locations with the name, type, position, description, URL and picture of each location
+// From schedule: A list of locations with the name, type, position, description, URL and picture along with the specific
+// day and order of each location.
 class Map extends React.Component {
   
   static propTypes = {
@@ -63,21 +70,44 @@ class Map extends React.Component {
     }
 
     render() {
+
+        const places = this.props.places;
+        const currentPath = places.map(place =>  {
+            const current = {lat:place.lat, lng:place.lon}
+            return current
+        });
+
         return (
             <GoogleMap
-                ref={this.getMapRef()}
+                // ref={this.getMapRef()}
                 zoom={13}
                 center={{ lat: 40.78, lng: -73.935242 }}
-                onLoad={this.handleMapMounted}
                 onClick={this.handleMapClick}
             >
-                {this.props.places.map( (place, index) => 
-                  <PlaceMarker 
-                    place={place} 
-                    key={index} 
-                    map={this.map} 
-                    toggleMarker={() => this.handleToggleMarker(place)} 
-                    isOpen={this.state.selectedPlace && this.state.selectedPlace === place.id} />)}
+                {places.map( (place, index) => 
+                    <PlaceMarker 
+                      place={place} 
+                      key={index} 
+                      map={this.map}
+                      toggleMarker={() => this.handleToggleMarker(place)} 
+                      isOpen={this.state.selectedPlace && this.state.selectedPlace === place.id} />)}
+                    <Polyline
+                        path={currentPath}
+                        geodesic={true}
+                        options={{
+                            strokeColor:  "#02030a",
+                            strokeOpacity: 1,
+                            strokeWeight: 2,
+                            icons: [{
+                                icon: "hello",
+                                offset: "0",
+                                repeat: "20px"
+                            }],
+                        }}
+                    />
+
+                {/*{props.directions && <DirectionsRenderer directions={props.directions} />}*/}
+
             </GoogleMap>
         );
     }
