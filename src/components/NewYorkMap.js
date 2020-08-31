@@ -81,7 +81,7 @@ class Map extends React.Component {
                 options = {OPTIONS}
                 //onClick={this.handleMapClick}
             >
-                {/*<TrafficLayer autoUpdate />*/} // if want traffic layer
+                {/*<TrafficLayer autoUpdate />*/}
                 {this.props.places.map( (place, index) => 
                   <PlaceMarker 
                     place={place} 
