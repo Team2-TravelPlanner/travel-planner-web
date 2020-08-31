@@ -2,6 +2,7 @@ import React from "react";
 import { ToggleButtonGroup, ToggleButton, Button, Form } from "react-bootstrap";
 import DatePicker from "react-datepicker";
 import PropTypes from "prop-types";
+import { GeocodeUrl, GoogleKey } from "./Constants";
  
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -66,17 +67,33 @@ class AutoForm extends React.Component {
   }
 
   handleSubmit = () => {
-    const { style, selectedCats, address, startDate, endDate } = this.state;
-    // validate address, start and end date
+    let { style, selectedCats, address, startDate, endDate } = this.state;
 
-    this.props.submit({
-      style: style,
-      selectedCats: selectedCats,
-      address: address? address : this.defaultAddress,
-      startDate: startDate,
-      endDate: endDate
+    // validate address, start and end date
+    address = address? address : this.defaultAddress;
+    address = address.split(" ").join("+");
+    console.log(address);
+
+    fetch(`${GeocodeUrl}?address=${address}&key=${GoogleKey}`)
+    .then( res => {
+      return res.json();
+    })
+    .then( data => {
+      const lat = data.results[0].geometry.location.lat;
+      const lon = data.results[0].geometry.location.lng;
+
+      this.props.submit({
+        style: style,
+        selectedCats: selectedCats,
+        lat: lat,
+        lon: lon,
+        startDate: startDate,
+        endDate: endDate
+      });
+    })
+    .catch( err => {
+      console.log(err);
     });
-    
   }
 
   render() {
