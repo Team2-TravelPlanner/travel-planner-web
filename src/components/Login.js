@@ -2,11 +2,13 @@ import React from 'react';
 import { Modal, Button, Form } from 'react-bootstrap'
 import { Formik } from 'formik';
 import * as yup from 'yup';
+import Axios from 'axios';
+import {TOKEN_KEY} from '../constants';
+import {ID} from '../constants';
+import {URL} from '../constants';
 
 class Login extends React.Component {
-    state = {
-        LoginStatus: false
-    };
+
     //Schemas used to validate input of form.
     RegisterSchema = yup.object({
         email: yup.string().email('Invalid email address').required('Email is required'),
@@ -21,36 +23,86 @@ class Login extends React.Component {
     })
     //When forms close, need to set the state of its parent(App) back to false. 
     switchToRegister = () => {
-        this.props.isLoginData(false);
-        this.props.isRegisterData(true);
+        this.props.showLoginForm(false);
+        this.props.showRegisterForm(true);
     }
 
     switchToLogin = () => {
-        this.props.isRegisterData(false);
-        this.props.isLoginData(true);
+        this.props.showRegisterForm(false);
+        this.props.showLoginForm(true);
     }
 
-    handleLoginForm = () => {
-        this.props.isLoginData(false);
+    hideRegisterForm = () => {
+        this.props.showRegisterForm(false);
     };
 
-    handleRegisterForm = () => {
-        this.props.isRegisterData(false);
-    };
+    hideLoginForm = () => {
+      this.props.showLoginForm(false);
+    }
+
     //Handle Submit. TODO(Http request.)
-    handleSubmitLogin = (event) => {
-        this.props.isLoginData(false);
-        this.setState({LoginStatus : true});
-        this.props.loginStatus(true);
+    handleSubmitLogin = (event, { setSubmitting }) => {
+        console.log(event);
+        const url = `${URL}login`
+        Axios({
+            method: 'POST',
+            url: url,
+            data: {
+                email: event.email,
+                password: event.password            }
+        })
+        .then(
+            response => {
+                console.log(response.data.operationResponse.failed);
+                if (response.data.operationResponse.failed === false) {
+                    console.log("logged in");
+                    localStorage.setItem(TOKEN_KEY, response.data.token);
+                    localStorage.setItem(ID, response.data.id);
+                    this.props.loggedIn();
+                    this.props.showLoginForm(false);
+                } else {
+                  console.log("Login failed");
+                }
+                setSubmitting(false);
+            }
+        )
+        .catch(
+            err => {
+              console.log("Login failed");
+            }
+        )
     }
     handleSubmitRegister = (event) => {
-
+        console.log(event);
+        const url = `${URL}register`
+        Axios({
+            method: 'POST',
+            url: url,
+            data: {
+                email: event.email,
+                password: event.password,
+                userName: event.userName
+            }
+        })
+        .then(
+            response => {
+                console.log(response.data);
+                if (response.data.failed === false) {
+                    this.handleRegisterForm();
+                }
+            }
+        )
+        .catch(
+            response => {
+                console.log('failed')
+            }
+        )
     }
     render() {
         return (
             <div className=".login">
                 {/* Modal is the pop up window */}
-                {<Modal show={this.props.isLoginForm} onHide={this.handleLoginForm}> 
+                {<Modal show={this.props.isLoginForm} onHide={this.hideLoginForm}>
 
                     <Modal.Header closeButton>
                         <Modal.Title>Sign In</Modal.Title>
@@ -68,12 +120,12 @@ class Login extends React.Component {
                             {/* Form start here */}
                             {({ handleSubmit,
                                 handleChange,
+                                resetForm,
                                 handleBlur,
                                 values,
                                 touched,
                                 isValid,
                                 errors }) => (<Form noValidate onSubmit={handleSubmit}>
-
                                     <Form.Group controlId="formBasicEmail">
                                         <Form.Label>Email address</Form.Label>
                                         <Form.Control
@@ -87,7 +139,6 @@ class Login extends React.Component {
                                             {errors.email}
                                         </Form.Control.Feedback>
                                     </Form.Group>
-
                                     <Form.Group controlId="formBasicPassword">
                                         <Form.Label>Password</Form.Label>
                                         <Form.Control
@@ -101,7 +152,7 @@ class Login extends React.Component {
                                             {errors.password}
                                         </Form.Control.Feedback>
                                     </Form.Group>
-                                    <Button size = "sm" block = "true" variant="link" onClick={this.switchToRegister}>
+                                    <Button size="sm" block="true" variant="link" onClick={this.switchToRegister}>
                                         Not registered? Sign up
                                     </Button> {' '}
                                     <Button block="true" className="Submit_Buttom" variant="primary" type="submit">
@@ -121,7 +172,7 @@ class Login extends React.Component {
 
                         <Formik
                             validationSchema={this.RegisterSchema}
-                            onSubmit={console.log}
+                            onSubmit={this.handleSubmitRegister}
                             initialValues={{
                                 email: '',
                                 password: '',
@@ -135,8 +186,8 @@ class Login extends React.Component {
                                 touched,
                                 isValid,
                                 errors }) => (<Form noValidate onSubmit={handleSubmit}>
-                                    <Form.Group controlId="formBasicEmail">
-                                        <Form.Label>Email address</Form.Label>
+                                    <Form.Group controlId="formUserName">
+                                        <Form.Label>Email Address</Form.Label>
                                         <Form.Control
                                             type="email"
                                             placeholder="Enter email"
@@ -149,6 +200,20 @@ class Login extends React.Component {
                                         </Form.Text>
                                         <Form.Control.Feedback type="invalid">
                                             {errors.email}
+                                        </Form.Control.Feedback>
+                                    </Form.Group>
+
+                                    <Form.Group controlId="formBasicEmail">
+                                        <Form.Label>UserName</Form.Label>
+                                        <Form.Control
+                                            type="text"
+                                            placeholder="UserName"
+                                            name='userName'
+                                            onChange={handleChange}
+                                            isInvalid={!!errors.userName && touched.userName}
+                                        />
+                                        <Form.Control.Feedback type="invalid">
+                                            {errors.userName}
                                         </Form.Control.Feedback>
                                     </Form.Group>
 
@@ -179,11 +244,87 @@ class Login extends React.Component {
                                             {errors.confirm_password}
                                         </Form.Control.Feedback>
                                     </Form.Group>
-                                    <Button size = "sm" block = "true" variant="link" onClick={this.switchToLogin}>
+                                    <Button size="sm" block="true" variant="link" onClick={this.switchToLogin}>
                                         Aready registered? Log in
                                     </Button> {' '}
-                                    <Button block="true" className="Submit_Buttom" variant="primary" type="submit" >
+                                    <Button block="true" className="Submit_Buttom" variant="primary" type="submit">
                                         Join
+                                    </Button>
+                                </Form>
+                                )}
+                        </Formik>
+                    </Modal.Body>
+                </Modal>}
+                
+                {<Modal show={this.props.isRegisterForm} onHide={this.handleLoginForm}>
+
+                    <Modal.Header closeButton>
+                        <Modal.Title>Sign In</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        {/* Formik and yup are used to validate input of form */}
+                        <Formik
+                            validationSchema={this.LoginSchema}
+                            onSubmit={this.handleSubmitLogin}
+                            initialValues={{
+                                email: '',
+                                password: '',
+                            }}
+                        >
+                            {/* Form start here */}
+                            {({ handleSubmit,
+                                handleChange,
+                                handleBlur,
+                                values,
+                                touched,
+                                isValid,
+                                errors }) => (<Form noValidate onSubmit={handleSubmit}>
+                                    <Form.Text className="text-muted">
+                                            You have successfully register. Please sign in. 
+                                    </Form.Text>
+                                    <Form.Group controlId="formBasicEmail">
+                                        <Form.Label>Email address</Form.Label>
+                                        <Form.Control
+                                            type="email"
+                                            placeholder="Enter email"
+                                            name='email'
+                                            onChange={handleChange}
+                                            isInvalid={!!errors.email && touched.email}
+                                        />
+                                        <Form.Control.Feedback type="invalid">
+                                            {errors.email}
+                                        </Form.Control.Feedback>
+                                    </Form.Group>
+
+                                    <Form.Group controlId="formBasicEmail">
+                                        <Form.Label>UserName</Form.Label>
+                                        <Form.Control
+                                            type="text"
+                                            placeholder="UserName"
+                                            name='userName'
+                                            onChange={handleChange}
+                                            isInvalid={!!errors.userName && touched.userName}
+                                        />
+                                        <Form.Control.Feedback type="invalid">
+                                            {errors.userName}
+                                        </Form.Control.Feedback>
+                                    </Form.Group>
+
+                                    <Form.Group controlId="formBasicPassword">
+                                        <Form.Label>Password</Form.Label>
+                                        <Form.Control
+                                            type="password"
+                                            placeholder="Password"
+                                            name='password'
+                                            onChange={handleChange}
+                                            isInvalid={!!errors.password && touched.password}
+                                        />
+                                        <Form.Control.Feedback type="invalid">
+                                            {errors.password}
+                                        </Form.Control.Feedback>
+                                    </Form.Group>
+                                    <Button block="true" className="Submit_Buttom" variant="primary" type="submit">
+                                        Sign in
                                     </Button>
                                 </Form>
                                 )}

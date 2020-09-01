@@ -7,17 +7,19 @@ import { Modal } from "react-bootstrap";
 import savedTrips from "../data/SavedTrips";
 import Login from "./Login"
 import { withRouter } from "react-router-dom";
+import {TOKEN_KEY} from '../constants';
+import {ID} from '../constants';
 
 class App extends React.Component {
   state = { //states used to activated login or register form.
-    isLoginForm: false,
+    showLoginForm: false,
     isRegisterForm: false,
-    LoginStatus: false,
+    isLoggedIn: localStorage.getItem(TOKEN_KEY) !== null,
     showSavedTrips: false,
     savedTrips: [],
-    isLoadingSavedTrips: false
+    isLoadingSavedTrips: false,
   }
-
+  
   getSavedTrips = () => {
     // fetch saved trip list
     // ...
@@ -48,20 +50,28 @@ class App extends React.Component {
     this.props.history.push(`/trip/${id}`);
   }
 
-  loginCB = (isLoginData) => {
-    this.setState({isLoginForm: isLoginData})
+  showLoginForm = (show) => {
+    this.setState({
+      showLoginForm: show
+    });
   }
 
-  registerCB = (isRegisterData) => {
-    this.setState({isRegisterForm: isRegisterData})
+  showRegisterForm = (isRegisterData) => {
+    this.setState({
+      isRegisterForm: isRegisterData
+    });
   }
 
-  loginStatusCB = (loginStatus) => {
-    this.setState({LoginStatus : loginStatus})
+  loggedIn = () => {
+    this.setState({
+      isLoggedIn: true
+    });
   }
 
-  logOutCB = (LogOutData) => {
-    this.setState({LoginStatus : false})
+  loggedOut = () => {
+    this.setState({
+      isLoggedIn : false
+    });
   }
 
   render() {
@@ -69,19 +79,19 @@ class App extends React.Component {
 
     return (
       <div className="app">
-        <Header isLoginData={this.loginCB}
-                isRegisterData={this.registerCB}
-                isLogin={this.state.LoginStatus}
-                LogOutData={this.logOutCB}
+        <Header showLoginForm={this.showLoginForm}
+                showRegisterForm={this.showRegisterForm}
+                isLoggedIn={this.state.isLoggedIn}
+                loggedOut={this.loggedOut}
                 handleOpenSavedTrips={this.handleOpenSavedTrips}
                 />
-        <Login isLoginForm={this.state.isLoginForm} 
-               isLoginData = {this.loginCB}
-               isRegisterForm={this.state.isRegisterForm} 
-               isRegisterData={this.registerCB}
-               loginStatus={this.loginStatusCB}
+        <Login isLoginForm={this.state.showLoginForm} 
+               isRegisterForm={this.state.showRegisterForm} 
+               showLoginForm = {this.showLoginForm}
+               showRegisterForm={this.showRegisterForm}
+               loggedIn={this.loggedIn}
                />        
-        <Main />
+        <Main isLoggedIn={this.state.isLoggedIn}/>
         <Footer />
 
         <Modal
