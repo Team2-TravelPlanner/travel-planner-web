@@ -7,6 +7,8 @@ import { Modal } from "react-bootstrap";
 import savedTrips from "../data/SavedTrips";
 import Login from "./Login"
 import { withRouter } from "react-router-dom";
+import {TOKEN_KEY} from '../constants';
+import {ID} from '../constants';
 
 class App extends React.Component {
   state = { //states used to activated login or register form.
@@ -16,8 +18,6 @@ class App extends React.Component {
     showSavedTrips: false,
     savedTrips: [],
     isLoadingSavedTrips: false,
-    id: false,
-    token: false,
   }
   
   getSavedTrips = () => {
@@ -57,12 +57,6 @@ class App extends React.Component {
   registerCB = (isRegisterData) => {
     this.setState({isRegisterForm: isRegisterData})
   }
-  IdCB = (ID) => {
-    this.setState({id: ID})
-  }
-  tokenCB = (TOKEN) => {
-    this.setState({token : TOKEN})
-  }
   loginStatusCB = (loginStatus) => {
     this.setState({LoginStatus : loginStatus})
   }
@@ -88,8 +82,6 @@ class App extends React.Component {
                isRegisterForm={this.state.isRegisterForm} 
                isRegisterData={this.registerCB}
                loginStatus={this.loginStatusCB}
-               ID = {this.IdCB}
-               TOKEN = {this.tokenCB}
                />        
         <Main />
         <Footer />

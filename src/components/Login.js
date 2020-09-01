@@ -3,6 +3,8 @@ import { Modal, Button, Form } from 'react-bootstrap'
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import Axios from 'axios';
+import {TOKEN_KEY} from '../constants';
+import {ID} from '../constants';
 
 class Login extends React.Component {
     state = {
@@ -60,10 +62,10 @@ class Login extends React.Component {
                 console.log(response.data.operationResponse.failed);
                 if (response.data.operationResponse.failed === false) {
                     this.setState({LoginStatus : true})
-                    this.props.ID(response.data.id)
-                    this.props.TOKEN(response.data.token)
                     this.props.loginStatus(true)
                     this.handleLoginForm();
+                    localStorage.setItem(TOKEN_KEY, response.data.token)
+                    localStorage.setItem(ID, response.data.id)
                 }
             }
         )

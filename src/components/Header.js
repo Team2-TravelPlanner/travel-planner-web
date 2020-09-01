@@ -2,6 +2,8 @@ import React from 'react';
 import { Dropdown } from 'react-bootstrap'
 import avatar from "../assets/images/user.svg";
 import { Link } from "react-router-dom";
+import {TOKEN_KEY} from '../constants';
+import {ID} from '../constants';
 
 class Header extends React.Component {
   handleLogin = () => {
@@ -15,6 +17,8 @@ class Header extends React.Component {
   handleLogOut = () => {
     this.props.LogOutData(true);
     this.props.loginStatus(false)
+    localStorage.removeItem(TOKEN_KEY);
+    localStorage.removeItem(ID);
   }
 
   handleOpenSavedTrips = () => {
