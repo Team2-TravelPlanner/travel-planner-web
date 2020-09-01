@@ -65,9 +65,9 @@ class Main extends React.Component {
           <Route path="/trip/:id?" render={(props) =>{
             {
               return props.match.params.id? 
-                <Trip tripId={props.match.params.id}/>
+                <Trip tripId={props.match.params.id} isLoggedIn={this.props.isLoggedIn} />
                 :
-                <Trip tripPlan={this.state.tripPlan}/>
+                <Trip tripPlan={this.state.tripPlan} isLoggedIn={this.props.isLoggedIn} />
             }
             
           }} />

@@ -8,10 +8,7 @@ import {ID} from '../constants';
 import {URL} from '../constants';
 
 class Login extends React.Component {
-    state = {
-        LoginStatus: false,
-        RegisterStatus: false
-    };
+
     //Schemas used to validate input of form.
     RegisterSchema = yup.object({
         email: yup.string().email('Invalid email address').required('Email is required'),
@@ -26,27 +23,25 @@ class Login extends React.Component {
     })
     //When forms close, need to set the state of its parent(App) back to false. 
     switchToRegister = () => {
-        this.props.isLoginData(false);
-        this.props.isRegisterData(true);
+        this.props.showLoginForm(false);
+        this.props.showRegisterForm(true);
     }
 
     switchToLogin = () => {
-        this.props.isRegisterData(false);
-        this.props.isLoginData(true);
+        this.props.showRegisterForm(false);
+        this.props.showLoginForm(true);
     }
 
-    handleLoginForm = () => {
-        this.props.isLoginData(false);
-        if (this.state.RegisterStatus === true) {
-            this.setState({RegisterStatus : false})
-        }
+    hideRegisterForm = () => {
+        this.props.showRegisterForm(false);
     };
 
-    handleRegisterForm = () => {
-        this.props.isRegisterData(false);
-    };
+    hideLoginForm = () => {
+      this.props.showLoginForm(false);
+    }
+
     //Handle Submit. TODO(Http request.)
-    handleSubmitLogin = (event) => {
+    handleSubmitLogin = (event, { setSubmitting }) => {
         console.log(event);
         const url = `${URL}login`
         Axios({
@@ -54,25 +49,26 @@ class Login extends React.Component {
             url: url,
             data: {
                 email: event.email,
-                password: event.password,
-                userName: event.userName
-            }
+                password: event.password            }
         })
         .then(
             response => {
                 console.log(response.data.operationResponse.failed);
                 if (response.data.operationResponse.failed === false) {
-                    this.setState({LoginStatus : true})
-                    this.props.loginStatus(true)
-                    this.handleLoginForm();
-                    localStorage.setItem(TOKEN_KEY, response.data.token)
-                    localStorage.setItem(ID, response.data.id)
+                    console.log("logged in");
+                    localStorage.setItem(TOKEN_KEY, response.data.token);
+                    localStorage.setItem(ID, response.data.id);
+                    this.props.loggedIn();
+                    this.props.showLoginForm(false);
+                } else {
+                  console.log("Login failed");
                 }
+                setSubmitting(false);
             }
         )
         .catch(
-            response => {
-                console.log('failed')
+            err => {
+              console.log("Login failed");
             }
         )
     }
@@ -92,7 +88,6 @@ class Login extends React.Component {
             response => {
                 console.log(response.data);
                 if (response.data.failed === false) {
-                    this.setState({RegisterStatus : true})
                     this.handleRegisterForm();
                 }
             }
@@ -107,7 +102,7 @@ class Login extends React.Component {
         return (
             <div className=".login">
                 {/* Modal is the pop up window */}
-                {<Modal show={this.props.isLoginForm} onHide={this.handleLoginForm}>
+                {<Modal show={this.props.isLoginForm} onHide={this.hideLoginForm}>
 
                     <Modal.Header closeButton>
                         <Modal.Title>Sign In</Modal.Title>
@@ -125,6 +120,7 @@ class Login extends React.Component {
                             {/* Form start here */}
                             {({ handleSubmit,
                                 handleChange,
+                                resetForm,
                                 handleBlur,
                                 values,
                                 touched,
@@ -143,23 +139,6 @@ class Login extends React.Component {
                                             {errors.email}
                                         </Form.Control.Feedback>
                                     </Form.Group>
-
-                                    <Form.Group controlId="formBasicEmail">
-                                        <Form.Label>UserName</Form.Label>
-                                        <Form.Control
-                                            type="text"
-                                            placeholder="UserName"
-                                            name='userName'
-                                            onChange={handleChange}
-                                            isInvalid={!!errors.userName && touched.userName}
-                                        />
-                                        <Form.Control.Feedback type="invalid">
-                                            {errors.userName}
-                                        </Form.Control.Feedback>
-                                    </Form.Group>
-
-
-
                                     <Form.Group controlId="formBasicPassword">
                                         <Form.Label>Password</Form.Label>
                                         <Form.Control
@@ -277,7 +256,7 @@ class Login extends React.Component {
                     </Modal.Body>
                 </Modal>}
                 
-                {<Modal show={this.state.RegisterStatus} onHide={this.handleLoginForm}>
+                {<Modal show={this.props.isRegisterForm} onHide={this.handleLoginForm}>
 
                     <Modal.Header closeButton>
                         <Modal.Title>Sign In</Modal.Title>

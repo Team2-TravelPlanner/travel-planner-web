@@ -7,18 +7,17 @@ import {ID} from '../constants';
 
 class Header extends React.Component {
   handleLogin = () => {
-    this.props.isLoginData(true);
+    this.props.showLoginForm(true);
   };
 
   handleRegister = () => {
-    this.props.isRegisterData(true);
+    this.props.showRegisterForm(true);
   };
 
   handleLogOut = () => {
-    this.props.LogOutData(true);
-    this.props.loginStatus(false)
     localStorage.removeItem(TOKEN_KEY);
     localStorage.removeItem(ID);
+    this.props.loggedOut();
   }
 
   handleOpenSavedTrips = () => {
@@ -26,7 +25,7 @@ class Header extends React.Component {
   }
 
   showMenu = () => {
-    if (this.props.isLogin) {
+    if (this.props.isLoggedIn) {
       return <div>
         <Dropdown.Item className="dropdown-item" type="button" onClick={this.handleOpenSavedTrips}>Saved Trip</Dropdown.Item>
         <Dropdown.Divider />
@@ -63,10 +62,10 @@ class Header extends React.Component {
         <div className="DropDown">
           <Dropdown>
             <Dropdown.Toggle as={this.customToggle} id="dropdown-custom-components">
-              {<img className="avatar"
+              <img className="avatar"
                 src={avatar}
                 alt="user pic"
-              />}
+              />
             </Dropdown.Toggle>
             <Dropdown.Menu>
               {this.showMenu()}

@@ -12,9 +12,9 @@ import {ID} from '../constants';
 
 class App extends React.Component {
   state = { //states used to activated login or register form.
-    isLoginForm: false,
+    showLoginForm: false,
     isRegisterForm: false,
-    LoginStatus: false,
+    isLoggedIn: localStorage.getItem(TOKEN_KEY) !== null,
     showSavedTrips: false,
     savedTrips: [],
     isLoadingSavedTrips: false,
@@ -50,19 +50,28 @@ class App extends React.Component {
     this.props.history.push(`/trip/${id}`);
   }
 
-  loginCB = (isLoginData) => {
-    this.setState({isLoginForm: isLoginData})
+  showLoginForm = (show) => {
+    this.setState({
+      showLoginForm: show
+    });
   }
 
-  registerCB = (isRegisterData) => {
-    this.setState({isRegisterForm: isRegisterData})
-  }
-  loginStatusCB = (loginStatus) => {
-    this.setState({LoginStatus : loginStatus})
+  showRegisterForm = (isRegisterData) => {
+    this.setState({
+      isRegisterForm: isRegisterData
+    });
   }
 
-  logOutCB = (LogOutData) => {
-    this.setState({LoginStatus : false})
+  loggedIn = () => {
+    this.setState({
+      isLoggedIn: true
+    });
+  }
+
+  loggedOut = () => {
+    this.setState({
+      isLoggedIn : false
+    });
   }
 
   render() {
@@ -70,20 +79,19 @@ class App extends React.Component {
 
     return (
       <div className="app">
-        <Header isLoginData={this.loginCB}
-                isRegisterData={this.registerCB}
-                isLogin={this.state.LoginStatus}
-                LogOutData={this.logOutCB}
+        <Header showLoginForm={this.showLoginForm}
+                showRegisterForm={this.showRegisterForm}
+                isLoggedIn={this.state.isLoggedIn}
+                loggedOut={this.loggedOut}
                 handleOpenSavedTrips={this.handleOpenSavedTrips}
-                loginStatus={this.loginStatusCB}
                 />
-        <Login isLoginForm={this.state.isLoginForm} 
-               isLoginData = {this.loginCB}
-               isRegisterForm={this.state.isRegisterForm} 
-               isRegisterData={this.registerCB}
-               loginStatus={this.loginStatusCB}
+        <Login isLoginForm={this.state.showLoginForm} 
+               isRegisterForm={this.state.showRegisterForm} 
+               showLoginForm = {this.showLoginForm}
+               showRegisterForm={this.showRegisterForm}
+               loggedIn={this.loggedIn}
                />        
-        <Main />
+        <Main isLoggedIn={this.state.isLoggedIn}/>
         <Footer />
 
         <Modal
