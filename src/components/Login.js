@@ -5,6 +5,7 @@ import * as yup from 'yup';
 import Axios from 'axios';
 import {TOKEN_KEY} from '../constants';
 import {ID} from '../constants';
+import {URL} from '../constants';
 
 class Login extends React.Component {
     state = {
@@ -47,10 +48,10 @@ class Login extends React.Component {
     //Handle Submit. TODO(Http request.)
     handleSubmitLogin = (event) => {
         console.log(event);
-        const URL = 'http://localhost:8080/users/login'
+        const url = `${URL}login`
         Axios({
             method: 'POST',
-            url: URL,
+            url: url,
             data: {
                 email: event.email,
                 password: event.password,
@@ -77,10 +78,10 @@ class Login extends React.Component {
     }
     handleSubmitRegister = (event) => {
         console.log(event);
-        const URL = 'http://localhost:8080/users/register'
+        const url = `${URL}register`
         Axios({
             method: 'POST',
-            url: URL,
+            url: url,
             data: {
                 email: event.email,
                 password: event.password,
