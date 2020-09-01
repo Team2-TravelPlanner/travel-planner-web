@@ -15,9 +15,11 @@ class App extends React.Component {
     LoginStatus: false,
     showSavedTrips: false,
     savedTrips: [],
-    isLoadingSavedTrips: false
+    isLoadingSavedTrips: false,
+    id: false,
+    token: false,
   }
-
+  
   getSavedTrips = () => {
     // fetch saved trip list
     // ...
@@ -55,7 +57,12 @@ class App extends React.Component {
   registerCB = (isRegisterData) => {
     this.setState({isRegisterForm: isRegisterData})
   }
-
+  IdCB = (ID) => {
+    this.setState({id: ID})
+  }
+  tokenCB = (TOKEN) => {
+    this.setState({token : TOKEN})
+  }
   loginStatusCB = (loginStatus) => {
     this.setState({LoginStatus : loginStatus})
   }
@@ -74,12 +81,15 @@ class App extends React.Component {
                 isLogin={this.state.LoginStatus}
                 LogOutData={this.logOutCB}
                 handleOpenSavedTrips={this.handleOpenSavedTrips}
+                loginStatus={this.loginStatusCB}
                 />
         <Login isLoginForm={this.state.isLoginForm} 
                isLoginData = {this.loginCB}
                isRegisterForm={this.state.isRegisterForm} 
                isRegisterData={this.registerCB}
                loginStatus={this.loginStatusCB}
+               ID = {this.IdCB}
+               TOKEN = {this.tokenCB}
                />        
         <Main />
         <Footer />

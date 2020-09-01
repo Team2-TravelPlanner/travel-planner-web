@@ -14,6 +14,7 @@ class Header extends React.Component {
 
   handleLogOut = () => {
     this.props.LogOutData(true);
+    this.props.loginStatus(false)
   }
 
   handleOpenSavedTrips = () => {
