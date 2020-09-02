@@ -4,7 +4,8 @@ import NewYorkMap from "./NewYorkMap";
 import plus from "../assets/images/plus.svg"
 import checked from "../assets/images/checked.svg"
 import del from "../assets/images/delete.svg"
-import searchResults from "../data/SearchResults.js"
+import Axios from "axios";
+import {URL} from "../constants";
 
 
 class Explore extends Component {
@@ -17,7 +18,7 @@ class Explore extends Component {
             activeCategory: [],
             placeToView: null,
             showForm: false,
-            Park: "outline-primary",
+            Trans: "outline-primary",
             Museum: "outline-primary",
             Plaza: "outline-primary",
         }
@@ -38,33 +39,42 @@ class Explore extends Component {
     // 5. Result is dynamically changed based on category selections.
 
     findResult = () => {
-        let results = [];
-        const { activeCategory, keyword } = this.state;
-        searchResults["places"].map(place => {
-            // check whether the place is in the category
-            let matchCategory = activeCategory.some(category =>
-                place["category"].toLowerCase().includes(category.toLowerCase())
-            );
-            // check whether the name of place matches the user's input keyword
-            let matchKeyword = place["name"].toLowerCase().includes(keyword.toLowerCase());
-
-            // console.log(matchCategory)
-            if((activeCategory.length === 0 || matchCategory) &&
-                (keyword === '' || matchKeyword)) {
-                results.push(place);
-            }
-        })
-        return results;
-    }
+        // let results = [];
+        // const { activeCategory, keyword } = this.state;
+        // searchResults["places"].map(place => {
+        //     // check whether the place is in the category
+        //     let matchCategory = activeCategory.some(category =>
+        //         place["category"].toLowerCase().includes(category.toLowerCase())
+        //     );
+        //     // check whether the name of place matches the user's input keyword
+        //     let matchKeyword = place["name"].toLowerCase().includes(keyword.toLowerCase());
+        //
+        //     // console.log(matchCategory)
+        //     if((activeCategory.length === 0 || matchCategory) &&
+        //         (keyword === '' || matchKeyword)) {
+        //         results.push(place);
+        //     }
+        // })
+        }
 
     onSearch = () => {
-        let results = this.findResult();
-        this.setState(
-            {
-                result: results
-            },
-            () => console.log(this.state.result)
-        )
+        const url = `${URL}/search/query`
+        Axios({
+            method: 'POST',
+            url: url,
+            data: {
+                keyword: this.state.keyword,
+                category: this.state.activeCategory.toString()
+            }
+        })
+            .then(
+                response => {
+                    this.setState({
+                        result: response.data["placeInfoModels"]
+                    })
+                }
+            )
+          //  () => console.log(this.state.result[0]["name"])
     }
 
     showResult = () => {
@@ -154,7 +164,6 @@ class Explore extends Component {
     }
 
     selectCategory = (event) => {
-
         if (this.state[event.target.value] === "outline-primary") {
             this.setState(
                 {
@@ -165,9 +174,6 @@ class Explore extends Component {
                 this.onSearch
 
             )
-
-
-
         } else {
             this.setState(
                 {
