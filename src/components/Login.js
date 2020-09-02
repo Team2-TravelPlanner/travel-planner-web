@@ -88,7 +88,7 @@ class Login extends React.Component {
             response => {
                 console.log(response.data);
                 if (response.data.failed === false) {
-                    this.handleRegisterForm();
+                    this.switchToLogin();
                 }
             }
         )
@@ -164,7 +164,7 @@ class Login extends React.Component {
                     </Modal.Body>
                 </Modal>}
 
-                {<Modal show={this.props.isRegisterForm} onHide={this.handleRegisterForm}>
+                {<Modal show={this.props.isRegisterForm} onHide={this.hideRegisterForm}>
                     <Modal.Header closeButton>
                         <Modal.Title>Register</Modal.Title>
                     </Modal.Header>
@@ -249,82 +249,6 @@ class Login extends React.Component {
                                     </Button> {' '}
                                     <Button block="true" className="Submit_Buttom" variant="primary" type="submit">
                                         Join
-                                    </Button>
-                                </Form>
-                                )}
-                        </Formik>
-                    </Modal.Body>
-                </Modal>}
-                
-                {<Modal show={this.props.isRegisterForm} onHide={this.handleLoginForm}>
-
-                    <Modal.Header closeButton>
-                        <Modal.Title>Sign In</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        {/* Formik and yup are used to validate input of form */}
-                        <Formik
-                            validationSchema={this.LoginSchema}
-                            onSubmit={this.handleSubmitLogin}
-                            initialValues={{
-                                email: '',
-                                password: '',
-                            }}
-                        >
-                            {/* Form start here */}
-                            {({ handleSubmit,
-                                handleChange,
-                                handleBlur,
-                                values,
-                                touched,
-                                isValid,
-                                errors }) => (<Form noValidate onSubmit={handleSubmit}>
-                                    <Form.Text className="text-muted">
-                                            You have successfully register. Please sign in. 
-                                    </Form.Text>
-                                    <Form.Group controlId="formBasicEmail">
-                                        <Form.Label>Email address</Form.Label>
-                                        <Form.Control
-                                            type="email"
-                                            placeholder="Enter email"
-                                            name='email'
-                                            onChange={handleChange}
-                                            isInvalid={!!errors.email && touched.email}
-                                        />
-                                        <Form.Control.Feedback type="invalid">
-                                            {errors.email}
-                                        </Form.Control.Feedback>
-                                    </Form.Group>
-
-                                    <Form.Group controlId="formBasicEmail">
-                                        <Form.Label>UserName</Form.Label>
-                                        <Form.Control
-                                            type="text"
-                                            placeholder="UserName"
-                                            name='userName'
-                                            onChange={handleChange}
-                                            isInvalid={!!errors.userName && touched.userName}
-                                        />
-                                        <Form.Control.Feedback type="invalid">
-                                            {errors.userName}
-                                        </Form.Control.Feedback>
-                                    </Form.Group>
-
-                                    <Form.Group controlId="formBasicPassword">
-                                        <Form.Label>Password</Form.Label>
-                                        <Form.Control
-                                            type="password"
-                                            placeholder="Password"
-                                            name='password'
-                                            onChange={handleChange}
-                                            isInvalid={!!errors.password && touched.password}
-                                        />
-                                        <Form.Control.Feedback type="invalid">
-                                            {errors.password}
-                                        </Form.Control.Feedback>
-                                    </Form.Group>
-                                    <Button block="true" className="Submit_Buttom" variant="primary" type="submit">
-                                        Sign in
                                     </Button>
                                 </Form>
                                 )}

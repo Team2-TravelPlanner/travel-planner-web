@@ -13,7 +13,7 @@ import {ID} from '../constants';
 class App extends React.Component {
   state = { //states used to activated login or register form.
     showLoginForm: false,
-    isRegisterForm: false,
+    showRegisterForm: false,
     isLoggedIn: localStorage.getItem(TOKEN_KEY) !== null,
     showSavedTrips: false,
     savedTrips: [],
@@ -56,9 +56,9 @@ class App extends React.Component {
     });
   }
 
-  showRegisterForm = (isRegisterData) => {
+  showRegisterForm = (show) => {
     this.setState({
-      isRegisterForm: isRegisterData
+      showRegisterForm: show
     });
   }
 

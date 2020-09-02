@@ -8,10 +8,12 @@ import {ID} from '../constants';
 class Header extends React.Component {
   handleLogin = () => {
     this.props.showLoginForm(true);
+    this.props.showRegisterForm(false);
   };
 
   handleRegister = () => {
     this.props.showRegisterForm(true);
+    this.props.showLoginForm(false);
   };
 
   handleLogOut = () => {
