@@ -47,10 +47,6 @@
     align-items: center;
 }
 
-.search-item-select:hover{
-    background: #0dd910;
-}
-
 .add-btn {
     margin-left: auto;
     background-color: white;

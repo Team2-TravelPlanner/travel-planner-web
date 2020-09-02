@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
 import {Card, ListGroup, FormControl, Form, Button, Modal} from 'react-bootstrap'
 import NewYorkMap from "./NewYorkMap";
-import plus from "../assets/images/plus.svg"
-import checked from "../assets/images/checked.svg"
-import del from "../assets/images/delete.svg"
-import searchResults from "../data/SearchResults.js"
+import plus from "../assets/images/plus.svg";
+import checked from "../assets/images/checked.svg";
+import del from "../assets/images/delete.svg";
+import searchResults from "../data/SearchResults.js";
+import { URL } from "../constants";
+import { GoogleKey } from "./Constants";
 
 
 class Explore extends Component {
@@ -21,6 +23,25 @@ class Explore extends Component {
             Museum: "outline-primary",
             Plaza: "outline-primary",
         }
+    }
+
+    componentDidMount() {
+      fetch(`${URL}/search/getAllPlace`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          currentPageNumber: 1,
+          displayItemLimit: 10
+        })
+      }).then( res => {
+        return res.json();
+      }).then( data => {
+        this.setState({
+          result:  data.placeInfoModels
+        });
+      }).catch ( err => {
+        console.log(err);
+      })
     }
 
     onChangeKeyword = (event) => {
@@ -214,6 +235,21 @@ class Explore extends Component {
 
     render() {
         const { result, selected, showForm } = this.state;
+
+        const places = result.map( item => {
+          return {
+            id: item.id,
+            name: item.name,
+            address: item.address,
+            lat: item.lat,
+            lon: item.lon,
+            categories: item.categories,
+            info: "",
+            imageUrl: `${item.imageLink}${GoogleKey}`,
+            website: item.website
+          }
+        });
+
         return (
             <div className="explorer">
                 <div className="left-side">
@@ -259,9 +295,9 @@ class Explore extends Component {
                     <NewYorkMap
                         googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyD3CEh9DXuyjozqptVB5LA-dN7MxWWkr9s&v=3.exp&libraries=geometry,drawing,places"
                         loadingElement={<div style={{ height: `100%` }} />}
-                        containerElement={<div style={{ height: `760px` }} />}
+                        containerElement={<div style={{ height: `100%` }} />}
                         mapElement={<div style={{ height: `100%` }} />}
-                        places={result}
+                        places={places}
                         selectedPlaceId={this.state.placeToView}
                     />
                 </div>

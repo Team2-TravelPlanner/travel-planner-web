@@ -77,7 +77,7 @@ class Map extends React.Component {
             <GoogleMap
                 ref={this.getMapRef}
                 zoom={13}
-                center={{ lat: places[0].lat, lng: places[0].lon }}
+                center={places.length > 0? { lat: places[0].lat, lng: places[0].lon } : { lat: 40.782864, lng: -73.965355 }}
                 options = {OPTIONS}
                 //onClick={this.handleMapClick}
             >

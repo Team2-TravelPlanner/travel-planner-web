@@ -56,7 +56,7 @@ class Trip extends Component {
         lat: item.lat,
         lon: item.lon,
         categories: item.categories,
-        info: "Shimmering art deco skyscraper from 1930 whose spire once made it the world's tallest building.",
+        info: "",
         imageUrl: `${item.imageLink}${GoogleKey}`,
         website: item.weblink
       }
