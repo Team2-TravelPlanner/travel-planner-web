@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import Map from "./NewYorkMap";
 import { Tab, Button, Table, Tabs, Form } from "react-bootstrap";
 import trip from "../data/Trip";
-
+import { GoogleKey } from "./Constants";
+ 
 // Open either by tripId of by tripPlan
 class Trip extends Component {
 
@@ -37,19 +38,29 @@ class Trip extends Component {
 
   render() {
 
-    const { tripId, tripPlan } = this.props;
+    const { tripId, tripPlan: trip } = this.props;
     console.log("tripId: ", tripId);
-    console.log("tripPlan: ", tripPlan);
+    console.log("tripPlan: ", trip);
 
     const { isSaving } = this.state;
-    const itinerary = trip.itinerary;
+    const itinerary = trip.dayOfPlanDisplayModels;
     const days = itinerary.length;
-    const startDate = new Date(parseInt(trip.startDate)).toLocaleDateString(undefined, this.dateOptions);
-    const endDate = new Date(parseInt(trip.endDate)).toLocaleDateString(undefined, this.dateOptions);
+    const startDate = new Date(trip.startDate).toLocaleDateString(undefined, this.dateOptions);
+    const endDate = new Date(trip.endDate).toLocaleDateString(undefined, this.dateOptions);
 
-    const places = trip.itinerary[this.state.daySelected].map( item => (
-      item.place
-    ));
+    const places = itinerary[this.state.daySelected].placeOfPlanDetailModels.map( item => {
+      return {
+        id: item.placeId,
+        name: item.placeName,
+        address: item.address,
+        lat: item.lat,
+        lon: item.lon,
+        categories: item.categories,
+        info: "Shimmering art deco skyscraper from 1930 whose spire once made it the world's tallest building.",
+        imageUrl: `${item.imageLink}${GoogleKey}`,
+        website: item.weblink
+      }
+    });
 
     return (
       <div className="trip">
@@ -88,12 +99,12 @@ class Trip extends Component {
                       </tr>
                     </thead>
                     <tbody>
-                      {day.map((item, index) => (
-                        <tr key={index} className="table-row" onMouseDownCapture={ () => this.handlePlaceSelected(item.place.id)}>
+                      {day.placeOfPlanDetailModels.map((item, index) => (
+                        <tr key={index} className="table-row" onMouseDownCapture={ () => this.handlePlaceSelected(item.placeId)}>
                           <td>{index + 1}</td>
-                          <td>{item.place.name}</td>
-                          <td>{item.start}</td>
-                          <td>{item.end}</td>
+                          <td>{item.placeName}</td>
+                          <td>{item.start? item.start : null}</td>
+                          <td>{item.end? item.end: null}</td>
                         </tr>
                       ))}
                     </tbody>
