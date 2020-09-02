@@ -7,13 +7,16 @@ import Explore from "./Explore";
 import NotFound from "./NotFound";
 import { Modal } from "react-bootstrap";
 import Trip from "./Trip"
+import { URL } from "../constants";
+import { withRouter } from "react-router-dom";
 
 
 class Main extends React.Component {
 
   state = {
     showForm: false,
-    tripPlan: null
+    tripPlan: null,
+    isLoading: false
   }
 
   openForm = () => {
@@ -29,6 +32,49 @@ class Main extends React.Component {
   }
 
   generateItinerary = (options) => {
+    const url = `${URL}/plan/recommended`;
+    const { style,
+      selectedCats,
+      lat,
+      lon,
+      startDate,
+      endDate
+    } = options;
+
+    console.log(selectedCats);
+    this.setState({
+      isLoading: true
+    })
+
+    fetch(url, {
+      method: 'POST',
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({
+        categories: selectedCats,
+        settings: {
+          endDate: endDate.toJSON(),
+          lat: lat,
+          lon: lon,
+          startDate: startDate.toJSON(),
+          travelStyle: style
+        }
+      })
+    })
+    .then(response => response.json())
+    .then(plan => {
+      this.setState({
+        isLoading: false
+      });
+
+      this.openTripByPlan(plan);
+    })
+    .catch(error => {
+      this.setState({
+        isLoading: false
+      });
+      console.log('error', error);
+    });
+
     this.setState({
       showForm: false
     });
@@ -37,17 +83,16 @@ class Main extends React.Component {
   }
 
   openTripByPlan(plan) {
+    console.log(plan);
     // open an unsaved plan object
     this.setState({
       tripPlan: plan
-    }).then( () => {
-      this.props.history.location.push("/trip");
-    });
+    }, () => this.props.history.push("/trip"));
   }
 
-  openTripById(tripId) {
-    this.props.history.location.push(`/trip/${tripId}`);
-  }
+  // openTripById(tripId) {
+  //   this.props.history.push(`/trip/${tripId}`);
+  // }
 
   render() {
     const { showForm } = this.state;
@@ -90,4 +135,4 @@ class Main extends React.Component {
   }
 }
 
-export default Main;
+export default withRouter(Main);

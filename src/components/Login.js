@@ -43,7 +43,7 @@ class Login extends React.Component {
     //Handle Submit. TODO(Http request.)
     handleSubmitLogin = (event, { setSubmitting }) => {
         console.log(event);
-        const url = `${URL}/users/login`
+        const url = `${URL}/users/login`;
         Axios({
             method: 'POST',
             url: url,

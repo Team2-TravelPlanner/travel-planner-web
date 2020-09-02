@@ -14,15 +14,19 @@ class AutoForm extends React.Component {
     type: PropTypes.string.isRequired // short or long
   }
 
-  today = new Date();
   defaultAddress = "5th Avenue at, Central Park S, New York, NY 10022";
 
   state = {
-    style: "moderate",
-    selectedCats: [],
+    categories: ["TOURIST_ATTRACTION", "PARK", "MUSEUM", "ZOO", "UNIVERSITY", "ART_GALLERY"],
+    style: "Moderate",
+    selectedCats: ["POINT_OF_INTEREST"],
     address: "",
-    startDate: this.today,
-    endDate: new Date().setDate(this.today.getDate() + 5)
+    startDate: new Date(),
+    endDate: new Date()
+  }
+
+  capitalizeWords = (str) => {
+    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
   }
 
   handleStyleChange = (style) => {
@@ -98,7 +102,7 @@ class AutoForm extends React.Component {
 
   render() {
 
-    const { style, selectedCats, address, startDate, endDate } = this.state;
+    const { categories, style, selectedCats, address, startDate, endDate } = this.state;
     const { type } = this.props;
 
     return (
@@ -110,99 +114,32 @@ class AutoForm extends React.Component {
                   <h4>What's your travel style?</h4>
                   <div className="travel-style">
                     <ToggleButtonGroup type="radio" name="style" defaultValue={style} onChange={this.handleStyleChange}>
-                      <ToggleButton value={"relaxed"} variant="outline-primary">
+                      <ToggleButton value={"Loose"} variant="outline-primary">
                         Relaxed
                       </ToggleButton>
-                      <ToggleButton value={"moderate"} variant="outline-primary">
+                      <ToggleButton value={"Moderate"} variant="outline-primary">
                         Moderate
                       </ToggleButton>
-                      <ToggleButton value={"packed"} variant="outline-primary">
-                        Packed
+                      <ToggleButton value={"Compact"} variant="outline-primary">
+                        Compact
                       </ToggleButton>
                     </ToggleButtonGroup>
                   </div>
                   <br />
                   <h4>What interests you?</h4>
                   <div className="button-group">
-                    <Button 
-                      variant="outline-primary" 
-                      size="sm" 
-                      active={selectedCats.includes("parks")}
-                      onClick={() => this.handleClickCategory("parks")}>
-                      Parks
-                    </Button>{" "}
-                    <Button 
-                      variant="outline-primary" 
-                      size="sm" 
-                      active={selectedCats.includes("museums")}
-                      onClick={() => this.handleClickCategory("museums")}>
-                      Museums
-                    </Button>{" "}
-                    <Button 
-                      variant="outline-primary" 
-                      size="sm" 
-                      active={selectedCats.includes("plaza")}
-                      onClick={() => this.handleClickCategory("plaza")}>
-                      Plaza
-                    </Button>{" "}
-                    <Button 
-                      variant="outline-primary" 
-                      size="sm" 
-                      active={selectedCats.includes("architecture")}
-                      onClick={() => this.handleClickCategory("architecture")}>
-                      Architecture
-                    </Button>{" "}
-                    <Button 
-                      variant="outline-primary" 
-                      size="sm" 
-                      active={selectedCats.includes("buildings")}
-                      onClick={() => this.handleClickCategory("buildings")}>
-                      Buildings
-                    </Button>{" "}
-                  </div>
-                  <div className="button-group">
-                    <Button 
-                      variant="outline-primary" 
-                      size="sm" 
-                      active={selectedCats.includes("food")}
-                      onClick={() => this.handleClickCategory("food")}>
-                      Food
-                    </Button>{" "}
-                    <Button 
-                      variant="outline-primary" 
-                      size="sm" 
-                      active={selectedCats.includes("nightlife")}
-                      onClick={() => this.handleClickCategory("nightlife")}>
-                      Night life
-                    </Button>{" "}
-                    <Button 
-                      variant="outline-primary" 
-                      size="sm" 
-                      active={selectedCats.includes("music")}
-                      onClick={() => this.handleClickCategory("music")}>
-                      Music
-                    </Button>{" "}
-                    <Button 
-                      variant="outline-primary" 
-                      size="sm" 
-                      active={selectedCats.includes("art")}
-                      onClick={() => this.handleClickCategory("art")}>
-                      Art
-                    </Button>{" "}
-                    <Button 
-                      variant="outline-primary" 
-                      size="sm" 
-                      active={selectedCats.includes("shopping")}
-                      onClick={() => this.handleClickCategory("shopping")}>
-                      Shopping
-                    </Button>{" "}
-                    <Button 
-                      variant="outline-primary" 
-                      size="sm" 
-                      active={selectedCats.includes("kids")}
-                      onClick={() => this.handleClickCategory("kids")}>
-                      Kids
-                    </Button>{" "}
+                    {categories.map( category => (
+                      <span key={category}>
+                        <Button 
+                          variant="outline-primary" 
+                          className="mb-1"
+                          size="sm" 
+                          active={selectedCats.includes(category)}
+                          onClick={() => this.handleClickCategory(category)}>
+                            {this.capitalizeWords(category.toLowerCase().split("_").join(" "))}
+                        </Button>{" "}
+                      </span>
+                    ))}
                   </div>
                   <br />
                 </div>
