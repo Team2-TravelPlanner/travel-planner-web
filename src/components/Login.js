@@ -43,7 +43,7 @@ class Login extends React.Component {
     //Handle Submit. TODO(Http request.)
     handleSubmitLogin = (event, { setSubmitting }) => {
         console.log(event);
-        const url = `${URL}login`
+        const url = `${URL}/users/login`
         Axios({
             method: 'POST',
             url: url,
@@ -74,7 +74,7 @@ class Login extends React.Component {
     }
     handleSubmitRegister = (event) => {
         console.log(event);
-        const url = `${URL}register`
+        const url = `${URL}/users/register`
         Axios({
             method: 'POST',
             url: url,
