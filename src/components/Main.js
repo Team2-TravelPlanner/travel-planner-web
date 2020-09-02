@@ -5,7 +5,7 @@ import Home from "./Home";
 import Form from "./Form";
 import Explore from "./Explore";
 import NotFound from "./NotFound";
-import { Modal } from "react-bootstrap";
+import { Modal, Spinner } from "react-bootstrap";
 import Trip from "./Trip"
 import { URL } from "../constants";
 import { withRouter } from "react-router-dom";
@@ -95,10 +95,17 @@ class Main extends React.Component {
   // }
 
   render() {
-    const { showForm } = this.state;
+    const { showForm, isLoading } = this.state;
 
     return (
       <div className="main">
+        {isLoading? 
+          (<div className="spinner">
+            <Spinner animation="border" variant="light"/>
+          </div>)
+          :
+          null
+        }
 
         <Switch>
           <Route exact path="/">

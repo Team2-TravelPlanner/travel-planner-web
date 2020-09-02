@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Card, ListGroup, Form, Button, Modal} from 'react-bootstrap'
+import {Card, ListGroup, Form, Button, Modal, Spinner} from 'react-bootstrap'
 import NewYorkMap from "./NewYorkMap";
 import plus from "../assets/images/plus.svg";
 import checked from "../assets/images/checked.svg";
@@ -315,7 +315,7 @@ class Explore extends Component {
     }
 
     render() {
-        const { result, showForm, categories, activeCategory } = this.state;
+        const { result, showForm, categories, activeCategory, isLoading } = this.state;
 
 
         const places = result.map( item => {
@@ -334,6 +334,13 @@ class Explore extends Component {
 
         return (
             <div className="explorer">
+              {isLoading? 
+                (<div className="spinner">
+                  <Spinner animation="border" variant="light"/>
+                </div>)
+                :
+                null
+              }
                 <div className="left-side">
                     <div className="button-group">
                     {categories.map( category => (
