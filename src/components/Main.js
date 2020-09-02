@@ -82,7 +82,7 @@ class Main extends React.Component {
     console.log(options);
   }
 
-  openTripByPlan(plan) {
+  openTripByPlan = (plan) => {
     console.log(plan);
     // open an unsaved plan object
     this.setState({
@@ -105,7 +105,7 @@ class Main extends React.Component {
             <Home openForm={this.openForm} />
           </Route>
           <Route exact path="/explorer">
-            <Explore/>
+            <Explore openTripByPlan={this.openTripByPlan} />
           </Route>
           <Route path="/trip/:id?" render={(props) =>{
             {

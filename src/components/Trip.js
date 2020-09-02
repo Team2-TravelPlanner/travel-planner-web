@@ -3,6 +3,7 @@ import Map from "./NewYorkMap";
 import { Tab, Button, Table, Tabs, Form } from "react-bootstrap";
 import trip from "../data/Trip";
 import { GoogleKey } from "./Constants";
+import { Redirect } from "react-router-dom";
  
 // Open either by tripId of by tripPlan
 class Trip extends Component {
@@ -41,6 +42,12 @@ class Trip extends Component {
     const { tripId, tripPlan: trip } = this.props;
     console.log("tripId: ", tripId);
     console.log("tripPlan: ", trip);
+
+    if (!tripId && !trip) {
+      return (
+        <Redirect to="/" />
+      )
+    }
 
     const { isSaving } = this.state;
     const itinerary = trip.dayOfPlanDisplayModels;

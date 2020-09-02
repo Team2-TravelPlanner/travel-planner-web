@@ -7,6 +7,7 @@ import del from "../assets/images/delete.svg";
 import searchResults from "../data/SearchResults.js";
 import { URL } from "../constants";
 import { GoogleKey } from "./Constants";
+import SelfPlanForm from "./Form";
 
 
 class Explore extends Component {
@@ -22,6 +23,7 @@ class Explore extends Component {
             Park: "outline-primary",
             Museum: "outline-primary",
             Plaza: "outline-primary",
+            isLoading: false
         }
     }
 
@@ -225,16 +227,60 @@ class Explore extends Component {
     }
 
     generateItinerary = (options) => {
-        this.setState({
-            showForm: false
-        });
+      const url = `${URL}/plan/customized`;
+      const { style,
+        lat,
+        lon,
+        startDate,
+        endDate
+      } = options;
 
-        console.log(options);
-        // send data to backend
+      let placeIds = this.state.selected.map( place => place.id);
+  
+      this.setState({
+        isLoading: true
+      });
+  
+      fetch(url, {
+        method: 'POST',
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+          placeIds: placeIds,
+          settings: {
+            endDate: endDate.toJSON(),
+            lat: lat,
+            lon: lon,
+            startDate: startDate.toJSON(),
+            travelStyle: style
+          }
+        })
+      })
+      .then(response => response.json())
+      .then(plan => {
+        console.log(plan);
+        this.setState({
+          isLoading: false
+        });
+  
+        this.props.openTripByPlan(plan);
+      })
+      .catch(error => {
+        this.setState({
+          isLoading: false
+        });
+        console.log('error', error);
+      });
+  
+      this.setState({
+        showForm: false
+      });
+  
+      console.log(options);
     }
 
     render() {
-        const { result, selected, showForm } = this.state;
+        const { result, showForm } = this.state;
+
 
         const places = result.map( item => {
           return {
@@ -307,7 +353,11 @@ class Explore extends Component {
                     backdrop="static"
                     keyboard={false}>
                     <Modal.Body>
-                        <Form close={this.closeForm} submit={this.generateItinerary} type="long"/>
+                      <SelfPlanForm
+                            close={this.closeForm}
+                            submit={this.generateItinerary}
+                            />
+
                     </Modal.Body>
                 </Modal>
 
