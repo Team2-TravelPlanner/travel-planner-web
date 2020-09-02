@@ -4,60 +4,64 @@
     height: 100%;
 }
 
-.left-side {
+.explorer .left-side {
     position: absolute;
+    width: 520px;
     top: 10px;
     left: 10px;
     height: 760px;
 }
 
-.right-side {
+.explorer .right-side {
     margin-left: 520px;
     width: calc(100% - 520px);
     height: 760px;
     background-color: lightblue;
 }
 
-.buttons{
+.explorer .buttons{
     text-align: left;
     padding-left: 10px;
     justify-content: center;
 }
 
-.search-bar {
+.explorer .button-group {
+  width: 520px;
+  margin: 5px;
+}
+
+.explorer .search-bar {
     display: inline-flex;
     width: 30em;
     padding: 0 0 10px 0;
 }
 
-.search-items, .selected-items {
+.explorer .search-items, .selected-items {
     text-align: left;
     padding: 10px;
 }
 
-.search-result, .select-result {
+.explorer .search-result, .select-result {
     width: 30em;
     height: 280px;
     overflow: scroll;
 }
 
-.search-item-select {
+.explorer .search-item-select {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.add-btn {
+.explorer .add-btn {
     margin-left: auto;
     background-color: white;
     border: white;
     width: 32px;
     height: 32px;
-    alt: "book";
-    title: "Bootstrap";
 }
 
-.generate-btn {
+.explorer .generate-btn {
     margin-left: auto;
     margin-right: auto;
     width: 40%;

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Card, ListGroup, FormControl, Form, Button, Modal} from 'react-bootstrap'
+import {Card, ListGroup, Form, Button, Modal} from 'react-bootstrap'
 import NewYorkMap from "./NewYorkMap";
 import plus from "../assets/images/plus.svg";
 import checked from "../assets/images/checked.svg";
@@ -17,33 +17,83 @@ class Explore extends Component {
             keyword: '',
             result: [],
             selected: [],
-            activeCategory: [],
+            activeCategory: null,
             placeToView: null,
             showForm: false,
-            Park: "outline-primary",
-            Museum: "outline-primary",
-            Plaza: "outline-primary",
-            isLoading: false
+            isLoading: false,
+            categories: ["TOURIST_ATTRACTION", "PARK", "MUSEUM", "ZOO", "UNIVERSITY", "ART_GALLERY", "POINT_OF_INTEREST"]
         }
     }
 
     componentDidMount() {
+      this.searchAllPlaces();
+    }
+
+    capitalizeWords = (str) => {
+      return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+    }
+
+    searchAllPlaces = () => {
       fetch(`${URL}/search/getAllPlace`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           currentPageNumber: 1,
-          displayItemLimit: 10
+          displayItemLimit: 40
         })
       }).then( res => {
         return res.json();
       }).then( data => {
         this.setState({
-          result:  data.placeInfoModels
+          result:  data.placeInfoModels? data.placeInfoModels : []
         });
       }).catch ( err => {
         console.log(err);
-      })
+      });
+    }
+
+    searchByCategory = (cat) => {
+      fetch(`${URL}/search/query`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          currentPageNumber: 1,
+          displayItemLimit: 40,
+          category: cat // need to be able to use a list
+        })
+      }).then( res => {
+        return res.json();
+      }).then( data => {
+        console.log(data);
+        this.setState({
+          result:  data.placeInfoModels? data.placeInfoModels : []
+        });
+
+        
+      }).catch ( err => {
+        console.log(err);
+      });
+    }
+
+    searchByKeyword = (keyword) => {
+      fetch(`${URL}/search/query`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          currentPageNumber: 1,
+          displayItemLimit: 40,
+          keyword: keyword
+        })
+      }).then( res => {
+        return res.json();
+      }).then( data => {
+        console.log(data);
+        this.setState({
+          result:  data.placeInfoModels? data.placeInfoModels : []
+        });
+      }).catch ( err => {
+        console.log(err);
+      });
     }
 
     onChangeKeyword = (event) => {
@@ -81,13 +131,13 @@ class Explore extends Component {
     }
 
     onSearch = () => {
-        let results = this.findResult();
-        this.setState(
-            {
-                result: results
-            },
-            () => console.log(this.state.result)
-        )
+      this.setState({
+        activeCategory: null
+      })
+      if (this.state.keyword)
+        this.searchByKeyword(this.state.keyword);
+      else
+        this.searchAllPlaces();
     }
 
     showResult = () => {
@@ -176,35 +226,21 @@ class Explore extends Component {
         })
     }
 
-    selectCategory = (event) => {
+    handleClickedCategory = (cat) => {
 
-        if (this.state[event.target.value] === "outline-primary") {
-            this.setState(
-                {
-                    [event.target.value]: "primary",
-                    activeCategory: [...this.state.activeCategory, event.target.value]
-                },
-                //() => console.log(this.state.activeCategory),
-                this.onSearch
+      // changed category
+      if (this.state.activeCategory !== cat) {
+        this.setState({
+          activeCategory: cat
+        });
+        this.searchByCategory(cat);
+      } else {
+        this.setState({
+          activeCategory: null
+        });
+        this.searchAllPlaces();
+      }
 
-            )
-
-
-
-        } else {
-            this.setState(
-                {
-                    [event.target.value]: "outline-primary",
-                    activeCategory: this.state.activeCategory.filter(function (category) {
-                        return category !== event.target.value
-                    })
-                },
-                //() => console.log(this.state.activeCategory),
-                this.onSearch
-            )
-
-
-        }
     }
 
     handleKeyPress = (target) => {
@@ -236,6 +272,7 @@ class Explore extends Component {
       } = options;
 
       let placeIds = this.state.selected.map( place => place.id);
+      console.log(placeIds);
   
       this.setState({
         isLoading: true
@@ -275,11 +312,10 @@ class Explore extends Component {
         showForm: false
       });
   
-      console.log(options);
     }
 
     render() {
-        const { result, showForm } = this.state;
+        const { result, showForm, categories, activeCategory } = this.state;
 
 
         const places = result.map( item => {
@@ -299,18 +335,24 @@ class Explore extends Component {
         return (
             <div className="explorer">
                 <div className="left-side">
-                    <div className="buttons">
-                        <Button variant={this.state.Park} size="sm" value="Park"
-                                onClick={this.selectCategory}>Park </Button>{" "}
-                        <Button variant={this.state.Museum} size="sm" value="Museum"
-                                onClick={this.selectCategory}>Museum </Button>{" "}
-                        <Button variant={this.state.Plaza} size="sm" value="Plaza"
-                                onClick={this.selectCategory}>Plaza </Button>{" "}
+                    <div className="button-group">
+                    {categories.map( category => (
+                      <span key={category}>
+                        <Button 
+                          variant="outline-primary" 
+                          className="mb-1"
+                          size="sm" 
+                          active={activeCategory === category}
+                          onClick={() => this.handleClickedCategory(category)}>
+                            {this.capitalizeWords(category.toLowerCase().split("_").join(" "))}
+                        </Button>{" "}
+                      </span>
+                    ))}
                     </div>
 
                     <div className="search-items">
                         <Form className="search-bar">
-                            <FormControl type="text" placeholder="Search" className='mr-sm-2' style={{width: '30em'}}
+                            <Form.Control type="text" placeholder="Search" className='mr-sm-2' style={{width: '30em'}}
                                          onChange={this.onChangeKeyword} onKeyPress = {this.handleKeyPress}/>
                             <Button variant="primary" onClick={this.onSearch} >Search</Button>
                         </Form>
@@ -356,6 +398,7 @@ class Explore extends Component {
                       <SelfPlanForm
                             close={this.closeForm}
                             submit={this.generateItinerary}
+                            type="short"
                             />
 
                     </Modal.Body>
