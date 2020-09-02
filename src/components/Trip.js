@@ -119,7 +119,7 @@ class Trip extends Component {
           <Map
             googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyD3CEh9DXuyjozqptVB5LA-dN7MxWWkr9s&v=3.exp&libraries=geometry,drawing,places"
             loadingElement={<div style={{ height: `100%` }} />}
-            containerElement={<div style={{ height: `760px` }} />}
+            containerElement={<div style={{ height: `100%` }} />}
             mapElement={<div style={{ height: `100%` }} />}
             places={places}
             selectedPlaceId={this.state.placeSelected}
