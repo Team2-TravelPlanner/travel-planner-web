@@ -68,7 +68,6 @@ class Map extends React.Component {
             minZoom: 12,
             maxZoom: 16,
             panControl: false,
-            restriction: {latLngBounds:{north:40.9, south:40.5, west:-74.2, east:-73.7}, strictBounds: false},
             tilt: 45,
             streetViewControl: false,
         }
