@@ -89,7 +89,7 @@ class Map extends React.Component {
                     map={this.map} 
                     toggleMarker={() => this.handleToggleMarker(place)} 
                     isOpen={this.state.selectedPlace && this.state.selectedPlace === place.id} />)}
-                    { this.props.trip ? (
+                    { this.props.showRoute ? (
                         <Polyline
                             path={currentPath}
                             geodesic={true}
