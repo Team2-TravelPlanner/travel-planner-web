@@ -18,7 +18,6 @@ class Home extends React.Component {
   render() {
 
     const { background } = this.state;
-
     var backgroundStyle = {
       backgroundImage: `url(${background.path})`
     };

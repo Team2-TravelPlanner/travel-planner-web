@@ -83,7 +83,7 @@ class Main extends React.Component {
   }
 
   openTripByPlan(plan) {
-    console.log(plan);
+    console.log("plan is:::::::::::::::::::=> ", plan);
     // open an unsaved plan object
     this.setState({
       tripPlan: plan

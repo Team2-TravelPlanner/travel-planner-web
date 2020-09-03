@@ -38,3 +38,12 @@
   color: red;
   fill: currentColor;
 }
+
+.app-header .avatar-loggedIn {
+  position: relative;
+  right: 0px;
+  height: 40px;
+  width: 40px;
+  color: red;
+  fill: currentColor;
+}

@@ -3,6 +3,8 @@ import Map from "./NewYorkMap";
 import { Tab, Button, Table, Tabs, Form } from "react-bootstrap";
 import trip from "../data/Trip";
 import { GoogleKey } from "./Constants";
+import {URL,TOKEN_KEY, ID} from "../constants";
+import axios from "axios";
  
 // Open either by tripId of by tripPlan
 class Trip extends Component {
@@ -10,17 +12,81 @@ class Trip extends Component {
   dateOptions = { year: 'numeric', month: 'numeric', day: 'numeric' };
 
   state = {
-    isSaving: false,
+    planSaved: false,
     daySelected: 0,
-    placeSelected: null
+    placeSelected: null,
+    planName: null
   }
 
-  handleSave = () => {
-    this.setState({ isSaving: true });
+  handlePlanNameChange = (e) =>{
+    console.log("handle plan name change => ", e);
+    this.setState({
+      planName: e.target.value
+    })
+  }
 
-    setTimeout(() => {
-      this.setState({ isSaving: false });
-    }, 2000);
+  handleSave = (trip) => {
+    console.log("Handle save plan.");
+    console.log(trip);
+    console.log("save status -> ", this.state.planSaved);
+    this.setState({ planSaved: true });
+
+    const url =  `${URL}/plan/save`;
+    const dayPlan = trip.dayOfPlanDisplayModels;
+    const dayDetails = dayPlan.map(oneday => {
+      return {
+        index: oneday.index,
+        placeOfPlanSaveModels:
+          oneday.placeOfPlanDetailModels.map(item => {
+            return {
+              endDate: "",
+              placeId: item.placeId.toString(),
+              startDate: ""
+            }
+          })
+        }
+    });
+    console.log("day details: ", dayDetails);
+    console.log("token is: ", localStorage.getItem(TOKEN_KEY).toString());
+    console.log("user is : ", localStorage.getItem(ID).toString());
+
+
+
+    axios({
+      method: 'POST',
+      header: {"Content-Type": "application/json"},
+      url: url,
+      data: {
+        authModel: {
+          token: localStorage.getItem(TOKEN_KEY).toString(),
+          userEmail: localStorage.getItem(ID).toString()
+        },
+        dayOfPlanSaveModels: dayDetails,
+        endDate: trip.endDate,
+        planId: trip.planId,
+        startDate: trip.startDate,
+        startLatitude: trip.startLatitude,
+        startLongitude: trip.startLongitude,
+        typeOfPlan: trip.typeOfPlan
+      }
+    })
+    .then(
+        response => {
+          console.log("in then => ", response.data);
+          if (response.data.failed === false) {
+            console.log("plan saved.");
+            this.setState({ planSaved: true });
+          }else{
+            console.log("save plan failed here 111.");
+          }
+        }
+    )
+    .catch(
+        err => {
+          console.log("error: ", err);
+          console.log("save plan failed here 222.");
+        }
+    )
   };
 
   handleDaySelected = (daySelected) => {
@@ -42,7 +108,7 @@ class Trip extends Component {
     console.log("tripId: ", tripId);
     console.log("tripPlan: ", trip);
 
-    const { isSaving } = this.state;
+    const { planSaved, planName} = this.state;
     const itinerary = trip.dayOfPlanDisplayModels;
     const days = itinerary.length;
     const startDate = new Date(trip.startDate).toLocaleDateString(undefined, this.dateOptions);
@@ -61,22 +127,28 @@ class Trip extends Component {
         website: item.weblink
       }
     });
+    console.log("places -> ", places);
+    console.log("saving state => ", planSaved);
 
     return (
       <div className="trip">
         <div className="dayItem-part">
           <header>
-            {tripId?
-              <h3>{trip.name}</h3>
-              :
-              <Form.Group>
-                <Form.Control size="lg" type="text" placeholder="Unsaved Trip" />
-                <Button
-                  disabled={isSaving}
-                  onClick={!isSaving ? this.handleSave : null}>
-                    {isSaving ? "Saving..." : "Save Trip"}
-                </Button>
-              </Form.Group>
+            {
+              planSaved ?
+                <h3>
+                  {planName}
+                </h3>
+                :
+                <Form.Group>
+                  <Form.Control size="lg" type="text" placeholder="Unsaved Trip" onChange={this.handlePlanNameChange}/>
+                  <Button
+                    disabled={planSaved}
+                    onClick={planSaved ? null : () => this.handleSave(trip)}
+                  >
+                      {planSaved ? "Saving..." : "Save Trip"}
+                  </Button>
+                </Form.Group>
             }
           </header>
           <div className="travel-dates">
