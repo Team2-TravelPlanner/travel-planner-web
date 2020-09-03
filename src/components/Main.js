@@ -115,12 +115,12 @@ class Main extends React.Component {
             <Explore openTripByPlan={this.openTripByPlan} />
           </Route>
           <Route path="/trip/:id?" render={(props) =>{
-            {
+            
               return props.match.params.id? 
                 <Trip tripId={props.match.params.id} isLoggedIn={this.props.isLoggedIn} />
                 :
                 <Trip tripPlan={this.state.tripPlan} isLoggedIn={this.props.isLoggedIn} />
-            }
+            
             
           }} />
           <Route path="/">

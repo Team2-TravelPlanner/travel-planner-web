@@ -8,7 +8,6 @@ import savedTrips from "../data/SavedTrips";
 import Login from "./Login"
 import { withRouter } from "react-router-dom";
 import {TOKEN_KEY} from '../constants';
-import {ID} from '../constants';
 
 class App extends React.Component {
   state = { //states used to activated login or register form.

@@ -3,9 +3,7 @@ import {
     withScriptjs,
     withGoogleMap,
     GoogleMap,
-    Polyline,
-    DirectionsRenderer,
-    TrafficLayer,
+    Polyline
 } from "react-google-maps";
 import PlaceMarker from "./PlaceMarkers";
 import PropTypes from "prop-types";

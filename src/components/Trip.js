@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Map from "./NewYorkMap";
 import { Tab, Button, Table, Tabs, Form } from "react-bootstrap";
-import trip from "../data/Trip";
 import { GoogleKey } from "./Constants";
 import { Redirect } from "react-router-dom";
  
@@ -58,7 +57,6 @@ class Trip extends Component {
 
     const { isSaving } = this.state;
     const itinerary = trip.dayOfPlanDisplayModels;
-    const days = itinerary.length;
     const startDate = new Date(trip.startDate).toLocaleDateString(undefined, this.dateOptions);
     const endDate = new Date(trip.endDate).toLocaleDateString(undefined, this.dateOptions);
 

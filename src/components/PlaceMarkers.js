@@ -1,9 +1,6 @@
 import React from 'react';
 import { Marker, InfoWindow } from 'react-google-maps';
-import { Image } from "react-bootstrap";
 import PropTypes from 'prop-types';
-
-import greenIcon from "../assets/images/green-icon.svg";
 
 class PlaceMarker extends React.Component {
 
@@ -20,7 +17,6 @@ class PlaceMarker extends React.Component {
             <Marker
                 position={{ lat:lat, lng: lon }}
                 onClick={this.props.toggleMarker}
-                // icon={customizedIcon}
             >
                 {this.props.isOpen ? (
                     <InfoWindow>

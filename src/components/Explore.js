@@ -122,7 +122,7 @@ class Explore extends Component {
                 (keyword === '' || matchKeyword)) {
                 results.push(place);
             }
-        })
+        });
         return results;
     }
 
