@@ -22,6 +22,12 @@
     text-align: left;
     padding-left: 10px;
     justify-content: center;
+    font-size: 15px;
+    margin-bottom: 10px;
+}
+
+.button{
+    margin-bottom: 10px;
 }
 
 .search-bar {

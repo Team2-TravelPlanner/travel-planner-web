@@ -18,9 +18,22 @@ class Explore extends Component {
             activeCategory: [],
             placeToView: null,
             showForm: false,
-            Trans: "outline-primary",
+            Park: "outline-primary",
             Museum: "outline-primary",
-            Plaza: "outline-primary",
+            TransitStation:"outline-primary",
+            BusStation: "outline-primary",
+            Lodging: "outline-primary",
+            Route:"outline-primary",
+            Neighborhood:"outline-primary",
+            Political: "outline-primary",
+            Zoo: "outline-primary",
+            ArtGallery: "outline-primary",
+            TouristAttraction: "outline-primary",
+            University:"outline-primary",
+            PointOfInterest:"outline-primary",
+            Finance:"outline-primary",
+            Stadium:"outline-primary",
+
         }
     }
 
@@ -69,12 +82,17 @@ class Explore extends Component {
         })
             .then(
                 response => {
-                    this.setState({
-                        result: response.data["placeInfoModels"]
-                    })
+                    console.log(response)
+                    if (response.data["placeInfoModels"] === null || response.data["placeInfoModels"].length === 0) {
+                      //  alert("no result");
+
+                    } else {
+                        this.setState({
+                            result: response.data["placeInfoModels"]
+                        })
+                    }
                 }
             )
-          //  () => console.log(this.state.result[0]["name"])
     }
 
     showResult = () => {
@@ -164,15 +182,14 @@ class Explore extends Component {
     }
 
     selectCategory = (event) => {
+        console.log(this.state[event.target.value])
         if (this.state[event.target.value] === "outline-primary") {
             this.setState(
                 {
                     [event.target.value]: "primary",
                     activeCategory: [...this.state.activeCategory, event.target.value]
                 },
-                //() => console.log(this.state.activeCategory),
-                this.onSearch
-
+               this.onSearch
             )
         } else {
             this.setState(
@@ -182,11 +199,8 @@ class Explore extends Component {
                         return category !== event.target.value
                     })
                 },
-                //() => console.log(this.state.activeCategory),
                 this.onSearch
             )
-
-
         }
     }
 
@@ -223,13 +237,51 @@ class Explore extends Component {
         return (
             <div className="explorer">
                 <div className="left-side">
-                    <div className="buttons">
-                        <Button variant={this.state.Park} size="sm" value="Park"
-                                onClick={this.selectCategory}>Park </Button>{" "}
-                        <Button variant={this.state.Museum} size="sm" value="Museum"
-                                onClick={this.selectCategory}>Museum </Button>{" "}
-                        <Button variant={this.state.Plaza} size="sm" value="Plaza"
-                                onClick={this.selectCategory}>Plaza </Button>{" "}
+                    <div className="buttons" >
+                        <Button variant={this.state.Park}  size="sm" value="Park" className={"button"}
+                                onClick={this.selectCategory}>Park</Button>{" "}
+
+                        <Button variant={this.state.Museum}  size="sm" value="Museum" className={"button"}
+                                onClick={this.selectCategory}>Museum</Button>{" "}
+
+                        <Button variant={this.state.BusStation}  size="sm" value="Bus_Station" className={"button"}
+                                onClick={this.selectCategory}>Bus Station</Button>{" "}
+
+                        <Button variant={this.state.Lodging}  size="sm" value="Lodging" className={"button"}
+                                onClick={this.selectCategory}>Lodging</Button>{" "}
+
+                        <Button variant={this.state.Political}  size="sm" value="Political" className={"button"}
+                                onClick={this.selectCategory}>Political</Button>{" "}
+
+                        <Button variant={this.state.Zoo}  size="sm" value="Zoo" className={"button"}
+                                onClick={this.selectCategory}>Zoo </Button>{" "}
+
+                        <Button variant={this.state.University}  size="sm" value="University" className={"button"}
+                                onClick={this.selectCategory}>University</Button>  <br/>
+
+                        <Button variant={this.state.ArtGallery}  size="sm" value="Art_Gallery" className={"button"}
+                                onClick={this.selectCategory}>Art Gallery </Button>{" "}
+
+                        <Button variant={this.state.TouristAttraction}  size="sm" value="Tourist_Attraction" className={"button"}
+                                onClick={this.selectCategory}>Tourist Attraction</Button>{" "}
+
+                        <Button variant={this.state.Finance}  size="sm" value="Finance" className={"button"}
+                                onClick={this.selectCategory}>Finance</Button> {" "}
+
+                        <Button variant={this.state.Stadium}  size="sm" value="Stadium" className={"button"}
+                                onClick={this.selectCategory}>Stadium</Button> {" "}
+
+                        <Button variant={this.state.Route}  size="sm" value="Route" className={"button"}
+                                onClick={this.selectCategory}>Route</Button> {" "} <br/>
+
+                        <Button variant={this.state.Neighborhood}  size="sm" value="Neighborhood" className={"button"}
+                                onClick={this.selectCategory}>Neighborhood</Button> {" "}
+
+                        <Button variant={this.state.PointOfInterest}  size="sm" value="Point_of_Interest" className={"button"}
+                                onClick={this.selectCategory}>Point of Interest</Button> {" "}
+
+                        <Button variant={this.state.TransitStation}  size="sm" value="Transit_Station" className={"button"}
+                                onClick={this.selectCategory}>Transit Station</Button>
                     </div>
 
                     <div className="search-items">
