@@ -65,8 +65,6 @@ class Map extends React.Component {
 
         // Options: set restrictions
         const OPTIONS = {
-            minZoom: 12,
-            maxZoom: 16,
             panControl: false,
             tilt: 45,
             streetViewControl: false,
