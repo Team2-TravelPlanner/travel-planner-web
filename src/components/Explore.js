@@ -57,9 +57,7 @@ class Explore extends Component {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          currentPageNumber: 1,
-          displayItemLimit: 40,
-          category: cat // need to be able to use a list
+          category: cat 
         })
       }).then( res => {
         return res.json();
@@ -80,8 +78,6 @@ class Explore extends Component {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          currentPageNumber: 1,
-          displayItemLimit: 40,
           keyword: keyword
         })
       }).then( res => {
