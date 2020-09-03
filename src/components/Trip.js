@@ -16,6 +16,13 @@ class Trip extends Component {
     placeSelected: null
   }
 
+  times = ["1", "1.5", "2", "2.5"];
+
+  randomTimeSpend = () => {
+    const randIndex = Math.floor(Math.random() * this.times.length);
+    return this.times[randIndex];
+  }
+
   handleSave = () => {
     this.setState({ isSaving: true });
 
@@ -34,7 +41,7 @@ class Trip extends Component {
   handlePlaceSelected = (placeId) => {
     this.setState({
       placeSelected: placeId
-    })
+    });
   }
 
   render() {
@@ -101,8 +108,7 @@ class Trip extends Component {
                       <tr>
                         <th>#</th>
                         <th>Place</th>
-                        <th>Start</th>
-                        <th>End</th>
+                        <th>Time to spend (Hours)</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -110,8 +116,7 @@ class Trip extends Component {
                         <tr key={index} className="table-row" onMouseDownCapture={ () => this.handlePlaceSelected(item.placeId)}>
                           <td>{index + 1}</td>
                           <td>{item.placeName}</td>
-                          <td>{item.start? item.start : null}</td>
-                          <td>{item.end? item.end: null}</td>
+                          <td>{this.randomTimeSpend()}</td>
                         </tr>
                       ))}
                     </tbody>
