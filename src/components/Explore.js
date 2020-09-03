@@ -21,7 +21,8 @@ class Explore extends Component {
             placeToView: null,
             showForm: false,
             isLoading: false,
-            categories: ["TOURIST_ATTRACTION", "PARK", "MUSEUM", "ZOO", "UNIVERSITY", "ART_GALLERY", "POINT_OF_INTEREST"]
+            categories: ["ART_GALLERY", "BUS_STATION", "FINANCE", "LODGING", "MUSEUM", "NEIGHBORHOOD", 
+              "PARK", "POINT_OF_INTEREST", "POLITICAL", "ROUTE", "STADIUM", "TRANSIT_STATION", "TOURIST_ATTRACTION", "UNIVERSITY", "ZOO"]
         }
     }
 
