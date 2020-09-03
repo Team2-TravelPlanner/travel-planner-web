@@ -107,21 +107,21 @@ class AutoForm extends React.Component {
             {type === "long"? 
               (
                 <div>
-                  <h4>What's your travel style?</h4>
-                  <div className="travel-style">
-                    <ToggleButtonGroup type="radio" name="style" defaultValue={style} onChange={this.handleStyleChange}>
-                      <ToggleButton value={"relaxed"} variant="outline-primary">
-                        Relaxed
-                      </ToggleButton>
-                      <ToggleButton value={"moderate"} variant="outline-primary">
-                        Moderate
-                      </ToggleButton>
-                      <ToggleButton value={"packed"} variant="outline-primary">
-                        Packed
-                      </ToggleButton>
-                    </ToggleButtonGroup>
-                  </div>
-                  <br />
+                  {/*<h4>What's your travel style?</h4>*/}
+                  {/*<div className="travel-style">*/}
+                  {/*  <ToggleButtonGroup type="radio" name="style" defaultValue={style} onChange={this.handleStyleChange}>*/}
+                  {/*    <ToggleButton value={"relaxed"} variant="outline-primary">*/}
+                  {/*      Relaxed*/}
+                  {/*    </ToggleButton>*/}
+                  {/*    <ToggleButton value={"moderate"} variant="outline-primary">*/}
+                  {/*      Moderate*/}
+                  {/*    </ToggleButton>*/}
+                  {/*    <ToggleButton value={"packed"} variant="outline-primary">*/}
+                  {/*      Packed*/}
+                  {/*    </ToggleButton>*/}
+                  {/*  </ToggleButtonGroup>*/}
+                  {/*</div>*/}
+                  {/*<br />*/}
                   <h4>What interests you?</h4>
                   <div className="button-group">
                     <Button 
@@ -210,6 +210,23 @@ class AutoForm extends React.Component {
               :
               null 
           }
+          <div>
+            <h4>What's your travel style?</h4>
+            <div className="travel-style">
+              <ToggleButtonGroup type="radio" name="style" defaultValue={style} onChange={this.handleStyleChange}>
+                <ToggleButton value={"relaxed"} variant="outline-primary">
+                  Relaxed
+                </ToggleButton>
+                <ToggleButton value={"moderate"} variant="outline-primary">
+                  Moderate
+                </ToggleButton>
+                <ToggleButton value={"packed"} variant="outline-primary">
+                  Packed
+                </ToggleButton>
+              </ToggleButtonGroup>
+            </div>
+          </div>
+          <br />
           <div>
             <h4>Address you are staying at?</h4>
             <span className="description">We can better plan routes for you if you have a starting point</span>
