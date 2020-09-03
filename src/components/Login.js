@@ -4,8 +4,7 @@ import { Formik } from 'formik';
 import * as yup from 'yup';
 import Axios from 'axios';
 import {TOKEN_KEY} from '../constants';
-import {ID} from '../constants';
-import {URL} from '../constants';
+import {ID, URL} from '../constants';
 
 class Login extends React.Component {
 
