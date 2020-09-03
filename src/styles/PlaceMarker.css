@@ -1,5 +1,5 @@
 .marker-popup {
-  width: 400px;
+  width: 500px;
   height: 300px;
   display: flex;
 }
@@ -15,12 +15,13 @@
 }
 
 .marker-popup .marker-cat {
-  display: inline-block;
+  display: inline-list-item;
   padding: 3px;
   background-color: lightgray;
   border-radius: 3px;
   font-size: 10px;
   font-weight: bold;
+  width: 115px;
 }
 
 .marker-popup .marker-desc {

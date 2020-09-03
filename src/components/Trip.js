@@ -112,6 +112,7 @@ class Trip extends Component {
             mapElement={<div style={{ height: `100%` }} />}
             places={places}
             selectedPlaceId={this.state.placeSelected}
+            showRoute={true}
           />
         </div>
       </div>

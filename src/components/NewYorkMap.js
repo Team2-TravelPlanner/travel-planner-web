@@ -3,11 +3,12 @@ import {
     withScriptjs,
     withGoogleMap,
     GoogleMap,
+    Polyline,
+    DirectionsRenderer,
+    TrafficLayer,
 } from "react-google-maps";
-
 import PlaceMarker from "./PlaceMarkers";
 import PropTypes from "prop-types";
-
 class Map extends React.Component {
   
   static propTypes = {
@@ -17,7 +18,7 @@ class Map extends React.Component {
   }
 
   state = {
-    selectedPlace: this.props.seletecPlaceId? this.props.seletecPlaceId : null
+    selectedPlace: this.props.selectedPlaceId? this.props.selectedPlaceId : null
   }
 
   componentDidUpdate(prevProps) {
@@ -27,24 +28,15 @@ class Map extends React.Component {
       this.setState({
         selectedPlace: this.props.selectedPlaceId
       })
-    }
+    };
+    // move the newly selected place as the center
+    this.props.places.map(place => this.state.selectedPlace === place.id ?
+        this.map.panTo({lat:place.lat,lng:place.lon}): null);
   }
 
     getMapRef = (mapInstance) => {
         this.map = mapInstance;
         window.map = mapInstance;
-    }
-
-    handleMapMounted = (map) => {
-        this.map = map
-        if (map) {
-            const bounds = new window.google.maps.LatLngBounds();
-            this.props.places.map(place => {
-                const { lat, lon } = place;
-                bounds.extend({lat, lng: lon});
-            });
-            map.fitBounds(bounds);
-        }
     }
 
     onToggle = () => {
@@ -60,17 +52,36 @@ class Map extends React.Component {
       this.setState({
         selectedPlace: place.id
       });
+
     }
 
     render() {
+
+        const places = this.props.places;
+        const currentPath = places.map(place =>  {
+            const current = {lat:place.lat, lng:place.lon}
+            return current
+        });
+
+        // Options: set restrictions
+        const OPTIONS = {
+            minZoom: 12,
+            maxZoom: 16,
+            panControl: false,
+            restriction: {latLngBounds:{north:40.9, south:40.5, west:-74.2, east:-73.7}, strictBounds: false},
+            tilt: 45,
+            streetViewControl: false,
+        }
+
         return (
             <GoogleMap
-                ref={this.getMapRef()}
+                ref={this.getMapRef}
                 zoom={13}
                 center={{ lat: 40.78, lng: -73.935242 }}
-                onLoad={this.handleMapMounted}
-                onClick={this.handleMapClick}
+                options = {OPTIONS}
+                //onClick={this.handleMapClick}
             >
+                {/*<TrafficLayer autoUpdate />*/}
                 {this.props.places.map( (place, index) => 
                   <PlaceMarker 
                     place={place} 
@@ -78,6 +89,24 @@ class Map extends React.Component {
                     map={this.map} 
                     toggleMarker={() => this.handleToggleMarker(place)} 
                     isOpen={this.state.selectedPlace && this.state.selectedPlace === place.id} />)}
+                    { this.props.showRoute ? (
+                        <Polyline
+                            path={currentPath}
+                            geodesic={true}
+                            options={{
+                                strokeColor:  "#02030a",
+                                strokeOpacity: 1,
+                                strokeWeight: 2,
+                                icons: [{
+                                    icon: "hello",
+                                    offset: "0",
+                                    repeat: "20px"
+                                }],
+                            }}
+                        />) : null}
+
+                {/*{props.directions && <DirectionsRenderer directions={props.directions} />}*/}
+
             </GoogleMap>
         );
     }
