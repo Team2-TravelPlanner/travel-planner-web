@@ -18,7 +18,31 @@ class Trip extends Component {
     planName: null
   }
 
-  times = ["1", "1.5", "2", "2.5"];
+  times = ["1", "1.5", "2"];
+
+  constructor(props) {
+    super();
+    let trip = props.tripPlan? props.tripPlan : null;
+    if (trip) {
+      trip.dayOfPlanDisplayModels.forEach( (day, dIndex) => {
+        day.placeOfPlanDetailModels.forEach( (place, pIndex) => {
+          trip.dayOfPlanDisplayModels[dIndex].placeOfPlanDetailModels[pIndex].hours = this.randomTimeSpend();
+        });
+      });
+    }
+    this.state = {
+      planSaved: false,
+      daySelected: 0,
+      placeSelected: null,
+      planName: null,
+      trip: trip
+    }
+  }
+
+
+  componentDidUpdate(prevProps, prevState) {
+
+  }
 
   randomTimeSpend = () => {
     const randIndex = Math.floor(Math.random() * this.times.length);
@@ -109,7 +133,8 @@ class Trip extends Component {
 
   render() {
 
-    const { tripId, tripPlan: trip } = this.props;
+    const { tripId } = this.props;
+    const { trip } = this.state;
     console.log("tripId: ", tripId);
     console.log("tripPlan: ", trip);
 
@@ -184,7 +209,7 @@ class Trip extends Component {
                         <tr key={index} className="table-row" onMouseDownCapture={ () => this.handlePlaceSelected(item.placeId)}>
                           <td>{index + 1}</td>
                           <td>{item.placeName}</td>
-                          <td>{this.randomTimeSpend()}</td>
+                          <td>{item.hours}</td>
                         </tr>
                       ))}
                     </tbody>
