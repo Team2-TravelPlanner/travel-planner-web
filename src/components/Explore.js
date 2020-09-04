@@ -4,8 +4,7 @@ import NewYorkMap from "./NewYorkMap";
 import plus from "../assets/images/plus.svg";
 import checked from "../assets/images/checked.svg";
 import del from "../assets/images/delete.svg";
-import { URL } from "../constants";
-import { GoogleKey } from "./Constants";
+import { GoogleKey, URL } from "../constants";
 import SelfPlanForm from "./Form";
 
 

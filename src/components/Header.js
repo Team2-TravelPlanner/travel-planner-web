@@ -1,8 +1,7 @@
 import React from 'react';
 import { Dropdown } from 'react-bootstrap'
 import { Link } from "react-router-dom";
-import {TOKEN_KEY} from '../constants';
-import {ID} from '../constants';
+import {ID, TOKEN_KEY} from '../constants';
 
 class Header extends React.Component {
   handleLogin = () => {

@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import Map from "./NewYorkMap";
 import { Tab, Button, Table, Tabs, Form } from "react-bootstrap";
-import { GoogleKey } from "./Constants";
 import { Redirect } from "react-router-dom";
-import {URL,TOKEN_KEY, ID} from "../constants";
+import {URL,TOKEN_KEY, ID, GoogleKey} from "../constants";
 import axios from "axios";
  
 // Open either by tripId of by tripPlan

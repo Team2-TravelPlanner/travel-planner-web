@@ -3,8 +3,7 @@ import { Modal, Button, Form } from 'react-bootstrap'
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import Axios from 'axios';
-import {TOKEN_KEY} from '../constants';
-import {ID, URL} from '../constants';
+import {ID, URL, TOKEN_KEY} from '../constants';
 
 class Login extends React.Component {
 
