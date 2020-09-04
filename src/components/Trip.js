@@ -94,7 +94,8 @@ class Trip extends Component {
     })
     .then(
         response => {
-          if (response.data.failed === false) {
+          console.log(response.data);
+          if (response.data.operationResponse.failed === false) {
             this.setState({ planSaved: true });
           }else{
             console.log("save plan failed here 111.");
