@@ -19,6 +19,13 @@ class Main extends React.Component {
     isLoading: false
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.tripPlan && (!prevState.tripPlan || prevState.tripPlan.planId !== this.props.tripPlan.planId )) {
+      console.log("open plan");
+      this.openTripByPlan(this.props.tripPlan);
+    }
+  }
+
   openForm = () => {
     this.setState({
       showForm: true

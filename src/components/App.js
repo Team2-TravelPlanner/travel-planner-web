@@ -17,6 +17,7 @@ class App extends React.Component {
     showSavedTrips: false,
     savedTrips: [],
     isLoadingSavedTrips: false,
+    tripPlan: null
   }
   
   getSavedTrips = () => {
@@ -59,11 +60,12 @@ class App extends React.Component {
     this.getSavedTrips();
   }
 
-  openTripById = (id) => {
+  openTripByPlan = (plan) => {
+    // open an unsaved plan object
     this.setState({
+      tripPlan: plan,
       showSavedTrips: false
     });
-    this.props.history.push(`/trip/${id}`);
   }
 
   showLoginForm = (show) => {
@@ -107,7 +109,7 @@ class App extends React.Component {
                showRegisterForm={this.showRegisterForm}
                loggedIn={this.loggedIn}
                />        
-        <Main isLoggedIn={this.state.isLoggedIn}/>
+        <Main isLoggedIn={this.state.isLoggedIn} tripPlan={this.state.tripPlan}/>
         <Footer />
 
         <Modal
@@ -122,7 +124,7 @@ class App extends React.Component {
             <SavedTripsList 
               isLoading={isLoadingSavedTrips} 
               savedTrips={savedTrips} 
-              openTrip={this.openTripById} />
+              openTrip={this.openTripByPlan} />
           </Modal.Body>
         </Modal>
       </div>
