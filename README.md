@@ -22,3 +22,9 @@ NY Travel Planner is a smart planner for the city of New York.
 
 # UI Library
 We use [React-Bootstrap](https://react-bootstrap.github.io/) library for our UI components.
+
+# Google API
+These Google APIs need to be enabled.
+* Places API
+* Geocoding API
+* Maps Javascript API
