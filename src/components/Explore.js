@@ -228,12 +228,14 @@ class Explore extends Component {
       // changed category
       if (this.state.activeCategory !== cat) {
         this.setState({
-          activeCategory: cat
+          activeCategory: cat,
+          keyword: ""
         });
         this.searchByCategory(cat);
       } else {
         this.setState({
-          activeCategory: null
+          activeCategory: null,
+          keyword: ""
         });
         this.searchAllPlaces();
       }
@@ -356,7 +358,7 @@ class Explore extends Component {
 
                     <div className="search-items">
                         <Form className="search-bar">
-                            <Form.Control type="text" placeholder="Search" className='mr-sm-2' style={{width: '30em'}}
+                            <Form.Control type="text" placeholder="Search" className='mr-sm-2' style={{width: '30em'}} value={this.state.keyword}
                                          onChange={this.onChangeKeyword} onKeyPress = {this.handleKeyPress}/>
                             <Button variant="primary" onClick={this.onSearch} >Search</Button>
                         </Form>
