@@ -4,7 +4,6 @@ import NewYorkMap from "./NewYorkMap";
 import plus from "../assets/images/plus.svg";
 import checked from "../assets/images/checked.svg";
 import del from "../assets/images/delete.svg";
-import searchResults from "../data/SearchResults.js";
 import { URL } from "../constants";
 import { GoogleKey } from "./Constants";
 import SelfPlanForm from "./Form";
@@ -99,32 +98,6 @@ class Explore extends Component {
             },
             () => console.log(this.state.keyword))
 
-    }
-
-    // 1. if a category is selected and search box is empty, show all the places in that category.
-    // 2. if a category is selected and search box is not empty, show all the places that matches the search keyword in that category.
-    // 3. if no category is selected and search box is empty, show everything.
-    // 4. if no category is selected and search box not empty, show everything based on the keyword in all the categories.
-    // 5. Result is dynamically changed based on category selections.
-
-    findResult = () => {
-        let results = [];
-        const { activeCategory, keyword } = this.state;
-        searchResults["places"].map(place => {
-            // check whether the place is in the category
-            let matchCategory = activeCategory.some(category =>
-                place["category"].toLowerCase().includes(category.toLowerCase())
-            );
-            // check whether the name of place matches the user's input keyword
-            let matchKeyword = place["name"].toLowerCase().includes(keyword.toLowerCase());
-
-            // console.log(matchCategory)
-            if((activeCategory.length === 0 || matchCategory) &&
-                (keyword === '' || matchKeyword)) {
-                results.push(place);
-            }
-        });
-        return results;
     }
 
     onSearch = () => {

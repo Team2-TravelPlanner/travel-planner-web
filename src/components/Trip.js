@@ -144,7 +144,7 @@ class Trip extends Component {
       )
     }
 
-    const { isSaving, planSaved, planName} = this.state;
+    const { planSaved, planName} = this.state;
     const itinerary = trip.dayOfPlanDisplayModels;
     const startDate = new Date(trip.startDate).toLocaleDateString(undefined, this.dateOptions);
     const endDate = new Date(trip.endDate).toLocaleDateString(undefined, this.dateOptions);
