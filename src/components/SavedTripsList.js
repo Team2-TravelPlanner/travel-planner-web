@@ -22,18 +22,18 @@ class SavedTripsList extends Component {
         ) : (
           <ListGroup>
             {savedTrips.map((trip) => (
-              <Card key={trip.id} className="card">
-                <Card.Header>{trip.name}</Card.Header>
+              <Card key={trip.planId} className="card">
+                <Card.Header>Trip {savedTrips.indexOf(trip)}</Card.Header>
                 <Card.Body>
                   <p>
                     Start date:{" "}
-                    {new Date(parseInt(trip.startDate)).toLocaleDateString()}
+                    {new Date(trip.startDate).toLocaleDateString()}
                   </p>
                   <p>
                     End date:{" "}
-                    {new Date(parseInt(trip.endDate)).toLocaleDateString()}
+                    {new Date(trip.endDate).toLocaleDateString()}
                   </p>
-                  <Button className="detail-btn" onClick={ () => this.handleOpenTrip(trip.id)}>Open Trip</Button>
+                  <Button className="detail-btn" variant="dark" onClick={ () => this.handleOpenTrip(trip.planId)}>Open Trip</Button>
                 </Card.Body>
               </Card>
             ))}

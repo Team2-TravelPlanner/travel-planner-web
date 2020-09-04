@@ -7,7 +7,7 @@ import { Modal } from "react-bootstrap";
 import savedTrips from "../data/SavedTrips";
 import Login from "./Login"
 import { withRouter } from "react-router-dom";
-import {TOKEN_KEY} from '../constants';
+import { URL, TOKEN_KEY, ID } from '../constants';
 
 class App extends React.Component {
   state = { //states used to activated login or register form.
@@ -21,11 +21,28 @@ class App extends React.Component {
   
   getSavedTrips = () => {
     // fetch saved trip list
-    // ...
-    this.setState({
-        savedTrips: savedTrips,
-        isLoadingSaved: false
-    });
+    const url = `${URL}/plan/getAllPlan`;
+    fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        userEmail:localStorage.getItem(ID),
+        token: localStorage.getItem(TOKEN_KEY)
+      })
+    })
+        .then( res => {
+          return res.json();
+        })
+        .then( data => {
+          console.log(data.planDisplayModel)
+          this.setState({
+            savedTrips: data.planDisplayModel ? data.planDisplayModel : [],
+            isLoadingSaved: false
+          });
+        })
+        .catch(err => {
+          console.log('fetch saved trips list error -> ', err)
+        })
   }
 
   handleCloseSavedTrips = () => {
@@ -35,17 +52,17 @@ class App extends React.Component {
   }
 
   handleOpenSavedTrips = () => {
-    this.getSavedTrips();
     this.setState({
-      showSavedTrips: true
+      showSavedTrips: true,
+      isLoadingSaved: true
     });
+    this.getSavedTrips();
   }
 
   openTripById = (id) => {
     this.setState({
       showSavedTrips: false
     });
-
     this.props.history.push(`/trip/${id}`);
   }
 
