@@ -24,7 +24,14 @@ NY Travel Planner is a smart planner for the city of New York.
 We use [React-Bootstrap](https://react-bootstrap.github.io/) library for our UI components.
 
 # Google API
-These Google APIs need to be enabled.
+You need to get a Google API key from Google Cloud Console. These Google APIs need to be enabled.
 * Places API
 * Geocoding API
 * Maps Javascript API
+
+Once you have the key, create `.env` file in the project's root directory. This file should not be pushed to Github. 
+It should already be in `.gitignore`. Put this line in the `.env` file.
+```
+REACT_APP_API_KEY=your_api_key
+```
+IMPORTANT! Must use the exact key name `REACT_APP_API_KEY`, don't change it.
