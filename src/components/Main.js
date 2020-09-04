@@ -41,7 +41,6 @@ class Main extends React.Component {
       endDate
     } = options;
 
-    console.log(selectedCats);
     this.setState({
       isLoading: true
     })
@@ -79,12 +78,10 @@ class Main extends React.Component {
       showForm: false
     });
 
-    console.log(options);
   }
 
 
   openTripByPlan = (plan) => {
-    console.log("plan is:::::::::::::::::::=> ", plan);
     // open an unsaved plan object
     this.setState({
       tripPlan: plan

@@ -76,7 +76,6 @@ class AutoForm extends React.Component {
     // validate address, start and end date
     address = address? address : this.defaultAddress;
     address = address.split(" ").join("+");
-    console.log(address);
 
     fetch(`${GeocodeUrl}?address=${address}&key=${GoogleKey}`)
     .then( res => {

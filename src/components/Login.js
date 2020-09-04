@@ -40,7 +40,6 @@ class Login extends React.Component {
 
     //Handle Submit. TODO(Http request.)
     handleSubmitLogin = (event, { setSubmitting }) => {
-        console.log(event);
         const url = `${URL}/users/login`;
         Axios({
             method: 'POST',
@@ -51,9 +50,7 @@ class Login extends React.Component {
         })
         .then(
             response => {
-                console.log(response.data.operationResponse.failed);
                 if (response.data.operationResponse.failed === false) {
-                    console.log("logged in");
                     localStorage.setItem(TOKEN_KEY, response.data.token);
                     localStorage.setItem(ID, response.data.id);
                     this.props.loggedIn();
@@ -71,7 +68,6 @@ class Login extends React.Component {
         )
     }
     handleSubmitRegister = (event) => {
-        console.log(event);
         const url = `${URL}/users/register`
         Axios({
             method: 'POST',
@@ -84,7 +80,6 @@ class Login extends React.Component {
         })
         .then(
             response => {
-                console.log(response.data);
                 if (response.data.failed === false) {
                     this.switchToLogin();
                 }

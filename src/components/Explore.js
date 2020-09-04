@@ -61,7 +61,6 @@ class Explore extends Component {
       }).then( res => {
         return res.json();
       }).then( data => {
-        console.log(data);
         this.setState({
           result:  data.placeInfoModels? data.placeInfoModels : []
         });
@@ -82,7 +81,6 @@ class Explore extends Component {
       }).then( res => {
         return res.json();
       }).then( data => {
-        console.log(data);
         this.setState({
           result:  data.placeInfoModels? data.placeInfoModels : []
         });
@@ -94,8 +92,7 @@ class Explore extends Component {
     onChangeKeyword = (event) => {
         this.setState({
                 keyword: event.target.value
-            },
-            () => console.log(this.state.keyword))
+            });
 
     }
 
@@ -170,7 +167,6 @@ class Explore extends Component {
     }
 
     viewPlaceDetail = (placeId) => {
-        console.log(placeId);
         this.setState({
            placeToView: placeId,
         })
@@ -243,7 +239,6 @@ class Explore extends Component {
       } = options;
 
       let placeIds = this.state.selected.map( place => place.id);
-      console.log(placeIds);
   
       this.setState({
         isLoading: true
@@ -265,7 +260,6 @@ class Explore extends Component {
       })
       .then(response => response.json())
       .then(plan => {
-        console.log(plan);
         this.setState({
           isLoading: false
         });
@@ -359,7 +353,7 @@ class Explore extends Component {
 
                 <div className="right-side">
                     <NewYorkMap
-                        googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyD3CEh9DXuyjozqptVB5LA-dN7MxWWkr9s&v=3.exp&libraries=geometry,drawing,places"
+                        googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${GoogleKey}&v=3.exp&libraries=geometry,drawing,places`}
                         loadingElement={<div style={{ height: `100%` }} />}
                         containerElement={<div style={{ height: `100%` }} />}
                         mapElement={<div style={{ height: `100%` }} />}

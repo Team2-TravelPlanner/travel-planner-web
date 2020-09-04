@@ -49,16 +49,13 @@ class Trip extends Component {
   }
 
   handlePlanNameChange = (e) =>{
-    console.log("handle plan name change => ", e);
     this.setState({
       planName: e.target.value
     })
   }
 
   handleSave = (trip) => {
-    console.log("Handle save plan.");
-    console.log(trip);
-    console.log("save status -> ", this.state.planSaved);
+
     this.setState({ planSaved: true });
 
     const url =  `${URL}/plan/save`;
@@ -76,9 +73,6 @@ class Trip extends Component {
           })
         }
     });
-    console.log("day details: ", dayDetails);
-    console.log("token is: ", localStorage.getItem(TOKEN_KEY).toString());
-    console.log("user is : ", localStorage.getItem(ID).toString());
 
     axios({
       method: 'POST',
@@ -100,9 +94,7 @@ class Trip extends Component {
     })
     .then(
         response => {
-          console.log("in then => ", response.data);
           if (response.data.failed === false) {
-            console.log("plan saved.");
             this.setState({ planSaved: true });
           }else{
             console.log("save plan failed here 111.");
@@ -112,7 +104,6 @@ class Trip extends Component {
     .catch(
         err => {
           console.log("error: ", err);
-          console.log("save plan failed here 222.");
         }
     )
   };
@@ -134,8 +125,6 @@ class Trip extends Component {
 
     const { tripId } = this.props;
     const { trip } = this.state;
-    console.log("tripId: ", tripId);
-    console.log("tripPlan: ", trip);
 
     if (!tripId && !trip) {
       return (
@@ -161,8 +150,6 @@ class Trip extends Component {
         website: item.weblink
       }
     });
-    console.log("places -> ", places);
-    console.log("saving state => ", planSaved);
 
     return (
       <div className="trip">
@@ -221,7 +208,7 @@ class Trip extends Component {
 
         <div className="map-part">
           <Map
-            googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyD3CEh9DXuyjozqptVB5LA-dN7MxWWkr9s&v=3.exp&libraries=geometry,drawing,places"
+            googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${GoogleKey}&v=3.exp&libraries=geometry,drawing,places`}
             loadingElement={<div style={{ height: `100%` }} />}
             containerElement={<div style={{ height: `100%` }} />}
             mapElement={<div style={{ height: `100%` }} />}
