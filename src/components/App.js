@@ -3,8 +3,7 @@ import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
 import SavedTripsList from "./SavedTripsList";
-import { Modal } from "react-bootstrap";
-import savedTrips from "../data/SavedTrips";
+import { Modal, Spinner } from "react-bootstrap";
 import Login from "./Login"
 import { withRouter } from "react-router-dom";
 import { URL, TOKEN_KEY, ID } from '../constants';
@@ -35,14 +34,19 @@ class App extends React.Component {
           return res.json();
         })
         .then( data => {
-          console.log(data.planDisplayModel)
           this.setState({
             savedTrips: data.planDisplayModel ? data.planDisplayModel : [],
-            isLoadingSaved: false
+            isLoadingSavedTrips: false,
+            showSavedTrips: true
           });
         })
         .catch(err => {
-          console.log('fetch saved trips list error -> ', err)
+          console.log('fetch saved trips list error -> ', err);
+          this.setState({
+            savedTrips: [],
+            isLoadingSavedTrips: false,
+            showSavedTrips: false
+          });
         })
   }
 
@@ -54,10 +58,8 @@ class App extends React.Component {
 
   handleOpenSavedTrips = () => {
     this.setState({
-      showSavedTrips: true,
-      isLoadingSaved: true
-    });
-    this.getSavedTrips();
+      isLoadingSavedTrips: true
+    }, () => this.getSavedTrips());
   }
 
   openTripByPlan = (plan) => {
@@ -65,6 +67,9 @@ class App extends React.Component {
     this.setState({
       tripPlan: plan,
       showSavedTrips: false
+    }, () => {
+      if (this.props.location.pathname !== "/trip") 
+        this.props.history.push("/trip");
     });
   }
 
@@ -97,6 +102,13 @@ class App extends React.Component {
 
     return (
       <div className="app">
+        {isLoadingSavedTrips? 
+          (<div className="spinner">
+            <Spinner animation="border" variant="light"/>
+          </div>)
+          :
+          null
+        }
         <Header showLoginForm={this.showLoginForm}
                 showRegisterForm={this.showRegisterForm}
                 isLoggedIn={this.state.isLoggedIn}
@@ -109,7 +121,7 @@ class App extends React.Component {
                showRegisterForm={this.showRegisterForm}
                loggedIn={this.loggedIn}
                />        
-        <Main isLoggedIn={this.state.isLoggedIn} tripPlan={this.state.tripPlan}/>
+        <Main isLoggedIn={this.state.isLoggedIn} tripPlan={this.state.tripPlan} openTripByPlan={this.openTripByPlan}/>
         <Footer />
 
         <Modal
@@ -122,7 +134,6 @@ class App extends React.Component {
           </Modal.Header>
           <Modal.Body>
             <SavedTripsList 
-              isLoading={isLoadingSavedTrips} 
               savedTrips={savedTrips} 
               openTrip={this.openTripByPlan} />
           </Modal.Body>

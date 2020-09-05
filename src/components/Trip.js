@@ -5,53 +5,42 @@ import { Redirect } from "react-router-dom";
 import {URL,TOKEN_KEY, ID, GoogleKey} from "../constants";
 import axios from "axios";
  
-// Open either by tripId of by tripPlan
 class Trip extends Component {
 
   dateOptions = { year: 'numeric', month: 'numeric', day: 'numeric' };
 
-  state = {
-    planSaved: false,
-    daySelected: 0,
-    placeSelected: null,
-    planName: null
-  }
-
   times = ["1", "1.5", "2"];
 
-  constructor(props) {
-    super();
-    let trip = props.tripPlan? props.tripPlan : null;
-    if (trip) {
-      trip.dayOfPlanDisplayModels.forEach( (day, dIndex) => {
-        day.placeOfPlanDetailModels.forEach( (place, pIndex) => {
-          trip.dayOfPlanDisplayModels[dIndex].placeOfPlanDetailModels[pIndex].hours = this.randomTimeSpend();
-        });
-      });
-    }
-    this.state = {
-      planSaved: false,
-      daySelected: 0,
-      placeSelected: null,
-      planName: null,
-      trip: trip
-    }
+  state = {
+    planSaved: this.props.tripPlan? this.props.tripPlan.planId !== null : false,
+    daySelected: 0,
+    placeSelected: null
   }
 
+  getSnapshotBeforeUpdate(prevProps, prevState) {
+    if (prevProps.tripPlan.planId !== this.props.tripPlan.planId) {
+      return {
+        planSaved: this.props.tripPlan? this.props.tripPlan.planId !== null : false,
+        daySelected: 0,
+        placeSelected: null
+      }
+    }
+    return null;
+  }
 
-  componentDidUpdate(prevProps, prevState) {
-
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (snapshot) {
+      this.setState({
+        planSaved: snapshot.planSaved,
+        daySelected: snapshot.daySelected,
+        placeSelected: snapshot.placeSelected
+      });
+    }
   }
 
   randomTimeSpend = () => {
     const randIndex = Math.floor(Math.random() * this.times.length);
     return this.times[randIndex];
-  }
-
-  handlePlanNameChange = (e) =>{
-    this.setState({
-      planName: e.target.value
-    })
   }
 
   handleSave = (trip) => {
@@ -98,7 +87,7 @@ class Trip extends Component {
           if (response.data.operationResponse.failed === false) {
             this.setState({ planSaved: true });
           }else{
-            console.log("save plan failed here 111.");
+            console.log("save plan failed.");
           }
         }
     )
@@ -122,21 +111,36 @@ class Trip extends Component {
     });
   }
 
+  deselectedPlace = () => {
+    this.setState({
+      placeSelected: null
+    });
+  }
+
+  selectedPlace = (id) => {
+    this.setState({
+      placeSelected: id
+    })
+  }
+
   render() {
 
-    const { tripId } = this.props;
-    const { trip } = this.state;
-
-    if (!tripId && !trip) {
+    // no trip is given
+    if (this.props.tripPlan === null) {
       return (
         <Redirect to="/" />
       )
     }
 
-    const { planSaved, planName} = this.state;
+    const { planSaved } = this.state;
+    const { tripPlan: trip } = this.props;
     const itinerary = trip.dayOfPlanDisplayModels;
     const startDate = new Date(trip.startDate).toLocaleDateString(undefined, this.dateOptions);
     const endDate = new Date(trip.endDate).toLocaleDateString(undefined, this.dateOptions);
+
+    if (this.state.daySelected >= itinerary.length) {
+      return <div></div>
+    }
 
     const places = itinerary[this.state.daySelected].placeOfPlanDetailModels.map( item => {
       return {
@@ -158,19 +162,14 @@ class Trip extends Component {
           <header>
             {
               planSaved ?
-                <h3>
-                  {planName}
-                </h3>
+                null
                 :
-                <Form.Group>
-                  <Form.Control size="lg" type="text" placeholder="Unsaved Trip" onChange={this.handlePlanNameChange}/>
-                  <Button
-                    disabled={planSaved}
-                    onClick={planSaved ? null : () => this.handleSave(trip)}
-                  >
-                      {planSaved ? "Saving..." : "Save Trip"}
-                  </Button>
-                </Form.Group>
+                <Button
+                  disabled={planSaved}
+                  onClick={planSaved ? null : () => this.handleSave(trip)}
+                >
+                    {planSaved ? "Saving..." : "Save Trip"}
+                </Button>
             }
           </header>
           <div className="travel-dates">
@@ -216,6 +215,8 @@ class Trip extends Component {
             places={places}
             selectedPlaceId={this.state.placeSelected}
             showRoute={true}
+            deselectPlace={this.deselectedPlace}
+            selectPlace={this.selectedPlace}
           />
         </div>
       </div>

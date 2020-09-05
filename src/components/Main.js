@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, withRouter } from "react-router-dom";
 import Home from "./Home";
 import Form from "./Form";
 import Explore from "./Explore";
@@ -8,22 +8,13 @@ import NotFound from "./NotFound";
 import { Modal, Spinner } from "react-bootstrap";
 import Trip from "./Trip"
 import { URL } from "../constants";
-import { withRouter } from "react-router-dom";
 
 
 class Main extends React.Component {
 
   state = {
     showForm: false,
-    tripPlan: null,
     isLoading: false
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    if (this.props.tripPlan && (!prevState.tripPlan || prevState.tripPlan.planId !== this.props.tripPlan.planId )) {
-      console.log("open plan");
-      this.openTripByPlan(this.props.tripPlan);
-    }
   }
 
   openForm = () => {
@@ -72,7 +63,7 @@ class Main extends React.Component {
         isLoading: false
       });
 
-      this.openTripByPlan(plan);
+      this.props.openTripByPlan(plan);
     })
     .catch(error => {
       this.setState({
@@ -87,17 +78,6 @@ class Main extends React.Component {
 
   }
 
-
-  openTripByPlan = (plan) => {
-    // open an unsaved plan object
-    this.setState({
-      tripPlan: plan
-    }, () => this.props.history.push("/trip"));
-  }
-
-  // openTripById(tripId) {
-  //   this.props.history.push(`/trip/${tripId}`);
-  // }
 
   render() {
     const { showForm, isLoading } = this.state;
@@ -117,17 +97,11 @@ class Main extends React.Component {
             <Home openForm={this.openForm} />
           </Route>
           <Route exact path="/explorer">
-            <Explore openTripByPlan={this.openTripByPlan} />
+            <Explore openTripByPlan={this.props.openTripByPlan} />
           </Route>
-          <Route path="/trip/:id?" render={(props) =>{
-            
-              return props.match.params.id? 
-                <Trip tripId={props.match.params.id} isLoggedIn={this.props.isLoggedIn} />
-                :
-                <Trip tripPlan={this.state.tripPlan} isLoggedIn={this.props.isLoggedIn} />
-            
-            
-          }} />
+          <Route path="/trip">
+            <Trip tripPlan={this.props.tripPlan} isLoggedIn={this.props.isLoggedIn} />
+          </Route>
           <Route path="/">
             <NotFound />
           </Route>

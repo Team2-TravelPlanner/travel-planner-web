@@ -279,6 +279,18 @@ class Explore extends Component {
   
     }
 
+    deselectedPlace = () => {
+      this.setState({
+        placeToView: null
+      });
+    }
+
+    selectedPlace = (id) => {
+      this.setState({
+        placeToView: id
+      });
+    }
+
     render() {
         const { result, showForm, categories, activeCategory, isLoading } = this.state;
 
@@ -359,6 +371,9 @@ class Explore extends Component {
                         mapElement={<div style={{ height: `100%` }} />}
                         places={places}
                         selectedPlaceId={this.state.placeToView}
+                        showRoute={false}
+                        deselectPlace={this.deselectedPlace}
+                        selectPlace={this.selectedPlace}
                     />
                 </div>
 
