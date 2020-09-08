@@ -8,6 +8,7 @@ class PlaceMarker extends React.Component {
 
     static propTypes = {
         place: PropTypes.object.isRequired,
+        onClose: PropTypes.func.isRequired
         
     }
 
@@ -19,7 +20,7 @@ class PlaceMarker extends React.Component {
                 onClick={this.props.toggleMarker}
             >
                 {this.props.isOpen ? (
-                    <InfoWindow>
+                    <InfoWindow onCloseClick={this.props.onClose}>
                         <div className="marker-popup">
                             <img src={imageUrl} alt={message} className="marker-image"/>
                             <div className="marker-info">

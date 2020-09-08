@@ -11,24 +11,16 @@ class Map extends React.Component {
   
   static propTypes = {
     places: PropTypes.array.isRequired, // list of places
-    selectedPlaceId: PropTypes.string,    // selected place's id, not required
-    showRoute: PropTypes.bool           // show connection from place to place
-  }
-
-  state = {
-    selectedPlace: this.props.selectedPlaceId? this.props.selectedPlaceId : null
+    selectedPlaceId: PropTypes.string,    // selected place's id
+    showRoute: PropTypes.bool.isRequired,           // show connection from place to place
+    deselectPlace: PropTypes.func.isRequired,
+    selectPlace: PropTypes.func.isRequired
   }
 
   componentDidUpdate(prevProps) {
-    // if update is happening because of parent changes props
-    // reset selected place
-    if (prevProps !== this.props) {  
-      this.setState({
-        selectedPlace: this.props.selectedPlaceId
-      })
-    };
+
     // move the newly selected place as the center
-    this.props.places.map(place => this.state.selectedPlace === place.id ?
+    this.props.places.map(place => this.props.selectedPlaceId === place.id ?
         this.map.panTo({lat:place.lat,lng:place.lon}): null);
   }
 
@@ -47,10 +39,11 @@ class Map extends React.Component {
     })
 
     handleToggleMarker = (place) => {
-      this.setState({
-        selectedPlace: place.id
-      });
+      this.props.selectPlace(place.id);
+    }
 
+    handleMarkerClosed = () => {
+      this.props.deselectPlace();
     }
 
     render() {
@@ -83,7 +76,8 @@ class Map extends React.Component {
                     key={index} 
                     map={this.map} 
                     toggleMarker={() => this.handleToggleMarker(place)} 
-                    isOpen={this.state.selectedPlace && this.state.selectedPlace === place.id} />)}
+                    isOpen={this.props.selectedPlaceId && this.props.selectedPlaceId === place.id}
+                    onClose={this.handleMarkerClosed} />)}
                     { this.props.showRoute ? (
                         <Polyline
                             path={currentPath}
